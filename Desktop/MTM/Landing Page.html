@@ -1,0 +1,4080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modern Tournament Mastery Upswing Poker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Bebas+Neue&family=Big+Shoulders+Display:wght@600;700;800;900&family=Bowlby+One&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Fira+Code:wght@400;500&family=Fraunces:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Geist:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Inter+Tight:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500;600;700;800&family=Oswald:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Public+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Syne:wght@500;600;700;800&family=Unbounded:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════════════════════
+   MTM Editorial redesign
+   Tokens preserved from original palette.
+   ═══════════════════════════════════════════════════════════ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* preserved palette */
+  --black:    #0b0907;
+  --dark:     #0e0c0a;
+  --dark-2:   #141210;
+  --dark-3:   #1c1916;
+  --dark-4:   #25211c;
+  --mid:      #3a342b;
+  --muted:    #6b6557;
+  --subtle:   #8e887a;
+  --light:    #d4cdba;
+  --white:    #f4efe2;
+  --gold:     #c9a84c;
+  --gold-lt:  #e0c87a;
+  --gold-dk:  #8a6b1a;
+  --green:    #01A751;
+  --green-dk: #019647;
+  --red:      #c14242;
+
+  /* type */
+  --display:  'Bebas Neue', Impact, sans-serif;
+  --editorial:'Fraunces', 'Playfair Display', Georgia, serif;
+  --body:     'Inter Tight', system-ui, sans-serif;
+  --mono:     'JetBrains Mono', ui-monospace, monospace;
+
+  /* layout */
+  --wrap:     1280px;
+  --gutter:   clamp(20px, 4vw, 56px);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  font-feature-settings: 'ss01';
+}
+img { display: block; max-width: 100%; }
+a { color: var(--gold); text-decoration: none; transition: color .2s; }
+a:hover { color: var(--gold-lt); }
+
+/* subtle film grain */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+}
+
+/* ───────── Layout helpers ───────── */
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
+.wrap--narrow { max-width: 820px; }
+.wrap--wide { max-width: 1440px; }
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.eyebrow::before {
+  content: '';
+  width: 22px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.gold { color: var(--gold); }
+.gold-lt { color: var(--gold-lt); }
+em.italic { color: var(--gold-lt); font-family: var(--editorial); font-style: italic; font-weight: 400; }
+
+/* reveal */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .9s ease, transform .9s cubic-bezier(.16,.84,.3,1); }
+.reveal.in { opacity: 1; transform: none; }
+
+/* ═══════════════════════════════════════════════════════════
+   NAV
+   ═══════════════════════════════════════════════════════════ */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  height: 68px;
+  background: rgba(11, 9, 7, 0.78);
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  border-bottom: 1px solid rgba(201,168,76,0.12);
+  display: flex; align-items: center;
+}
+.nav::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -1px;
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(201,168,76,0) 8%,
+    var(--gold-lt) 45%,
+    var(--gold) 50%,
+    var(--gold-lt) 55%,
+    rgba(201,168,76,0) 92%,
+    transparent 100%
+  );
+  transform-origin: left center;
+  animation: navStroke 8s cubic-bezier(.7,0,.3,1) infinite;
+  pointer-events: none;
+}
+@keyframes navStroke {
+  0%   { transform: scaleX(0) translateX(0); opacity: 0; }
+  10%  { opacity: 1; }
+  60%  { transform: scaleX(1) translateX(0); opacity: 1; }
+  75%  { transform: scaleX(1) translateX(0); opacity: 0; }
+  100% { transform: scaleX(0) translateX(0); opacity: 0; }
+}
+.nav .wrap {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; gap: 24px;
+}
+.nav-left {
+  display: flex; align-items: center; gap: 28px;
+}
+.nav-logo {
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding-right: 22px;
+  border-right: 1px solid rgba(255,255,255,0.1);
+}
+.nav-logo img {
+  height: 34px;
+  width: auto;
+  display: block;
+}
+
+.nav-countdown {
+  display: inline-flex; align-items: baseline; gap: 8px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--subtle);
+}
+.nav-countdown-label {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--gold);
+  font-weight: 500;
+}
+.nav-countdown-time {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--white);
+  letter-spacing: 0.06em;
+  font-weight: 500;
+}
+
+.nav-links {
+  display: flex; align-items: center; gap: 28px;
+}
+.nav-link {
+  font-size: 13px;
+  color: var(--light);
+  letter-spacing: 0.02em;
+  font-weight: 400;
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute; left: 0; right: 0; bottom: -6px;
+  height: 1px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .25s;
+}
+.nav-link:hover { color: var(--white); }
+.nav-link:hover::after { transform: scaleX(1); }
+
+.nav-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--gold);
+  color: var(--black);
+  padding: 10px 18px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  transition: background .2s, color .2s, transform .2s;
+}
+.nav-cta:hover { background: var(--gold-lt); color: var(--black); transform: translateY(-1px); }
+
+/* ═══════════════════════════════════════════════════════════
+   HERO
+   ═══════════════════════════════════════════════════════════ */
+.hero {
+  position: relative;
+  padding: 140px 0 80px;
+  background: var(--black);
+  overflow: hidden;
+  isolation: isolate;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(90deg,
+      rgba(11,9,7,0.98) 0%,
+      rgba(11,9,7,0.85) 40%,
+      rgba(11,9,7,0.5) 70%,
+      rgba(11,9,7,0.3) 100%
+    ),
+    url('https://upswingpoker.com/wp-content/uploads/2026/05/mtm-course-hero-bg-coaches-right-dark-overlay-3.png') center right / cover no-repeat,
+    radial-gradient(ellipse 60% 60% at 80% 30%, rgba(201,168,76,0.18) 0%, transparent 60%),
+    var(--black);
+}
+.hero-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(transparent 0%, transparent 92%, var(--black) 100%);
+}
+
+.hero-grid {
+  display: block;
+}
+.hero-intro {
+  max-width: 760px;
+  margin-bottom: 40px;
+}
+.hero-bottom {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 36px;
+  align-items: start;
+}
+.hero-media-col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Attention pill (poker-chip hover) ── */
+.hero-attention {
+  display: inline-block;
+  margin-bottom: 36px;
+}
+.attn-pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 6px 0 12px;
+  background: rgba(201,168,76,0.06);
+  border: 1px solid rgba(201,168,76,0.28);
+  border-radius: 8px;
+  font-family: var(--mono);
+}
+.attn-btn {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  padding: 4px 0;
+  margin: -1px 0;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: underline;
+  text-decoration-color: rgba(201,168,76,0.35);
+  text-underline-offset: 5px;
+  transition: color .2s, text-decoration-color .2s;
+  outline: none;
+}
+.attn-btn:hover {
+  color: var(--gold-lt);
+  text-decoration-color: rgba(224,200,122,0.7);
+}
+.attn-btn:focus-visible {
+  box-shadow: 0 0 0 2px rgba(201,168,76,0.5);
+  border-radius: 2px;
+}
+.attn-desc {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--subtle);
+  text-transform: uppercase;
+  padding-right: 4px;
+}
+.attn-close {
+  width: 24px; height: 24px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: transparent; border: 0; cursor: pointer;
+  border-radius: 4px;
+  color: var(--gold);
+  transition: background .2s, color .2s;
+  padding: 0;
+}
+.attn-close:hover {
+  background: rgba(201,168,76,0.18);
+  color: var(--gold-lt);
+}
+.attn-chip {
+  position: absolute;
+  width: 18px; height: 18px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(0,0) rotate(0deg);
+  transition: opacity .35s ease, transform .9s cubic-bezier(.34,1.45,.64,1);
+  z-index: 1;
+}
+.attn-chip--tl { left: 4px;  top: 2px; }
+.attn-chip--br { left: 6rem; bottom: 2px; }
+
+.attn-pill:hover .attn-chip--tl,
+.attn-btn:focus-visible ~ .attn-chip--tl {
+  opacity: 1;
+  transform: translate(-14px, -14px) rotate(-360deg);
+}
+.attn-pill:hover .attn-chip--br,
+.attn-btn:focus-visible ~ .attn-chip--br {
+  opacity: 1;
+  transform: translate(14px, 14px) rotate(360deg);
+}
+.attn-pill.dismissed { display: none; }
+
+.hero-headline {
+  font-family: var(--display);
+  font-size: clamp(48px, 7vw, 108px);
+  line-height: 0.92;
+  letter-spacing: 0.005em;
+  margin-bottom: 30px;
+  color: var(--white);
+  white-space: nowrap;
+}
+.hero-headline .it {
+  font-family: var(--display);
+  font-style: normal;
+  font-weight: 400;
+  color: var(--gold);
+  letter-spacing: 0.005em;
+  font-size: 1em;
+}
+.hero-headline .stop {
+  display: inline-block;
+  position: relative;
+}
+
+.hero-sub {
+  font-family: var(--body);
+  font-size: clamp(17px, 1.4vw, 21px);
+  font-weight: 300;
+  line-height: 1.55;
+  color: var(--light);
+  max-width: 580px;
+  margin-bottom: 44px;
+}
+.hero-sub strong { color: var(--white); font-weight: 600; }
+
+.hero-actions {
+  display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+  margin-bottom: 56px;
+}
+.btn {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 18px 28px;
+  font-family: var(--body);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all .25s cubic-bezier(.16,.84,.3,1);
+  text-decoration: none;
+}
+.btn-primary {
+  background: var(--gold);
+  color: var(--black);
+}
+.btn-primary:hover {
+  background: var(--gold-lt);
+  color: var(--black);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(201,168,76,0.25);
+}
+.btn-primary .arrow {
+  display: inline-block;
+  transition: transform .25s;
+}
+.btn-primary:hover .arrow { transform: translateX(4px); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--light);
+  border: 1px solid rgba(255,255,255,0.18);
+}
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+.hero-marquee {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-top: 1px solid rgba(201,168,76,0.18);
+  border-bottom: 1px solid rgba(201,168,76,0.18);
+  padding: 20px 0;
+  max-width: 720px;
+}
+.hero-marquee-item {
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 0 18px;
+  border-right: 1px solid rgba(255,255,255,0.05);
+}
+.hero-marquee-item:first-child { padding-left: 0; }
+.hero-marquee-item:last-child  { border-right: none; padding-right: 0; }
+.hero-marquee-val {
+  font-family: var(--display);
+  font-size: 22px;
+  color: var(--gold);
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+.hero-marquee-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* hero video (in left column) */
+.hero-video {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 16 / 10;
+  background: var(--dark-3);
+  border: 1px solid rgba(201,168,76,0.18);
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 2px;
+}
+.hero-video::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(201,168,76,0.12) 0%, transparent 60%),
+    repeating-linear-gradient(90deg, transparent 0 40px, rgba(255,255,255,0.018) 40px 41px),
+    repeating-linear-gradient(0deg, transparent 0 40px, rgba(255,255,255,0.018) 40px 41px),
+    linear-gradient(135deg, #1a1612 0%, #0a0807 100%);
+  transition: opacity .25s;
+}
+.hero-video-meta {
+  position: absolute; top: 18px; left: 18px;
+  z-index: 2;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.hero-video-play {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 18px;
+  z-index: 2;
+  transition: opacity .25s;
+}
+.hero-video-btn {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  border: 1.5px solid var(--gold);
+  background: rgba(201,168,76,0.12);
+  display: flex; align-items: center; justify-content: center;
+  transition: all .25s;
+  position: relative;
+}
+.hero-video-btn::after {
+  content: '';
+  position: absolute; inset: -10px;
+  border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.3);
+  animation: ring 2.6s ease-out infinite;
+}
+@keyframes ring {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.3); opacity: 0; }
+}
+.hero-video:hover .hero-video-btn { background: rgba(201,168,76,0.25); transform: scale(1.05); }
+.hero-video-label {
+  font-family: var(--body);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--white);
+  letter-spacing: 0;
+}
+.hero-video-iframe {
+  display: none;
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  border: 0;
+  z-index: 3;
+}
+.hero-video.playing .hero-video-iframe { display: block; }
+.hero-video.playing .hero-video-play,
+.hero-video.playing .hero-video-meta,
+.hero-video.playing::before { opacity: 0; pointer-events: none; }
+
+.hero-trust {
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 36px;
+  padding-top: 26px;
+  margin-top: 26px;
+  border-top: 1px solid rgba(201,168,76,0.18);
+}
+.hero-trust-item {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 14.5px;
+  color: var(--light);
+  letter-spacing: -0.005em;
+}
+.hero-trust-icon {
+  width: 24px; height: 24px;
+  flex-shrink: 0;
+  color: var(--gold);
+  display: flex; align-items: center; justify-content: center;
+}
+.hero-trust-icon svg { width: 22px; height: 22px; }
+.hero-card {
+  position: relative;
+  background: linear-gradient(180deg, rgba(20,18,16,0.85) 0%, rgba(11,9,7,0.88) 100%);
+  border: 1px solid rgba(201,168,76,0.22);
+  border-top: 1px solid rgba(201,168,76,0.4);
+  backdrop-filter: blur(10px);
+  padding: 0;
+  border-radius: 2px;
+}
+.hero-card::before {
+  content: '';
+  position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%);
+  width: 80px; height: 1px;
+  background: var(--gold);
+}
+
+.hero-card-header {
+  padding: 18px 22px;
+  border-bottom: 1px solid rgba(201,168,76,0.18);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.hero-card-stats {
+  display: grid;
+  grid-template-columns: 96px repeat(3, 1fr);
+  border-bottom: 1px solid rgba(201,168,76,0.18);
+}
+.hero-card-stat {
+  padding: 18px 10px;
+  text-align: center;
+  border-right: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.hero-card-stat:last-child { border-right: 0; }
+.hero-card-stat--logo { padding: 10px; }
+.hero-card-stat--logo img { max-width: 68px; height: auto; display: block; }
+.hero-stat-num {
+  font-family: var(--display);
+  font-size: 30px;
+  color: var(--white);
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+.hero-stat-label {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.hero-card-coaches {}
+.hero-coach-strip {
+  display: grid;
+  grid-template-columns: 50px 1fr 1.05fr;
+  gap: 14px;
+  align-items: center;
+  padding: 16px 22px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.hero-coach-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  overflow: hidden;
+  background: var(--dark-3);
+  border: 1px solid rgba(201,168,76,0.3);
+  flex-shrink: 0;
+}
+.hero-coach-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.hero-coach-mid { min-width: 0; }
+.hero-coach-name { font-size: 15px; font-weight: 700; color: var(--white); line-height: 1.15; letter-spacing: -0.005em; }
+.hero-coach-role {
+  font-family: var(--mono);
+  font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold); margin-top: 4px;
+}
+.hero-coach-byline {
+  font-family: var(--editorial);
+  font-style: italic;
+  font-size: 13.5px;
+  line-height: 1.4;
+  color: var(--light);
+  text-align: right;
+}
+
+.hero-card-cta {
+  padding: 18px;
+  display: flex; flex-direction: column;
+  gap: 10px;
+}
+.btn-green {
+  background: var(--green);
+  color: var(--white);
+}
+.btn-green:hover {
+  background: var(--green-dk);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(1,167,81,0.28);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--white);
+  border: 1px solid rgba(255,255,255,0.18);
+}
+.btn-outline:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+.hero-card-cta .btn { width: 100%; justify-content: center; padding: 18px 18px; font-size: 13px; }
+.hero-card-cta .arrow-down {
+  display: inline-block;
+  transition: transform .25s;
+}
+.hero-card-cta .btn-outline:hover .arrow-down { transform: translateY(3px); }
+
+@media (max-width: 980px) {
+  .hero { padding: 110px 0 60px; }
+  .hero-bottom { grid-template-columns: 1fr; gap: 36px; }
+  .hero-video, .hero-trust { max-width: 100%; }
+  .hero-bg { background-position: 70% center; }
+}
+@media (max-width: 600px) {
+  .hero-headline { font-size: clamp(48px, 13vw, 72px); }
+  .hero-trust { grid-template-columns: 1fr; gap: 12px; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   THE LINEUP
+   ═══════════════════════════════════════════════════════════ */
+.lineup {
+  background: var(--dark);
+  padding: 120px 0;
+  position: relative;
+  border-top: 1px solid rgba(201,168,76,0.08);
+}
+
+.lineup-head { text-align: center; margin-bottom: 72px; }
+.lineup-head .eyebrow { margin-bottom: 28px; }
+.lineup-head .eyebrow::before { display: none; }
+.lineup-headline {
+  font-family: var(--display);
+  font-size: clamp(40px, 5.5vw, 76px);
+  line-height: 0.94;
+  letter-spacing: 0.01em;
+  color: var(--white);
+  margin-bottom: 24px;
+  max-width: 1000px;
+  margin-inline: auto;
+}
+.lineup-headline .num {
+  color: var(--gold);
+  font-family: var(--display);
+}
+.lineup-sub {
+  font-family: var(--editorial);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(18px, 1.6vw, 22px);
+  color: var(--light);
+  max-width: 640px;
+  margin-inline: auto;
+  line-height: 1.4;
+}
+
+.lineup-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.lineup-card {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--dark-3);
+  transition: transform .5s cubic-bezier(.16,.84,.3,1);
+  border: 1px solid rgba(201,168,76,0.10);
+}
+.lineup-glow {
+  position: absolute;
+  inset: -1px;
+  border-radius: 3px;
+  pointer-events: none;
+  z-index: 6;
+  opacity: 0;
+  transition: opacity .35s ease;
+  padding: 2px;
+  background: radial-gradient(
+    360px circle at calc(var(--gx, -200) * 1px) calc(var(--gy, -200) * 1px),
+    rgba(224, 200, 122, 1) 0%,
+    rgba(201, 168, 76, 0.85) 30%,
+    rgba(201, 168, 76, 0) 70%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  filter: drop-shadow(0 0 6px rgba(201,168,76,0.5));
+}
+.lineup-card:hover .lineup-glow { opacity: 1; }
+.lineup-card:hover { transform: translateY(-6px); }
+.lineup-card img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  filter: grayscale(0.15) contrast(1.04);
+  transition: filter .5s, transform .8s ease;
+}
+.lineup-card:hover img { filter: grayscale(0) contrast(1.08); transform: scale(1.03); }
+
+.lineup-card::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg,
+    rgba(11,9,7,0.4) 0%,
+    rgba(11,9,7,0) 30%,
+    rgba(11,9,7,0.35) 60%,
+    rgba(11,9,7,0.98) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+.lineup-card-tag {
+  position: absolute; top: 18px; left: 18px;
+  z-index: 2;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding: 6px 10px;
+  background: rgba(11,9,7,0.85);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 1px;
+}
+.lineup-card-num {
+  position: absolute; top: 18px; right: 22px;
+  z-index: 2;
+  font-family: var(--display);
+  font-size: 18px;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.08em;
+}
+.lineup-card-body {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 28px 24px 26px;
+  z-index: 2;
+}
+.lineup-card-name {
+  font-family: var(--display);
+  font-size: clamp(28px, 2.6vw, 38px);
+  letter-spacing: 0.02em;
+  color: var(--white);
+  margin-bottom: 12px;
+  line-height: 1;
+}
+.lineup-card-titles {
+  font-size: 13px;
+  color: rgba(212, 205, 186, 0.85);
+  line-height: 1.55;
+  border-top: 1px solid rgba(201,168,76,0.25);
+  padding-top: 12px;
+}
+
+@media (max-width: 880px) {
+  .lineup-grid { grid-template-columns: 1fr; gap: 22px; max-width: 480px; margin-inline: auto; }
+  .lineup-card { aspect-ratio: 5 / 4; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PROBLEM / ESSAY
+   ═══════════════════════════════════════════════════════════ */
+.essay {
+  padding: 140px 0 100px;
+  background: var(--black);
+  position: relative;
+}
+.essay::before {
+  content: '';
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 1px; height: 60px;
+  background: linear-gradient(180deg, transparent, var(--gold));
+}
+
+.section-head {
+  text-align: center;
+  margin-bottom: 80px;
+}
+.section-head .eyebrow { margin-bottom: 24px; }
+.section-head .eyebrow::before { display: none; }
+.section-headline {
+  font-family: var(--display);
+  font-size: clamp(40px, 5.4vw, 76px);
+  line-height: 0.94;
+  letter-spacing: 0.01em;
+  color: var(--white);
+  margin-bottom: 22px;
+}
+.section-headline .it {
+  font-family: var(--editorial);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--gold);
+  letter-spacing: 0;
+  font-size: 0.92em;
+}
+.section-sub {
+  font-family: var(--editorial);
+  font-style: italic;
+  font-size: clamp(17px, 1.4vw, 20px);
+  color: var(--light);
+  max-width: 600px;
+  margin-inline: auto;
+  line-height: 1.45;
+}
+.section-sub .em { color: var(--gold); }
+
+.essay-lead {
+  font-size: 22px;
+  line-height: 1.6;
+  color: var(--white);
+  margin-bottom: 72px;
+  font-family: var(--editorial);
+  font-weight: 400;
+}
+.essay-lead::first-letter {
+  font-family: var(--display);
+  font-size: 78px;
+  float: left;
+  line-height: 0.85;
+  margin: 8px 14px 0 0;
+  color: var(--gold);
+}
+.essay-lead strong { color: var(--gold); font-weight: 600; font-style: normal; }
+
+/* essay figures redesigned */
+.essay-figure {
+  margin: 88px 0 60px;
+  max-width: 1100px;
+  margin-inline: auto;
+  position: relative;
+}
+.essay-figure-tag {
+  position: absolute;
+  top: -28px;
+  left: 0;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.essay-figure-tag::before {
+  content: '';
+  display: inline-block;
+  width: 8px; height: 8px;
+  border: 1px solid var(--gold);
+  background: var(--gold);
+  transform: rotate(45deg);
+}
+.essay-figure-tag .divider {
+  width: 22px; height: 1px;
+  background: rgba(201,168,76,0.5);
+}
+.essay-figure-tag .label { color: var(--subtle); }
+
+.essay-figure-inner {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--dark-3);
+  border: 1px solid rgba(201,168,76,0.15);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+}
+.essay-figure-inner img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 1.2s ease;
+}
+.essay-figure:hover .essay-figure-inner img { transform: scale(1.03); }
+.essay-figure-inner::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, transparent 60%, rgba(11,9,7,0.85) 100%),
+    linear-gradient(90deg, rgba(11,9,7,0.4) 0%, transparent 30%, transparent 70%, rgba(11,9,7,0.4) 100%);
+  pointer-events: none;
+}
+.essay-figure-corners {
+  position: absolute; inset: 12px;
+  pointer-events: none;
+  z-index: 2;
+}
+.essay-figure-corners::before,
+.essay-figure-corners::after {
+  content: '';
+  position: absolute;
+  width: 24px; height: 24px;
+  border: 1px solid var(--gold);
+}
+.essay-figure-corners::before { top: 0; left: 0; border-right: 0; border-bottom: 0; }
+.essay-figure-corners::after  { bottom: 0; right: 0; border-left: 0; border-top: 0; }
+
+.essay-figure-cap {
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+  padding-top: 16px;
+  margin-top: 0;
+  border-top: none;
+}
+.essay-figure-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: var(--muted);
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+.essay-figure-text {
+  font-family: var(--editorial);
+  font-style: italic;
+  font-size: 17px;
+  color: var(--light);
+  line-height: 1.45;
+  flex: 1;
+}
+
+/* solver comparison redesign */
+.solver-comp {
+  margin: 64px 0;
+  background: linear-gradient(180deg, rgba(20,18,16,0.85) 0%, rgba(11,9,7,0.95) 100%);
+  border: 1px solid rgba(201,168,76,0.25);
+  border-top: 2px solid var(--gold);
+}
+.solver-comp-head {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 24px;
+  border-bottom: 1px solid rgba(201,168,76,0.18);
+  background: rgba(201,168,76,0.04);
+}
+.solver-comp-title {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.solver-comp-title::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+.solver-comp-meta {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--subtle);
+  text-transform: uppercase;
+}
+.solver-comp-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.solver-cell {
+  padding: 36px 32px;
+  position: relative;
+}
+.solver-cell--you {
+  background: linear-gradient(180deg, rgba(193,66,66,0.10) 0%, rgba(193,66,66,0.03) 100%);
+  border-right: 1px solid rgba(255,255,255,0.06);
+}
+.solver-cell--solver {
+  background: linear-gradient(180deg, rgba(1,167,81,0.08) 0%, rgba(1,167,81,0.02) 100%);
+}
+.solver-cell-tag {
+  position: absolute; top: 20px; right: 20px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 1px;
+}
+.solver-cell-tag--bad { background: rgba(193,66,66,0.18); color: #ec9999; border: 1px solid rgba(193,66,66,0.4); }
+.solver-cell-tag--good { background: rgba(1,167,81,0.18); color: #6cdf99; border: 1px solid rgba(1,167,81,0.4); }
+.solver-cell-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+.solver-cell-action {
+  font-family: var(--display);
+  font-size: 72px;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+.solver-cell--you .solver-cell-action { color: #ec9999; }
+.solver-cell--solver .solver-cell-action { color: #6cdf99; }
+.solver-cell-detail {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--subtle);
+  letter-spacing: 0.06em;
+  min-height: 18px;
+  margin-bottom: 26px;
+}
+.solver-cell-bar {
+  height: 8px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 1px;
+  position: relative;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.solver-cell-bar-fill {
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  border-radius: 1px;
+  transition: width 1.2s cubic-bezier(.16,.84,.3,1);
+  width: 0;
+}
+.solver-comp.in .solver-cell--you .solver-cell-bar-fill {
+  width: 100%;
+  background: linear-gradient(90deg, rgba(193,66,66,0.6), #ec9999);
+}
+.solver-comp.in .solver-cell--solver .solver-cell-bar-fill {
+  width: 76%;
+  background: linear-gradient(90deg, rgba(1,167,81,0.6), #6cdf99);
+}
+.solver-cell-freq {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-family: var(--mono);
+}
+.solver-cell-freq-num {
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+.solver-cell--you .solver-cell-freq-num { color: #ec9999; }
+.solver-cell--solver .solver-cell-freq-num { color: #6cdf99; }
+.solver-cell-freq-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* essay kicker redesign */
+.essay-kicker {
+  margin-top: 96px;
+  padding: 56px 0 0;
+  border-top: 1px solid rgba(201,168,76,0.25);
+  position: relative;
+}
+.essay-kicker::before {
+  content: '';
+  position: absolute;
+  top: -1px; left: 0;
+  width: 80px; height: 2px;
+  background: var(--gold);
+}
+.essay-kicker-mark {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 24px;
+}
+.essay-kicker-text {
+  font-family: var(--display);
+  font-size: clamp(38px, 5vw, 68px);
+  line-height: 1.02;
+  color: var(--white);
+  letter-spacing: 0.012em;
+  margin-bottom: 32px;
+  max-width: 980px;
+}
+.essay-kicker-text .it {
+  font-family: var(--editorial);
+  font-style: italic;
+  color: var(--gold);
+  letter-spacing: 0;
+  font-weight: 400;
+  font-size: 0.95em;
+}
+.essay-kicker-foot {
+  display: flex;
+  align-items: baseline;
+  gap: 32px;
+  font-size: 17px;
+  color: var(--subtle);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 24px;
+}
+.essay-kicker-foot strong {
+  font-family: var(--display);
+  font-size: clamp(28px, 3vw, 40px);
+  color: var(--gold);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  display: inline-block;
+}
+.essay-kicker-foot .label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  flex-shrink: 0;
+  padding-top: 12px;
+}
+
+.essay-body {
+  font-size: 19px;
+  line-height: 1.75;
+  color: var(--light);
+}
+.essay-body p { margin-bottom: 26px; }
+.essay-body p:last-child { margin-bottom: 0; }
+.essay-body strong { color: var(--white); font-weight: 600; }
+.essay-body em { color: var(--gold-lt); font-family: var(--editorial); font-style: italic; }
+.essay-beat {
+  font-family: var(--display);
+  font-size: 56px;
+  letter-spacing: 0.02em;
+  color: var(--gold);
+  line-height: 1;
+  margin: 32px 0 !important;
+}
+
+/* solver comparison */
+.solver-comp {
+  margin: 56px 0;
+  border: 1px solid rgba(201,168,76,0.2);
+}
+.solver-comp-head {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(201,168,76,0.2);
+  background: rgba(201,168,76,0.04);
+}
+.solver-comp-title {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.solver-comp-meta {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+.solver-comp-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.solver-cell {
+  padding: 32px 28px;
+  position: relative;
+  font-family: var(--mono);
+}
+.solver-cell--you { background: rgba(193, 66, 66, 0.08); border-right: 1px solid rgba(255,255,255,0.05); }
+.solver-cell--solver { background: rgba(1, 167, 81, 0.06); }
+.solver-cell-tag {
+  position: absolute; top: 18px; right: 18px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  padding: 4px 8px;
+  border-radius: 1px;
+}
+.solver-cell-tag--bad { background: rgba(193,66,66,0.2); color: #e88a8a; border: 1px solid rgba(193,66,66,0.35); }
+.solver-cell-tag--good { background: rgba(1,167,81,0.15); color: #6cdf99; border: 1px solid rgba(1,167,81,0.35); }
+.solver-cell-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+.solver-cell-action {
+  font-family: var(--display);
+  font-size: 56px;
+  letter-spacing: 0.02em;
+  color: var(--white);
+  line-height: 1;
+}
+.solver-cell--you .solver-cell-action { color: #e88a8a; }
+.solver-cell--solver .solver-cell-action { color: #6cdf99; }
+.solver-cell-detail {
+  margin-top: 8px;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--subtle);
+  letter-spacing: 0.04em;
+}
+.solver-cell-freq {
+  margin-top: 18px;
+  font-family: var(--mono);
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--white);
+}
+
+.essay-kicker {
+  margin-top: 80px;
+  padding-top: 48px;
+  border-top: 1px solid rgba(201,168,76,0.18);
+  text-align: left;
+}
+.essay-kicker-text {
+  font-family: var(--display);
+  font-size: clamp(36px, 4.5vw, 60px);
+  line-height: 1;
+  color: var(--white);
+  letter-spacing: 0.018em;
+  margin-bottom: 22px;
+}
+.essay-kicker-text .it {
+  font-family: var(--editorial);
+  font-style: italic;
+  color: var(--gold);
+  letter-spacing: 0;
+  font-weight: 400;
+  font-size: 0.95em;
+}
+.essay-kicker-foot {
+  font-size: 18px;
+  color: var(--light);
+}
+.essay-kicker-foot strong { color: var(--gold); font-weight: 600; }
+
+/* ═══════════════════════════════════════════════════════════
+   SOLUTION + MECHANICS
+   ═══════════════════════════════════════════════════════════ */
+.solution {
+  background: var(--dark);
+  padding: 140px 0;
+  position: relative;
+  border-top: 1px solid rgba(201,168,76,0.08);
+}
+.solution-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 96px;
+  align-items: start;
+}
+.solution-left .eyebrow { margin-bottom: 24px; }
+.solution-headline {
+  font-family: var(--display);
+  font-size: clamp(38px, 4.6vw, 62px);
+  line-height: 0.96;
+  letter-spacing: 0.012em;
+  color: var(--white);
+  margin-bottom: 22px;
+}
+.solution-sub {
+  font-family: var(--editorial);
+  font-style: italic;
+  font-size: 20px;
+  line-height: 1.45;
+  color: var(--gold-lt);
+  margin-bottom: 44px;
+  max-width: 480px;
+}
+.solution-body {
+  font-size: 18px;
+  line-height: 1.78;
+  color: var(--light);
+}
+.solution-body p { margin-bottom: 22px; }
+.solution-body em { color: var(--gold-lt); font-family: var(--editorial); font-style: italic; }
+.solution-body strong { color: var(--white); font-weight: 600; }
+
+.pull {
+  margin: 48px 0 0;
+  padding-left: 28px;
+  border-left: 2px solid var(--gold);
+}
+.pull-text {
+  font-family: var(--editorial);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1.45;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+.pull-text strong { font-style: normal; color: var(--gold); }
+.pull-attr {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--subtle);
+}
+
+/* mechanics list */
+.mechanics {
+  position: sticky;
+  top: 96px;
+}
+.mechanics-head {
+  padding-bottom: 28px;
+  border-bottom: 1px solid rgba(201,168,76,0.2);
+  margin-bottom: 8px;
+}
+.mechanics-eyebrow {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+.mechanics-title {
+  font-family: var(--display);
+  font-size: clamp(28px, 2.6vw, 38px);
+  line-height: 1;
+  letter-spacing: 0.015em;
+  color: var(--white);
+}
+.mechanics-title .it {
+  font-family: var(--editorial);
+  font-style: italic;
+  color: var(--gold);
+  letter-spacing: 0;
+  font-weight: 400;
+  font-size: 0.95em;
+}
+.mech-item {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 24px;
+  padding: 22px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  align-items: flex-start;
+}
+.mech-num {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  color: var(--gold);
+  padding-top: 4px;
+}
+.mech-title {
+  display: block;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+.mech-desc {
+  font-size: 14.5px;
+  color: var(--subtle);
+  line-height: 1.55;
+}
+.mech-tail {
+  margin-top: 24px;
+  font-size: 14px;
+  color: var(--subtle);
+  line-height: 1.55;
+}
+.mech-tail strong { color: var(--gold); font-weight: 600; }
+
+@media (max-width: 980px) {
+  .solution-grid { grid-template-columns: 1fr; gap: 64px; }
+  .mechanics { position: static; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ORIGIN
+   ═══════════════════════════════════════════════════════════ */
+.origin {
+  padding: 140px 0;
+  background: var(--black);
+}
+.origin-body {
+  font-size: 20px;
+  line-height: 1.78;
+  color: var(--light);
+  font-family: var(--editorial);
+  font-weight: 400;
+  margin-top: 48px;
+}
+.origin-body p { margin-bottom: 28px; }
+.origin-body strong {
+  color: var(--white);
+  font-family: var(--body);
+  font-weight: 600;
+  font-style: normal;
+}
+.origin-body em { color: var(--gold-lt); }
+.origin-pull {
+  margin: 40px 0;
+  padding: 28px 0;
+  border-top: 1px solid rgba(201,168,76,0.25);
+  border-bottom: 1px solid rgba(201,168,76,0.25);
+  position: relative;
+}
+.origin-pull p {
+  font-family: var(--editorial);
+  font-style: italic;
+  font-size: 26px;
+  line-height: 1.4;
+  color: var(--white);
+  margin: 0;
+  font-weight: 400;
+}
+.origin-pull p::before {
+  content: '"';
+  font-family: var(--editorial);
+  color: var(--gold);
+  font-size: 80px;
+  position: absolute;
+  top: -10px;
+  left: -22px;
+  line-height: 1;
+  font-style: normal;
+  opacity: 0.4;
+}
+.origin-pull-src {
+  margin-top: 18px;
+  font-family: var(--mono);
+  font-style: normal;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.origin-closer { color: var(--white); }
+.origin-closer strong { color: var(--gold); }
+
+/* ═══════════════════════════════════════════════════════════
+   PROGRESSION
+   ═══════════════════════════════════════════════════════════ */
+.progression {
+  padding: 120px 0;
+  background: var(--dark);
+  border-top: 1px solid rgba(201,168,76,0.08);
+}
+.prog-track {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0;
+  margin: 80px auto 0;
+  max-width: 1100px;
+  position: relative;
+}
+.prog-track::before {
+  content: '';
+  position: absolute;
+  top: 30px;
+  left: 8%; right: 8%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-dk), var(--gold), var(--gold-dk), transparent);
+}
+.prog-node {
+  text-align: center;
+  position: relative;
+  padding: 0 12px;
+}
+.prog-dot {
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  background: var(--dark);
+  border: 1px solid rgba(201,168,76,0.4);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 18px;
+  font-family: var(--display);
+  font-size: 18px;
+  color: var(--gold);
+  position: relative;
+  z-index: 2;
+  transition: all .25s;
+}
+.prog-node:hover .prog-dot {
+  background: rgba(201,168,76,0.15);
+  border-color: var(--gold);
+  transform: scale(1.08);
+  box-shadow: 0 0 30px rgba(201,168,76,0.2);
+}
+.prog-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.35;
+  margin-bottom: 4px;
+}
+.prog-sub {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.steps-block {
+  max-width: 760px;
+  margin: 96px auto 0;
+}
+.step {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 32px;
+  padding: 30px 0;
+  border-top: 1px solid rgba(201,168,76,0.15);
+  align-items: baseline;
+}
+.step:last-child { border-bottom: 1px solid rgba(201,168,76,0.15); }
+.step-num {
+  font-family: var(--display);
+  font-size: 56px;
+  color: var(--gold);
+  line-height: 0.85;
+  letter-spacing: 0.02em;
+}
+.step-content strong {
+  display: block;
+  font-size: 22px;
+  color: var(--white);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+.step-content span {
+  display: block;
+  color: var(--subtle);
+  font-size: 16px;
+  line-height: 1.6;
+}
+.step-content em { color: var(--gold-lt); font-family: var(--editorial); font-style: italic; }
+
+@media (max-width: 900px) {
+  .prog-track { grid-template-columns: repeat(2, 1fr); gap: 32px 0; }
+  .prog-track::before { display: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FUTURECAST (scenario)
+   ═══════════════════════════════════════════════════════════ */
+.futurecast {
+  padding: 140px 0;
+  background: var(--black);
+  position: relative;
+}
+.futurecast::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 50% at 50% 100%, rgba(201,168,76,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.futurecast .wrap { position: relative; z-index: 2; }
+.scenario {
+  margin-top: 60px;
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 40px;
+  align-items: start;
+}
+.scenario-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding-top: 8px;
+  border-top: 1px solid var(--gold);
+}
+.scenario-body p {
+  font-size: 20px;
+  line-height: 1.7;
+  color: var(--light);
+  margin-bottom: 22px;
+  font-family: var(--editorial);
+  font-weight: 400;
+}
+.scenario-body p:last-child { margin-bottom: 0; }
+.scenario-body strong {
+  color: var(--white);
+  font-weight: 600;
+  font-family: var(--body);
+  font-style: normal;
+}
+.scenario-body em { color: var(--gold-lt); }
+
+.futurecast-quote {
+  margin-top: 80px;
+  max-width: 820px;
+  margin-inline: auto;
+  text-align: center;
+}
+.futurecast-quote p {
+  font-family: var(--editorial);
+  font-style: italic;
+  font-size: clamp(22px, 2.4vw, 30px);
+  line-height: 1.45;
+  color: var(--white);
+  margin-bottom: 24px;
+  font-weight: 400;
+}
+.futurecast-quote p strong { color: var(--gold); font-style: normal; }
+.futurecast-quote-attr {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--subtle);
+}
+
+@media (max-width: 720px) {
+  .scenario { grid-template-columns: 1fr; gap: 24px; }
+  .scenario-body p { font-size: 17px; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   COACH PROFILES
+   ═══════════════════════════════════════════════════════════ */
+.coaches {
+  padding: 140px 0;
+  background: var(--dark);
+  border-top: 1px solid rgba(201,168,76,0.08);
+}
+.coach-profile {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 80px;
+  align-items: start;
+  padding: 80px 0;
+  border-top: 1px solid rgba(201,168,76,0.12);
+  position: relative;
+}
+.coach-profile.flip { grid-template-columns: 1fr 420px; }
+.coach-profile.flip .coach-photo-wrap { order: 2; }
+.coach-photo-wrap {
+  position: sticky;
+  top: 110px;
+}
+.coach-photo {
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: var(--dark-3);
+  overflow: hidden;
+  position: relative;
+  border-radius: 2px;
+}
+.coach-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+.coach-photo::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 60%, rgba(11,9,7,0.9) 100%);
+}
+.coach-photo-tag {
+  position: absolute;
+  top: 20px; left: 20px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  z-index: 2;
+  padding: 6px 10px;
+  background: rgba(11,9,7,0.85);
+  border: 1px solid rgba(201,168,76,0.3);
+}
+.coach-photo-label {
+  position: absolute;
+  bottom: 22px; left: 22px;
+  z-index: 2;
+}
+.coach-photo-name {
+  font-family: var(--display);
+  font-size: 32px;
+  color: var(--white);
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+.coach-photo-cash {
+  font-family: var(--mono);
+  font-size: 15px;
+  color: var(--gold);
+  letter-spacing: 0.06em;
+  margin-top: 6px;
+}
+
+.coach-bio-role {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.coach-bio-role::before {
+  content: '';
+  width: 24px; height: 1px; background: var(--gold);
+}
+.coach-bio-name {
+  font-family: var(--display);
+  font-size: clamp(48px, 6vw, 88px);
+  letter-spacing: 0.018em;
+  color: var(--white);
+  line-height: 0.9;
+  margin-bottom: 14px;
+}
+.coach-bio-cash {
+  font-family: var(--display);
+  font-size: clamp(28px, 3vw, 44px);
+  color: var(--gold);
+  letter-spacing: 0.04em;
+  margin-bottom: 32px;
+  border-bottom: 1px solid rgba(201,168,76,0.2);
+  padding-bottom: 28px;
+}
+.coach-bio-body {
+  font-size: 18px;
+  line-height: 1.75;
+  color: var(--light);
+}
+.coach-bio-body p { margin-bottom: 22px; }
+.coach-bio-body em { color: var(--gold-lt); font-family: var(--editorial); font-style: italic; }
+
+.coach-fine {
+  font-size: 14px;
+  color: var(--muted);
+  font-style: italic;
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.coach-quote {
+  margin: 36px 0;
+  padding: 28px 32px;
+  background: rgba(201,168,76,0.04);
+  border-left: 2px solid var(--gold);
+}
+.coach-quote-text {
+  font-family: var(--editorial);
+  font-style: italic;
+  font-size: 20px;
+  line-height: 1.5;
+  color: var(--white);
+  margin-bottom: 14px;
+}
+.coach-quote-attr {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.creds-banner {
+  margin-top: 80px;
+  padding: 56px 40px;
+  border: 1px solid rgba(201,168,76,0.25);
+  border-top: 2px solid var(--gold);
+  background: rgba(20,18,16,0.6);
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
+}
+.cred-item {
+  text-align: center;
+  padding: 0 16px;
+  border-right: 1px solid rgba(255,255,255,0.06);
+}
+.cred-item:last-child { border-right: none; }
+.cred-num {
+  font-family: var(--display);
+  font-size: clamp(36px, 4vw, 56px);
+  color: var(--gold);
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+  margin-bottom: 10px;
+}
+.cred-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--subtle);
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+@media (max-width: 980px) {
+  .coach-profile, .coach-profile.flip { grid-template-columns: 1fr; gap: 40px; }
+  .coach-profile.flip .coach-photo-wrap { order: 0; }
+  .coach-photo-wrap { position: static; }
+  .coach-photo { max-width: 420px; }
+  .creds-banner { grid-template-columns: repeat(2, 1fr); padding: 36px 20px; }
+  .cred-item:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.06); }
+  .cred-item:nth-child(even) { border-right: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   WEAPONS
+   ═══════════════════════════════════════════════════════════ */
+.weapons {
+  padding: 140px 0;
+  background: var(--black);
+}
+.weapons-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  margin-top: 72px;
+  background: rgba(201,168,76,0.15);
+  border: 1px solid rgba(201,168,76,0.15);
+}
+.weapon {
+  background: var(--dark);
+  padding: 56px 48px;
+  position: relative;
+  transition: background .3s;
+}
+.weapon:hover {
+  background: var(--dark-2);
+}
+.weapon-num {
+  font-family: var(--display);
+  font-size: 110px;
+  color: rgba(201,168,76,0.12);
+  line-height: 0.85;
+  letter-spacing: 0;
+  position: absolute;
+  top: 30px;
+  right: 38px;
+}
+.weapon-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.weapon-label::before {
+  content: '';
+  width: 18px; height: 1px;
+  background: var(--gold);
+}
+.weapon-title {
+  font-family: var(--display);
+  font-size: clamp(28px, 2.8vw, 40px);
+  color: var(--white);
+  line-height: 1;
+  letter-spacing: 0.015em;
+  margin-bottom: 24px;
+  max-width: 360px;
+}
+.weapon-body {
+  font-size: 16px;
+  color: var(--light);
+  line-height: 1.7;
+}
+.weapon-body p { margin-bottom: 14px; }
+.weapon-body p:last-child { margin-bottom: 0; }
+.weapon-body strong { color: var(--white); font-weight: 600; }
+
+@media (max-width: 880px) {
+  .weapons-grid { grid-template-columns: 1fr; }
+  .weapon { padding: 44px 28px; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CURRICULUM
+   ═══════════════════════════════════════════════════════════ */
+.curriculum {
+  padding: 140px 0;
+  background: var(--dark);
+  border-top: 1px solid rgba(201,168,76,0.08);
+}
+.curr-parts {
+  margin-top: 72px;
+  max-width: 1000px;
+  margin-inline: auto;
+}
+.curr-part {
+  border-top: 1px solid rgba(201,168,76,0.18);
+}
+.curr-part:last-child { border-bottom: 1px solid rgba(201,168,76,0.18); }
+.curr-part-head {
+  display: grid;
+  grid-template-columns: 80px 1fr 60px;
+  align-items: center;
+  gap: 32px;
+  padding: 32px 0;
+  cursor: pointer;
+  transition: padding-left .3s;
+}
+.curr-part-head:hover { padding-left: 10px; }
+.curr-part-num {
+  font-family: var(--display);
+  font-size: 48px;
+  color: var(--gold);
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+.curr-part-meta {
+  min-width: 0;
+}
+.curr-part-title {
+  font-family: var(--display);
+  font-size: clamp(22px, 2.2vw, 28px);
+  color: var(--white);
+  line-height: 1.1;
+  letter-spacing: 0.012em;
+  margin-bottom: 8px;
+}
+.curr-part-sub {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--subtle);
+  text-transform: uppercase;
+}
+.curr-part-toggle {
+  width: 40px; height: 40px;
+  border: 1px solid rgba(201,168,76,0.35);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  color: var(--gold);
+  justify-self: end;
+  transition: all .25s;
+  position: relative;
+}
+.curr-part-toggle::before, .curr-part-toggle::after {
+  content: '';
+  position: absolute;
+  background: var(--gold);
+  transition: transform .25s;
+}
+.curr-part-toggle::before { width: 14px; height: 1.5px; }
+.curr-part-toggle::after { width: 1.5px; height: 14px; }
+.curr-part.open .curr-part-toggle {
+  background: var(--gold);
+  border-color: var(--gold);
+}
+.curr-part.open .curr-part-toggle::before,
+.curr-part.open .curr-part-toggle::after { background: var(--black); }
+.curr-part.open .curr-part-toggle::after { transform: rotate(90deg); opacity: 0; }
+
+.curr-modules {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .55s cubic-bezier(.16,.84,.3,1);
+}
+.curr-part.open .curr-modules {
+  max-height: 1200px;
+}
+.curr-modules-inner {
+  padding: 0 0 32px 80px;
+  display: grid;
+  gap: 0;
+}
+.curr-module {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 28px;
+  padding: 20px 0;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.curr-module-num {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  padding-top: 3px;
+}
+.curr-module-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 4px;
+  letter-spacing: -0.005em;
+}
+.curr-module-desc {
+  font-size: 14.5px;
+  color: var(--subtle);
+  line-height: 1.55;
+}
+
+@media (max-width: 720px) {
+  .curr-part-head { grid-template-columns: 56px 1fr 40px; gap: 18px; padding: 26px 0; }
+  .curr-part-num { font-size: 32px; }
+  .curr-modules-inner { padding-left: 18px; }
+  .curr-module { grid-template-columns: 50px 1fr; gap: 14px; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TESTIMONIALS
+   ═══════════════════════════════════════════════════════════ */
+.proof {
+  padding: 140px 0;
+  background: var(--black);
+}
+.proof-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 72px;
+}
+.testimonial {
+  background: var(--dark);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-top: 2px solid var(--gold);
+  padding: 36px 32px;
+  display: flex; flex-direction: column;
+}
+.testimonial-stars {
+  color: var(--gold);
+  letter-spacing: 0.18em;
+  font-size: 14px;
+  margin-bottom: 22px;
+}
+.testimonial-quote {
+  font-family: var(--editorial);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--light);
+  margin-bottom: 28px;
+  flex: 1;
+}
+.testimonial-attr {
+  display: flex; align-items: center; gap: 14px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+.testimonial-avatar {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: rgba(201,168,76,0.12);
+  border: 1px solid rgba(201,168,76,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--display);
+  font-size: 14px;
+  color: var(--gold);
+}
+.testimonial-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--white);
+}
+.testimonial-stakes {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 3px;
+}
+
+@media (max-width: 880px) {
+  .proof-grid { grid-template-columns: 1fr; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   OFFER / PRICING
+   ═══════════════════════════════════════════════════════════ */
+.offer {
+  padding: 140px 0;
+  background: var(--dark);
+  border-top: 1px solid rgba(201,168,76,0.08);
+  position: relative;
+}
+.offer-card {
+  margin-top: 72px;
+  background: var(--black);
+  border: 1px solid rgba(201,168,76,0.3);
+  position: relative;
+  overflow: hidden;
+}
+.offer-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold-dk), var(--gold), var(--gold-lt), var(--gold), var(--gold-dk));
+}
+.offer-card-head {
+  text-align: center;
+  padding: 56px 40px 36px;
+  border-bottom: 1px solid rgba(201,168,76,0.18);
+}
+.launch-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding: 6px 14px;
+  border: 1px solid rgba(201,168,76,0.35);
+  border-radius: 1px;
+  margin-bottom: 24px;
+}
+.launch-badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.3); }
+}
+.offer-card-title {
+  font-family: var(--display);
+  font-size: clamp(36px, 4vw, 56px);
+  color: var(--white);
+  letter-spacing: 0.018em;
+  line-height: 1;
+  margin-bottom: 14px;
+}
+.offer-card-sub {
+  font-family: var(--editorial);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--gold-lt);
+}
+
+.offer-card-body { padding: 40px 56px 48px; }
+.offer-line {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  padding: 22px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  align-items: center;
+}
+.offer-line-name {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+.offer-line-desc {
+  font-size: 14px;
+  color: var(--muted);
+}
+.offer-line-val {
+  font-family: var(--mono);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--white);
+  letter-spacing: 0.04em;
+}
+.offer-line-val.free {
+  color: var(--green);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+.offer-total {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  padding: 32px 0 0;
+  align-items: end;
+  margin-top: 12px;
+}
+.offer-total-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 4px;
+}
+.offer-total-sub {
+  font-size: 13px;
+  color: var(--muted);
+}
+.offer-total-price {
+  font-family: var(--display);
+  font-size: 72px;
+  color: var(--gold);
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+}
+
+.offer-cta-wrap {
+  padding: 0 56px 56px;
+  text-align: center;
+}
+.offer-cta-wrap .btn { width: 100%; max-width: 540px; justify-content: center; padding: 22px 28px; font-size: 14px; }
+.offer-urgency {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  margin-top: 18px;
+  text-transform: uppercase;
+}
+
+.bonus-section {
+  max-width: 880px;
+  margin: 80px auto 0;
+}
+.bonus-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-align: center;
+  margin-bottom: 36px;
+}
+.bonus {
+  display: grid;
+  grid-template-columns: 60px 1fr auto;
+  gap: 24px;
+  padding: 28px 0;
+  border-top: 1px solid rgba(201,168,76,0.18);
+  align-items: center;
+}
+.bonus:last-child { border-bottom: 1px solid rgba(201,168,76,0.18); }
+.bonus-icon {
+  width: 48px; height: 48px;
+  border: 1px solid rgba(201,168,76,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  color: var(--gold);
+}
+.bonus-name {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+.bonus-desc {
+  font-size: 14.5px;
+  color: var(--subtle);
+  line-height: 1.55;
+}
+.bonus-badge {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--green);
+  padding: 6px 12px;
+  border: 1px solid rgba(1,167,81,0.35);
+  background: rgba(1,167,81,0.08);
+  border-radius: 1px;
+  white-space: nowrap;
+}
+
+@media (max-width: 720px) {
+  .offer-card-body, .offer-cta-wrap { padding-left: 24px; padding-right: 24px; }
+  .offer-card-head { padding: 36px 24px 28px; }
+  .offer-total-price { font-size: 56px; }
+  .bonus { grid-template-columns: 1fr; gap: 12px; }
+  .bonus-icon { width: 42px; height: 42px; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   GUARANTEE
+   ═══════════════════════════════════════════════════════════ */
+.guarantee {
+  padding: 100px 0;
+  background: var(--black);
+}
+.guarantee-inner {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 56px;
+  align-items: center;
+  max-width: 880px;
+  margin-inline: auto;
+  padding: 56px 48px;
+  border: 1px solid rgba(201,168,76,0.2);
+  background: var(--dark);
+}
+.guarantee-seal img {
+  width: 100%;
+  max-width: 180px;
+}
+.guarantee-text h3 {
+  font-family: var(--display);
+  font-size: clamp(26px, 2.6vw, 36px);
+  color: var(--white);
+  line-height: 1;
+  letter-spacing: 0.015em;
+  margin-bottom: 18px;
+}
+.guarantee-text p {
+  font-size: 16px;
+  color: var(--light);
+  line-height: 1.65;
+  margin-bottom: 14px;
+}
+.guarantee-text p:last-child { color: var(--muted); font-size: 13px; }
+
+@media (max-width: 720px) {
+  .guarantee-inner { grid-template-columns: 1fr; gap: 28px; padding: 36px 24px; text-align: center; }
+  .guarantee-seal { margin-inline: auto; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FAQ
+   ═══════════════════════════════════════════════════════════ */
+.faq {
+  padding: 140px 0;
+  background: var(--dark);
+  border-top: 1px solid rgba(201,168,76,0.08);
+}
+.faq-list {
+  max-width: 880px;
+  margin: 64px auto 0;
+}
+.faq-item {
+  border-top: 1px solid rgba(201,168,76,0.18);
+}
+.faq-item:last-child { border-bottom: 1px solid rgba(201,168,76,0.18); }
+.faq-q {
+  display: grid;
+  grid-template-columns: 1fr 32px;
+  gap: 24px;
+  padding: 28px 0;
+  align-items: center;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--white);
+  letter-spacing: -0.005em;
+  transition: color .2s;
+}
+.faq-q:hover { color: var(--gold); }
+.faq-toggle {
+  width: 28px; height: 28px;
+  border: 1px solid rgba(201,168,76,0.4);
+  border-radius: 50%;
+  position: relative;
+  flex-shrink: 0;
+  transition: all .25s;
+}
+.faq-toggle::before, .faq-toggle::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  background: var(--gold);
+  transition: transform .25s;
+}
+.faq-toggle::before { width: 10px; height: 1.5px; transform: translate(-50%, -50%); }
+.faq-toggle::after { width: 1.5px; height: 10px; transform: translate(-50%, -50%); }
+.faq-item.open .faq-toggle { background: var(--gold); }
+.faq-item.open .faq-toggle::before,
+.faq-item.open .faq-toggle::after { background: var(--black); }
+.faq-item.open .faq-toggle::after { transform: translate(-50%, -50%) rotate(90deg); opacity: 0; }
+
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .5s ease;
+}
+.faq-item.open .faq-a { max-height: 400px; }
+.faq-a p {
+  padding: 0 60px 28px 0;
+  font-size: 16px;
+  color: var(--light);
+  line-height: 1.7;
+}
+.faq-a em { color: var(--gold-lt); font-family: var(--editorial); font-style: italic; }
+
+/* ═══════════════════════════════════════════════════════════
+   WARNING / COST OF WAITING
+   ═══════════════════════════════════════════════════════════ */
+.warning {
+  padding: 140px 0;
+  background: var(--black);
+  position: relative;
+}
+.warning::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.warning-body {
+  font-size: 19px;
+  line-height: 1.75;
+  color: var(--light);
+  margin-top: 48px;
+  font-family: var(--editorial);
+  font-weight: 400;
+}
+.warning-body p { margin-bottom: 24px; }
+.warning-body strong {
+  color: var(--white);
+  font-weight: 600;
+  font-family: var(--body);
+  font-style: normal;
+}
+
+.warning-quote {
+  margin: 64px 0;
+  padding: 48px 0;
+  border-top: 1px solid rgba(201,168,76,0.25);
+  border-bottom: 1px solid rgba(201,168,76,0.25);
+  text-align: center;
+}
+.warning-quote p {
+  font-family: var(--editorial);
+  font-style: italic;
+  font-size: clamp(20px, 2.2vw, 26px);
+  line-height: 1.5;
+  color: var(--white);
+  margin-bottom: 22px;
+  font-weight: 400;
+  max-width: 760px;
+  margin-inline: auto;
+}
+.warning-quote-attr {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.warning-lede {
+  font-size: 19px;
+  color: var(--white);
+  font-family: var(--body);
+  font-weight: 500;
+  font-style: normal;
+  text-align: center;
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FINAL CTA
+   ═══════════════════════════════════════════════════════════ */
+.final-cta {
+  padding: 160px 0 120px;
+  background: var(--dark);
+  border-top: 1px solid rgba(201,168,76,0.08);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.final-cta::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(201,168,76,0.1) 0%, transparent 60%);
+  pointer-events: none;
+}
+.final-cta .wrap { position: relative; z-index: 2; }
+
+.final-coaches {
+  display: flex; justify-content: center; gap: 32px;
+  margin-bottom: 48px;
+}
+.final-chip {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 18px 10px 10px;
+  border: 1px solid rgba(201,168,76,0.25);
+  border-radius: 100px;
+  background: rgba(20,18,16,0.5);
+}
+.final-chip-av {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--dark-3);
+  border: 1px solid rgba(201,168,76,0.3);
+}
+.final-chip-av img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.final-chip-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.final-headline {
+  font-family: var(--display);
+  font-size: clamp(48px, 7vw, 104px);
+  line-height: 0.92;
+  letter-spacing: 0.012em;
+  color: var(--white);
+  margin-bottom: 24px;
+}
+.final-headline .it {
+  font-family: var(--editorial);
+  font-style: italic;
+  color: var(--gold);
+  letter-spacing: 0;
+  font-weight: 400;
+  font-size: 0.92em;
+}
+.final-sub {
+  font-family: var(--editorial);
+  font-style: italic;
+  font-size: clamp(18px, 1.8vw, 24px);
+  color: var(--gold-lt);
+  max-width: 640px;
+  margin: 0 auto 56px;
+  line-height: 1.4;
+}
+
+.final-cta-btn { display: inline-flex; }
+.final-cta-btn .btn { padding: 24px 40px; font-size: 14px; }
+.final-note {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 22px;
+}
+
+.final-trust {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  margin-top: 72px;
+  padding-top: 48px;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  flex-wrap: wrap;
+}
+.final-trust-item {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px;
+  color: var(--subtle);
+}
+.final-trust-item svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+@media (max-width: 720px) {
+  .final-coaches { gap: 8px; flex-wrap: wrap; }
+  .final-trust { gap: 22px; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════════════════════ */
+.footer {
+  padding: 64px 0 40px;
+  background: var(--black);
+  border-top: 1px solid rgba(255,255,255,0.05);
+  text-align: center;
+}
+.footer-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+.footer-logo img {
+  height: 60px;
+  width: auto;
+  display: block;
+}
+.footer-links {
+  display: flex; justify-content: center; gap: 32px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+.footer-links a {
+  font-size: 13px;
+  color: var(--subtle);
+  letter-spacing: 0.02em;
+}
+.footer-links a:hover { color: var(--gold); }
+.footer-copy {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* nav nav-cta initially hidden */
+.nav-cta {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition: opacity .3s ease, transform .3s ease, background .2s;
+}
+.nav-cta.visible {
+  opacity: 1; pointer-events: auto; transform: none;
+}
+
+@media (max-width: 880px) {
+  .nav-links .nav-link:not(.nav-cta) { display: none; }
+  .nav-countdown-time .seconds { display: none; }
+}
+@media (max-width: 600px) {
+  .nav-countdown-label { display: none; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ═══ NAV ═══════════════════════════════════════════════════ -->
+<nav class="nav">
+  <div class="wrap">
+    <div class="nav-left">
+      <a href="#" class="nav-logo"><img src="https://upswingpoker.com/wp-content/uploads/2026/05/upswing-poker-logo-for-dark-bg.png" alt="Upswing Poker"></a>
+      <span class="nav-countdown">
+        <span class="nav-countdown-label">Bonus ends</span>
+        <span class="nav-countdown-time">
+          <span id="cd-d">00</span>:<span id="cd-h">00</span>:<span id="cd-m">00</span><span class="seconds">:<span id="cd-s">00</span></span>
+        </span>
+      </span>
+    </div>
+    <div class="nav-links">
+      <a href="#curriculum" class="nav-link">Curriculum</a>
+      <a href="#coaches" class="nav-link">Coaches</a>
+      <a href="#offer" class="nav-link">Pricing</a>
+      <a href="#offer" class="nav-cta" id="navCta">Get the course →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══ HERO ══════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="wrap">
+    <div class="hero-grid">
+
+      <div class="hero-intro">
+        <div class="hero-attention reveal">
+          <div class="attn-pill" id="attnPill">
+            <span class="attn-chip attn-chip--tl" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+                <circle cx="12" cy="12" r="11" fill="#0e0c0a" stroke="#c9a84c" stroke-width="1.4"/>
+                <g stroke="#c9a84c" stroke-width="2" stroke-linecap="round">
+                  <line x1="12" y1="1.8" x2="12" y2="4.2"/>
+                  <line x1="12" y1="19.8" x2="12" y2="22.2"/>
+                  <line x1="1.8" y1="12" x2="4.2" y2="12"/>
+                  <line x1="19.8" y1="12" x2="22.2" y2="12"/>
+                  <line x1="4.7" y1="4.7" x2="6.4" y2="6.4"/>
+                  <line x1="17.6" y1="17.6" x2="19.3" y2="19.3"/>
+                  <line x1="4.7" y1="19.3" x2="6.4" y2="17.6"/>
+                  <line x1="17.6" y1="6.4" x2="19.3" y2="4.7"/>
+                </g>
+                <circle cx="12" cy="12" r="5.2" fill="none" stroke="#c9a84c" stroke-width="0.9"/>
+                <circle cx="12" cy="12" r="2" fill="#c9a84c"/>
+              </svg>
+            </span>
+            <span class="attn-chip attn-chip--br" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+                <circle cx="12" cy="12" r="11" fill="#0e0c0a" stroke="#e0c87a" stroke-width="1.4"/>
+                <g stroke="#e0c87a" stroke-width="2" stroke-linecap="round">
+                  <line x1="12" y1="1.8" x2="12" y2="4.2"/>
+                  <line x1="12" y1="19.8" x2="12" y2="22.2"/>
+                  <line x1="1.8" y1="12" x2="4.2" y2="12"/>
+                  <line x1="19.8" y1="12" x2="22.2" y2="12"/>
+                  <line x1="4.7" y1="4.7" x2="6.4" y2="6.4"/>
+                  <line x1="17.6" y1="17.6" x2="19.3" y2="19.3"/>
+                  <line x1="4.7" y1="19.3" x2="6.4" y2="17.6"/>
+                  <line x1="17.6" y1="6.4" x2="19.3" y2="4.7"/>
+                </g>
+                <circle cx="12" cy="12" r="5.2" fill="none" stroke="#e0c87a" stroke-width="0.9"/>
+                <circle cx="12" cy="12" r="2" fill="#e0c87a"/>
+              </svg>
+            </span>
+            <button type="button" class="attn-btn">Attention</button>
+            <span class="attn-desc">Tournament players serious about more final tables</span>
+            <button type="button" class="attn-close" aria-label="Dismiss" onclick="document.getElementById('attnPill').classList.add('dismissed')">
+              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="3" y1="3" x2="13" y2="13"/><line x1="13" y1="3" x2="3" y2="13"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <h1 class="hero-headline reveal">
+          Stop Guessing.<br>
+          <span class="gold">Start Thinking.</span><br>
+          Like THE Best.
+        </h1>
+
+        <p class="hero-sub reveal">
+          Tim Adams and Dan Dvoress built a course that teaches you the <strong>why</strong> behind solvers so you can confidently deviate and crush any tournament.
+        </p>
+      </div><!-- /.hero-intro -->
+
+      <div class="hero-bottom">
+        <div class="hero-media-col">
+
+        <div class="hero-video reveal" id="heroVideo"
+             data-vimeo="https://player.vimeo.com/video/1191769044?badge=0&amp;autopause=0&amp;autoplay=1&amp;title=0&amp;byline=0&amp;portrait=0">
+          <div class="hero-video-meta">Course Preview · 2:34</div>
+          <div class="hero-video-play">
+            <div class="hero-video-btn">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="#c9a84c"><polygon points="6,3 20,12 6,21"/></svg>
+            </div>
+            <div class="hero-video-label">Free Peek Inside</div>
+          </div>
+        </div>
+
+        <div class="hero-trust reveal">
+          <div class="hero-trust-item">
+            <span class="hero-trust-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 2l2.6 6.3 6.8.6-5.2 4.5 1.6 6.6L12 16.7 6.2 20l1.6-6.6L2.6 8.9l6.8-.6L12 2z"/></svg>
+            </span>
+            <span>$100M+ combined live cashes</span>
+          </div>
+          <div class="hero-trust-item">
+            <span class="hero-trust-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg>
+            </span>
+            <span>Lifetime access</span>
+          </div>
+          <div class="hero-trust-item">
+            <span class="hero-trust-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
+            </span>
+            <span>Adv. ChipEV Ranges</span>
+          </div>
+          <div class="hero-trust-item">
+            <span class="hero-trust-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 2l8 3v7c0 5-3.6 8.5-8 10-4.4-1.5-8-5-8-10V5l8-3z"/></svg>
+            </span>
+            <span>Fair Play Guarantee</span>
+          </div>
+        </div>
+        </div><!-- /.hero-media-col -->
+
+      <!-- right card -->
+      <aside class="hero-card reveal">
+        <div class="hero-card-header">The Ultimate Tournament Course</div>
+
+        <div class="hero-card-stats">
+          <div class="hero-card-stat hero-card-stat--logo">
+            <img src="https://upswingpoker.com/wp-content/uploads/2026/04/MTM-Logo-Dark-Version-thumb.png" alt="Modern Tournament Mastery">
+          </div>
+          <div class="hero-card-stat">
+            <div class="hero-stat-num">20+</div>
+            <div class="hero-stat-label">Hours of Video</div>
+          </div>
+          <div class="hero-card-stat">
+            <div class="hero-stat-num">6</div>
+            <div class="hero-stat-label">Modules</div>
+          </div>
+          <div class="hero-card-stat">
+            <div class="hero-stat-num">3</div>
+            <div class="hero-stat-label">All-Timers</div>
+          </div>
+        </div>
+
+        <div class="hero-card-coaches">
+          <div class="hero-coach-strip">
+            <div class="hero-coach-avatar"><img src="https://upswingpoker.com/wp-content/uploads/2026/05/tim-adams-hero-bio-pic.png" alt="Timothy Adams"></div>
+            <div class="hero-coach-mid">
+              <div class="hero-coach-name">Timothy Adams</div>
+              <div class="hero-coach-role">Lead Coach</div>
+            </div>
+            <div class="hero-coach-byline">2× Triton ME Champion who teaches you to think, not memorize.</div>
+          </div>
+          <div class="hero-coach-strip">
+            <div class="hero-coach-avatar"><img src="https://upswingpoker.com/wp-content/uploads/2026/05/Daniel-Dvoress-min-300x300-gto-lab.png" alt="Daniel Dvoress"></div>
+            <div class="hero-coach-mid">
+              <div class="hero-coach-name">Daniel Dvoress</div>
+              <div class="hero-coach-role">Coach</div>
+            </div>
+            <div class="hero-coach-byline">13th player to cross $50M in live cashes. The ICM authority.</div>
+          </div>
+          <div class="hero-coach-strip">
+            <div class="hero-coach-avatar"><img src="https://upswingpoker.com/wp-content/uploads/2026/05/chidwick-image-1.png" alt="Stephen Chidwick"></div>
+            <div class="hero-coach-mid">
+              <div class="hero-coach-name">Stephen Chidwick</div>
+              <div class="hero-coach-role">Guest Coach</div>
+            </div>
+            <div class="hero-coach-byline">Widely considered the best tournament player alive.</div>
+          </div>
+        </div>
+
+        <div class="hero-card-cta">
+          <a href="https://upswingpoker.com/shop/cart/?add-to-cart=784093" class="btn btn-green">Get Modern Tournament Mastery <span class="arrow">→</span></a>
+          <a href="#curriculum" class="btn btn-outline">See What's Inside <span class="arrow-down">↓</span></a>
+        </div>
+      </aside>
+      </div><!-- /.hero-bottom -->
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ LINEUP ════════════════════════════════════════════════ -->
+<section class="lineup">
+  <div class="wrap">
+    <header class="lineup-head reveal">
+      <div class="eyebrow">The Lineup</div>
+      <h2 class="lineup-headline">
+        <span class="num">$100 Million+</span> in Live Tournament Cashes.<br>One Course.
+      </h2>
+      <p class="lineup-sub">A generational lineup. Three of the most decorated tournament players of the modern era.</p>
+    </header>
+
+    <div class="lineup-grid">
+      <article class="lineup-card reveal">
+        <div class="lineup-glow"></div>
+        <div class="lineup-card-tag">Lead Coach</div>
+        <div class="lineup-card-num">01</div>
+        <img src="https://upswingpoker.com/wp-content/uploads/2026/05/timothy-adams-upswing-poker-bio.png" alt="Tim Adams">
+        <div class="lineup-card-body">
+          <div class="lineup-card-name">Tim Adams</div>
+          <div class="lineup-card-titles">
+            2× Triton Main Event Champion<br>
+            Back-to-Back Super High Roller Bowl Champion<br>
+            WSOP Bracelet Winner · Aussie Millions Champion
+          </div>
+        </div>
+      </article>
+
+      <article class="lineup-card reveal">
+        <div class="lineup-glow"></div>
+        <div class="lineup-card-tag">Coach · GTO Lab Co-Founder</div>
+        <div class="lineup-card-num">02</div>
+        <img src="https://upswingpoker.com/wp-content/uploads/2026/05/daniel-dvoress-upswing-course-coach-bio.png" alt="Daniel Dvoress">
+        <div class="lineup-card-body">
+          <div class="lineup-card-name">Daniel Dvoress</div>
+          <div class="lineup-card-titles">
+            Super High Roller Bowl Champion<br>
+            2× WSOP Bracelet Winner<br>
+            5× EPT Champion · Multi-Triton Title Winner
+          </div>
+        </div>
+      </article>
+
+      <article class="lineup-card reveal">
+        <div class="lineup-glow"></div>
+        <div class="lineup-card-tag">Guest Coach · Octopi Pro</div>
+        <div class="lineup-card-num">03</div>
+        <img src="https://upswingpoker.com/wp-content/uploads/2026/05/stephen-chidwick-guest-poker-coach-bio-upswing.png" alt="Stephen Chidwick">
+        <div class="lineup-card-body">
+          <div class="lineup-card-name">Stephen Chidwick</div>
+          <div class="lineup-card-titles">
+            #2 All-Time Live Earnings<br>
+            2× WSOP Bracelet · 3× Triton Champion<br>
+            11× EPT Champion · Former World #1 GPI
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ESSAY / PROBLEM ═══════════════════════════════════════ -->
+<section class="essay">
+  <div class="wrap wrap--narrow">
+    <header class="section-head reveal">
+      <div class="eyebrow">The Problem</div>
+      <h2 class="section-headline">
+        You Study Harder Than Ever.<br>You Still Bust In<br><span class="it">Painful Spots.</span>
+      </h2>
+      <p class="section-sub">You know the strategies. You just might not know <span class="em">why.</span></p>
+    </header>
+
+    <p class="essay-lead reveal">
+      Five years ago, a chart and a few well-timed shoves got you a cash. <strong>That world is gone.</strong> Today the $200 field has immersed themselves in solvers. They have ranges memorized. They watch the same free videos you watch. The baseline has moved, and if all you have is the baseline, you're the one being exploited.
+    </p>
+  </div>
+
+  <div class="wrap wrap--wide">
+    <figure class="essay-figure reveal">
+      <div class="essay-figure-tag"><span>Fig. 01</span><span class="divider"></span><span class="label">The Habit</span></div>
+      <div class="essay-figure-inner">
+        <img src="https://upswingpoker.com/wp-content/uploads/2026/05/mtm-3-problem-pain-section-illustration-solver-confusion.jpg" alt="Poker solver confusion">
+        <div class="essay-figure-corners"></div>
+      </div>
+      <figcaption class="essay-figure-cap">
+        <span class="essay-figure-num">01 / 03</span>
+        <span class="essay-figure-text">Studied. Tired. Chart in the head. Doubt in the gut.</span>
+      </figcaption>
+    </figure>
+  </div>
+
+  <div class="wrap wrap--narrow">
+    <div class="essay-body reveal">
+      <p>You <em>know</em> this. You've put in the hours on HRC or GTO Wizard. You've studied the outputs, looked at the frequencies, tried to memorize the spots. And yet, 30 big blinds deep, short stack in the blind, clock ticking, you still feel like you're guessing.</p>
+      <p class="essay-beat">Because you are.</p>
+    </div>
+  </div>
+
+  <div class="wrap wrap--wide">
+    <figure class="essay-figure reveal">
+      <div class="essay-figure-tag"><span>Fig. 02</span><span class="divider"></span><span class="label">The Spot</span></div>
+      <div class="essay-figure-inner">
+        <img src="https://upswingpoker.com/wp-content/uploads/2026/05/mtt-poker-course-2026-flop-652-for-landing.jpg" alt="Flop on felt 6-5-2">
+        <div class="essay-figure-corners"></div>
+      </div>
+      <figcaption class="essay-figure-cap">
+        <span class="essay-figure-num">02 / 03</span>
+        <span class="essay-figure-text">A board that hits his range twice as often as yours. You c-bet anyway.</span>
+      </figcaption>
+    </figure>
+  </div>
+
+  <div class="wrap wrap--narrow">
+    <div class="essay-body reveal">
+      <p>You open from the hijack. Get flatted by the cutoff. Flop comes 6-5-2. You fire a c-bet because, well you were the preflop raiser, and that's what you do. Check-raise. <strong>Now what?</strong></p>
+      <p>You didn't think about range asymmetry. The cutoff's flat is loaded with pocket pairs that crush this exact board. Out of position against a condensed range, the solver wants you checking 76% of the time.</p>
+    </div>
+
+    <div class="solver-comp reveal">
+      <div class="solver-comp-head">
+        <div class="solver-comp-title">Solver Output</div>
+        <div class="solver-comp-meta">BTN flat vs UTG · 6-5-2 rainbow · OOP turn</div>
+      </div>
+      <div class="solver-comp-grid">
+        <div class="solver-cell solver-cell--you">
+          <div class="solver-cell-tag solver-cell-tag--bad">LEAK</div>
+          <div class="solver-cell-label">What you did</div>
+          <div class="solver-cell-action">BET</div>
+          <div class="solver-cell-detail">75% pot c-bet</div>
+          <div class="solver-cell-bar"><div class="solver-cell-bar-fill"></div></div>
+          <div class="solver-cell-freq">
+            <span class="solver-cell-freq-num">100%</span>
+            <span class="solver-cell-freq-label">frequency</span>
+          </div>
+        </div>
+        <div class="solver-cell solver-cell--solver">
+          <div class="solver-cell-tag solver-cell-tag--good">✓ SOLVER</div>
+          <div class="solver-cell-label">What solver wants</div>
+          <div class="solver-cell-action">CHECK</div>
+          <div class="solver-cell-detail">range-wide</div>
+          <div class="solver-cell-bar"><div class="solver-cell-bar-fill"></div></div>
+          <div class="solver-cell-freq">
+            <span class="solver-cell-freq-num">76%</span>
+            <span class="solver-cell-freq-label">frequency</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="essay-body reveal">
+      <p>So you burned chips in a pot you never should have built. <em>Again.</em></p>
+    </div>
+  </div>
+
+  <div class="wrap wrap--wide">
+    <figure class="essay-figure reveal">
+      <div class="essay-figure-tag"><span>Fig. 03</span><span class="divider"></span><span class="label">The Cost</span></div>
+      <div class="essay-figure-inner">
+        <img src="https://pokerati.com/wp-content/uploads/2025/06/Tournament-Poker-Strategy-1024x576.jpg" alt="Short stack alone on felt">
+        <div class="essay-figure-corners"></div>
+      </div>
+      <figcaption class="essay-figure-cap">
+        <span class="essay-figure-num">03 / 03</span>
+        <span class="essay-figure-text">The bust hand. Not a cooler. A leak.</span>
+      </figcaption>
+    </figure>
+  </div>
+
+  <div class="wrap wrap--narrow">
+    <div class="essay-body reveal">
+      <p>And it gets worse near the money. You tighten up because that's what everyone says to do. But you tighten too much, or not enough, or in the wrong spots because nobody ever explained <em>how</em> ICM actually changes post-flop strategy.</p>
+    </div>
+
+    <div class="essay-kicker reveal">
+      <div class="essay-kicker-mark">— The Real Cost</div>
+      <p class="essay-kicker-text">
+        The gap between knowing the charts and <span class="it">understanding what the best players see</span> that's where your money is hiding.
+      </p>
+      <div class="essay-kicker-foot">
+        <span class="label">Cashing vs. final-tabling</span>
+        <strong>$2,000 → $20,000</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SOLUTION ══════════════════════════════════════════════ -->
+<section class="solution">
+  <div class="wrap">
+    <div class="solution-grid">
+
+      <div class="solution-left reveal">
+        <div class="eyebrow" style="margin-bottom: 24px;">The Solution</div>
+        <h2 class="solution-headline">
+          What if you could see the game the way <span style="font-family: var(--editorial); font-style: italic; color: var(--gold); font-size: 0.95em;">they</span> see it?
+        </h2>
+        <p class="solution-sub">This course doesn't teach you what to memorize. It teaches you how to think.</p>
+
+        <div class="solution-body">
+          <p>Here's what separates the players who cash $100 million+ from the rest of the field.</p>
+          <p>They understand the <em>why</em> behind every decision.</p>
+          <p>They know why the same hand plays differently at 100bb than at 30bb. They know why ICM pressure doesn't just change preflop ranges it <strong>reshapes entire post-flop strategies</strong> in ways most players never think about. They know why a dry Jack-high flop means one thing against a wide range and something completely different against a tight defender under bubble pressure.</p>
+          <p>When you understand the mechanics behind the decisions, you don't need to memorize 10,000 spots. You need the principles. And you'll know what to do when you get there.</p>
+        </div>
+
+        <div class="pull">
+          <p class="pull-text">We want to help you become that player who makes their opponents shrug their shoulders a lot, creating a lot of <strong>indifference</strong> in their decisions. That's the hardest player to play against. Someone very, very well balanced.</p>
+          <p class="pull-attr">— The Upswing Poker Team</p>
+        </div>
+      </div>
+
+      <aside class="mechanics reveal">
+        <header class="mechanics-head">
+          <div class="mechanics-eyebrow">Examples from the curriculum</div>
+          <h3 class="mechanics-title">Mechanics, in <span class="it">practice.</span></h3>
+        </header>
+
+        <div class="mech-item">
+          <div class="mech-num">01</div>
+          <div>
+            <span class="mech-title">Range Asymmetry</span>
+            <span class="mech-desc">Why boards hit your range vs. your opponent's differently and how to act on it without guessing.</span>
+          </div>
+        </div>
+        <div class="mech-item">
+          <div class="mech-num">02</div>
+          <div>
+            <span class="mech-title">Stack-Depth Adjustments</span>
+            <span class="mech-desc">Why the same hand plays differently at 100bb, 30bb, and 15bb with the mechanical reason behind every change.</span>
+          </div>
+        </div>
+        <div class="mech-item">
+          <div class="mech-num">03</div>
+          <div>
+            <span class="mech-title">Post-Flop ICM</span>
+            <span class="mech-desc">The section most courses skip entirely. How ICM reshapes flop, turn, and river strategy covering and covered.</span>
+          </div>
+        </div>
+        <div class="mech-item">
+          <div class="mech-num">04</div>
+          <div>
+            <span class="mech-title">Risk Premium Deltas</span>
+            <span class="mech-desc">Dvoress's framework for finding attack spots and for defending when a bigger stack is targeting you.</span>
+          </div>
+        </div>
+        <div class="mech-item">
+          <div class="mech-num">05</div>
+          <div>
+            <span class="mech-title">The Study Method</span>
+            <span class="mech-desc">The exact three-step routine Tim uses to prepare for $100K buy-ins. You can copy it starting today.</span>
+          </div>
+        </div>
+
+        <p class="mech-tail">A few examples from <strong>25+ modules</strong> across preflop, post-flop, ICM, and study workflow.</p>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ORIGIN ════════════════════════════════════════════════ -->
+<section class="origin">
+  <div class="wrap wrap--narrow">
+    <header class="section-head reveal" style="text-align: left; margin-bottom: 0;">
+      <div class="eyebrow">How this course got made</div>
+      <h2 class="section-headline" style="text-align: left;">This course almost<br><span class="it">didn't get made.</span></h2>
+      <p class="section-sub" style="margin-left: 0; max-width: 540px;">Why three of the best current tournament players alive spent months building this for you.</p>
+    </header>
+
+    <div class="origin-body reveal">
+      <p>Tim Adams spent the last year and a half mostly at home, preparing to have his first child. Not grinding the circuit. Studying. So when the chance to build a course came up, he took it. Building it at that stage of life wasn't easy <strong>he rented an office space just to get it over the finish line.</strong></p>
+      <p>He didn't build it alone. He brought in Daniel Dvoress and, for the Triton final-table review, Stephen Chidwick the player ranked #2 all-time on the Hendon Mob money list.</p>
+
+      <div class="origin-pull">
+        <p>The best of the best when it comes to preflop, the mechanics behind the plays, and the way ICM influences responses.</p>
+        <div class="origin-pull-src">— Tim, on Daniel</div>
+      </div>
+
+      <p>The three of them are friends who've studied and grown their game together comparing notes, arguing spots, sharpening each other. In the Triton London Main Event review, you get to sit in on one of those Super High Roller study sessions. On camera. For hours.</p>
+      <p class="origin-closer"><strong>That's what over $100 million in combined cashes looks like when it's teaching instead of playing.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ COURSE PROGRESSION ════════════════════════════════════ -->
+<section class="progression">
+  <div class="wrap">
+    <header class="section-head reveal">
+      <div class="eyebrow">Course Structure</div>
+      <h2 class="section-headline">You'll see spots differently<br>after the <span class="it">first week.</span></h2>
+      <p class="section-sub">You don't need to be an ICM expert to start. You just need to be willing to study.</p>
+    </header>
+
+    <div class="prog-track reveal">
+      <div class="prog-node">
+        <div class="prog-dot">01</div>
+        <div class="prog-label">Study Tools<br>& Methods</div>
+        <div class="prog-sub">Part 1</div>
+      </div>
+      <div class="prog-node">
+        <div class="prog-dot">02</div>
+        <div class="prog-label">Deep Stack<br>Play (100bb+)</div>
+        <div class="prog-sub">Part 2</div>
+      </div>
+      <div class="prog-node">
+        <div class="prog-dot">03</div>
+        <div class="prog-label">Mid-Stage<br>Preflop</div>
+        <div class="prog-sub">Part 3</div>
+      </div>
+      <div class="prog-node">
+        <div class="prog-dot">04</div>
+        <div class="prog-label">ICM Pre &<br>Post-Flop</div>
+        <div class="prog-sub">Part 4</div>
+      </div>
+      <div class="prog-node">
+        <div class="prog-dot">05</div>
+        <div class="prog-label">Endgame &<br>Final Tables</div>
+        <div class="prog-sub">Part 5</div>
+      </div>
+      <div class="prog-node">
+        <div class="prog-dot">06</div>
+        <div class="prog-label">Triton ME<br>Review</div>
+        <div class="prog-sub">Part 5–6</div>
+      </div>
+    </div>
+
+    <div class="steps-block reveal">
+      <p style="font-size: 19px; line-height: 1.7; color: var(--light); margin-bottom: 48px; font-family: var(--editorial); font-weight: 400;">
+        Tim designed this course so each concept builds on the last. You don't start with final table ICM and drown. You start with the tools and the study method the same study method Tim uses to prepare for $100,000 buy-in events.
+      </p>
+
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <strong>Preflop Range Breakdown</strong>
+          <span>Tim breaks down the range interaction. Not just "we have the advantage" but <em>why</em>, showing the exact weight of offsuit hands versus pocket pairs.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <strong>Aggregate Flop Reports</strong>
+          <span>He opens GTO Lab and looks at flop reports across thousands of boards, teaching you the push and pull factors that drive strategy.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <strong>Live Bot Drilling</strong>
+          <span>He boots up Lucid GTO Trainer and plays hands live, explaining his thinking, managing frequencies with the RNG, catching his own mistakes in real time.</span>
+        </div>
+      </div>
+
+      <div class="futurecast-quote" style="margin-top: 64px;">
+        <p>"The best way to get better at poker is to drill, drill versus the bot. It'll open up your mind. You'll get good at frequencies."</p>
+        <div class="futurecast-quote-attr">— Tim Adams · Course Lead</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FUTURECAST ════════════════════════════════════════════ -->
+<section class="futurecast">
+  <div class="wrap wrap--narrow">
+    <header class="section-head reveal">
+      <div class="eyebrow">The Result</div>
+      <h2 class="section-headline">The table is<br><span class="it">afraid of you</span> now.</h2>
+      <p class="section-sub">Imagine sitting down at a final table and feeling <span class="em">ready</span>.</p>
+    </header>
+
+    <div class="scenario reveal">
+      <div class="scenario-label">Scenario</div>
+      <div class="scenario-body">
+        <p>You're 9-handed. The money bubble just burst. The chip leader has been bullying the table for the last 20 minutes.</p>
+        <p>Old you would tighten up. Wait for a big hand. Hope to ladder.</p>
+        <p><strong>The new you sees something different.</strong></p>
+        <p>You see that the chip leader is opening wider than the solver wants because he thinks "I have the big stack, I should pressure everyone." You see that his risk premium is lower than yours, but his <em>delta</em> against the players behind you is where the real action is. You see a spot to 3-bet jam with a hand you used to fold. Not because you're gambling because you understand the exact ICM math that makes it profitable.</p>
+        <p>You act. He tank-folds. The table notices.</p>
+        <p>Two orbits later, a wet board comes down and you fire what Tim calls a <strong>"Demi-Bluff"</strong> a merge bet at 150% pot with a vulnerable hand that forces his middle-pair combos into pure indifference. He doesn't know whether you're value-betting or bluffing. That's the point. You've put him in a blender. You're picking on the chip leader.</p>
+        <p>He folds again. And now you're the one the table is afraid of.</p>
+      </div>
+    </div>
+
+    <div class="futurecast-quote reveal">
+      <p>"Do you want to be a transactional player, where all you care about is the wins and losses? Or do you want to be a <strong>transformational player</strong>, where you're thinking bigger picture on improving every day?"</p>
+      <div class="futurecast-quote-attr">— Tim Adams · 2× Triton Main Event Champion</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ COACHES ══════════════════════════════════════════════ -->
+<section class="coaches" id="coaches">
+  <div class="wrap">
+    <header class="section-head reveal">
+      <div class="eyebrow">Your Coaches</div>
+      <h2 class="section-headline">Three Coaches.<br>Five Bracelets. <span class="it">$100 Million+.</span></h2>
+    </header>
+
+    <!-- Tim -->
+    <div class="coach-profile reveal">
+      <div class="coach-photo-wrap">
+        <div class="coach-photo">
+          <div class="coach-photo-tag">Course Lead</div>
+          <img src="https://upswingpoker.com/wp-content/uploads/2026/05/Timothy-Adams-poker-coach-card-fifa-style.png" alt="Tim Adams">
+          <div class="coach-photo-label">
+            <div class="coach-photo-name">Tim Adams</div>
+          </div>
+        </div>
+      </div>
+      <div class="coach-bio">
+        <div class="coach-bio-role">01 Course Lead</div>
+        <h3 class="coach-bio-name">Tim Adams</h3>
+        <div class="coach-bio-body">
+          <p>Tim started playing freerolls in his dorm room during the poker boom. He's now a 2× Triton Main Event Champion, 2× Super High Roller Bowl Champion, and bracelet winner.</p>
+          <p>But what makes Tim different as a teacher is his philosophy. He's a solver-based player who looks at every output through an exploitative lens.</p>
+        </div>
+        <div class="coach-quote">
+          <p class="coach-quote-text">"At the end of the day, we are playing humans. I do look through the solves with that exploitative lens. I'm always searching for exploitative opportunities."</p>
+          <div class="coach-quote-attr">— Tim Adams</div>
+        </div>
+        <p class="coach-fine">Tim drives the bus on this course. He shows you his exact study process, his tools, his mistakes. When he drills against the bot on camera, he catches his own errors and explains what went wrong. That kind of honesty is rare from someone at his level.</p>
+      </div>
+    </div>
+
+    <!-- Daniel -->
+    <div class="coach-profile flip reveal">
+      <div class="coach-photo-wrap">
+        <div class="coach-photo">
+          <div class="coach-photo-tag">ICM Specialist</div>
+          <img src="https://upswingpoker.com/wp-content/uploads/2026/05/Daniel-Dvoress-poker-coach-card-fifa-style.png" alt="Daniel Dvoress">
+          <div class="coach-photo-label">
+            <div class="coach-photo-name">Daniel Dvoress</div>
+            <div class="coach-photo-cash">$50.5M+ live</div>
+          </div>
+        </div>
+      </div>
+      <div class="coach-bio">
+        <div class="coach-bio-role">02 ICM Specialist</div>
+        <h3 class="coach-bio-name">Daniel Dvoress</h3>
+        <div class="coach-bio-cash">$50.5M+</div>
+        <div class="coach-bio-body">
+          <p>Here's how Tim introduces Daniel in the course: <em>"The best of the best when it comes to understanding preflop, the mechanics behind the plays, and the way ICM influences responses."</em></p>
+          <p>Daniel just crossed $50 million in live cashes only the 13th player in history to do it. He's won a Super High Roller Bowl ($4.08M), three Triton titles, two bracelets, and four EPT titles.</p>
+          <p>Daniel takes over when the course shifts from chip EV to tournament EV. He handles the ICM sections both preflop and post-flop and breaks down concepts like risk premium deltas that most players have never even heard of, let alone understood.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stephen -->
+    <div class="coach-profile reveal">
+      <div class="coach-photo-wrap">
+        <div class="coach-photo">
+          <div class="coach-photo-tag">Final Table Analyst</div>
+          <img src="https://upswingpoker.com/wp-content/uploads/2026/05/stephen-chidwick-poker-coach-card-fifa-style.png" alt="Stephen Chidwick">
+          <div class="coach-photo-label">
+            <div class="coach-photo-name">Stephen Chidwick</div>
+            <div class="coach-photo-cash">$76M+ live</div>
+          </div>
+        </div>
+      </div>
+      <div class="coach-bio">
+        <div class="coach-bio-role">03 Final Table Analyst</div>
+        <h3 class="coach-bio-name">Stephen Chidwick</h3>
+        <div class="coach-bio-cash">$76M+</div>
+        <div class="coach-bio-body">
+          <p>The poker community has been saying it for years. PokerNews, PokerGO, his peers. They all agree. Chidwick is widely considered one of the best tournament players on the planet. #2 all-time on the Hendon Mob money list. Two-time CardPlayer Player of the Year. Former world #1 GPI ranking.</p>
+          <p>Stephen's contribution is a multi-hour review of the Triton London Main Event the same event Tim Adams won. Every key hand analyzed, from bubble burst to the final winner, with Tim and Stephen studying it together on camera.</p>
+        </div>
+        <div class="coach-quote">
+          <p class="coach-quote-text">"How you play when you are running poorly or things aren't going your way that's a much bigger variable between players. That gives you a really big opportunity to separate yourself."</p>
+          <div class="coach-quote-attr">— Stephen Chidwick</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="creds-banner reveal">
+      <div class="cred-item">
+        <div class="cred-num">$100M+</div>
+        <div class="cred-label">Combined live cashes</div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-num">5</div>
+        <div class="cred-label">Bracelets</div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-num">3</div>
+        <div class="cred-label">Triton ME titles</div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-num">3</div>
+        <div class="cred-label">SHR Bowl titles</div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-num">#1</div>
+        <div class="cred-label">Most credentialed Upswing lineup</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WEAPONS ══════════════════════════════════════════════ -->
+<section class="weapons">
+  <div class="wrap">
+    <header class="section-head reveal">
+      <div class="eyebrow">The Mechanics</div>
+      <h2 class="section-headline">The weapons they don't teach in <span class="it">other</span> courses.</h2>
+      <p class="section-sub">Four concepts that will forever change how you play tournaments.</p>
+    </header>
+
+    <div class="weapons-grid">
+      <article class="weapon reveal">
+        <div class="weapon-num">01</div>
+        <div class="weapon-label">Framework</div>
+        <h3 class="weapon-title">The Three Pillars of Mid-Stage Preflop</h3>
+        <div class="weapon-body">
+          <p>Most players treat the middle of a tournament like a guessing game, blindly applying early-game deep-stack strategy to tables where stack depths are wildly uneven.</p>
+          <p><strong>Pillar 1 Equal Stacks (Crawling).</strong> How ranges actually function when everyone has 50bb. Why hands you loved at 100bb lose massive value at shallower depths.</p>
+          <p><strong>Pillar 2 Mixed Stacks (Walking).</strong> What happens when you have 50bb but there are 11bb and 15bb stacks behind you? Those short stacks deny your equity in ways that aren't obvious.</p>
+          <p><strong>Pillar 3 ICM (Running).</strong> Daniel Dvoress takes over. How to use risk premium deltas to find attack spots and defend when you're targeted.</p>
+        </div>
+      </article>
+
+      <article class="weapon reveal">
+        <div class="weapon-num">02</div>
+        <div class="weapon-label">Study Method</div>
+        <h3 class="weapon-title">The "Come Study With Me" Format</h3>
+        <div class="weapon-body">
+          <p>You're exhausted by courses that dump hours of static solver charts on your screen without showing you how to use them in a real game.</p>
+          <p>Tim fixes this with an over-the-shoulder teaching method. A repeatable three-step process:</p>
+          <p><strong>Step 1.</strong> Preflop range interaction breakdown not just "we have the advantage" but why.</p>
+          <p><strong>Step 2.</strong> GTO Lab aggregate flop reports across thousands of boards the push and pull factors driving strategy.</p>
+          <p><strong>Step 3.</strong> Lucid GTO Trainer live drilling thinking out loud, managing frequencies, catching his own mistakes in real time.</p>
+        </div>
+      </article>
+
+      <article class="weapon reveal">
+        <div class="weapon-num">03</div>
+        <div class="weapon-label">Concept</div>
+        <h3 class="weapon-title">The Demi-Bluff</h3>
+        <div class="weapon-body">
+          <p>A merge bet at 150% pot with a vulnerable hand one that simultaneously generates fold equity, builds a pot when called with the best hand, and forces your opponent into pure indifference.</p>
+          <p>It's the exact spot that separates players who "sort of understand ICM" from players who can dictate outcomes at a final table. When your opponent doesn't know if you're value-betting or bluffing, they're in a blender. That's the point.</p>
+          <p><strong>When better hands fold. When equal hands give up equity. When worse hands pay you off.</strong> All three outcomes are profitable.</p>
+        </div>
+      </article>
+
+      <article class="weapon reveal">
+        <div class="weapon-num">04</div>
+        <div class="weapon-label">Concept</div>
+        <h3 class="weapon-title">The Tomahawk 300% Pot Jams</h3>
+        <div class="weapon-body">
+          <p>On certain dynamic boards with a specific stack-to-pot ratio, the solver wants you jamming the entire pot at 300% a massive, polar move that most players would never consider.</p>
+          <p>The Tomahawk isn't gambling. It's precisely calibrated aggression that puts your opponents in impossible spots. At deep stacks with the right board texture, it's not just an option it's the highest-EV play available.</p>
+          <p><strong>Tim shows you the exact conditions, the right hands, and how to balance this play</strong> so it can't be exploited.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CURRICULUM ════════════════════════════════════════════ -->
+<section class="curriculum" id="curriculum">
+  <div class="wrap">
+    <header class="section-head reveal">
+      <div class="eyebrow">Full Curriculum</div>
+      <h2 class="section-headline">25 Modules. 6 Parts.<br>Every stage of <span class="it">tournaments.</span></h2>
+    </header>
+
+    <div class="curr-parts reveal">
+      <!-- Part 1 -->
+      <div class="curr-part">
+        <div class="curr-part-head" onclick="togglePart(this)">
+          <div class="curr-part-num">01</div>
+          <div class="curr-part-meta">
+            <div class="curr-part-title">How Elite Players Study</div>
+            <div class="curr-part-sub">4 modules · Tim's exact study process for $100K+ buy-in events</div>
+          </div>
+          <div class="curr-part-toggle"></div>
+        </div>
+        <div class="curr-modules">
+          <div class="curr-modules-inner">
+            <div class="curr-module"><div class="curr-module-num">01</div><div><div class="curr-module-title">Welcome & Course Philosophy</div><div class="curr-module-desc">Tim introduces the "transactional vs. transformational" mindset and how to approach the material for maximum results.</div></div></div>
+            <div class="curr-module"><div class="curr-module-num">02</div><div><div class="curr-module-title">PioSOLVER & GTO Lab Walkthrough</div><div class="curr-module-desc">How to use Range Explorer and Equity Distribution graphs. How to read flop reports and quickly spot which boards favor which player.</div></div></div>
+            <div class="curr-module"><div class="curr-module-num">03</div><div><div class="curr-module-title">Runout Analysis</div><div class="curr-module-desc">How strategy shifts across different turn and river cards. Tim shows you how to use runout tools so you stop guessing on later streets.</div></div></div>
+            <div class="curr-module"><div class="curr-module-num">04</div><div><div class="curr-module-title">Lucid GTO Trainer & Bot Drilling</div><div class="curr-module-desc">How the RNG works, why it matters for building unbiased frequencies, and how to structure effective drill sessions. Tim drills live on camera.</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Part 2 -->
+      <div class="curr-part">
+        <div class="curr-part-head" onclick="togglePart(this)">
+          <div class="curr-part-num">02</div>
+          <div class="curr-part-meta">
+            <div class="curr-part-title">Early Stages, Deep-Stack Mechanics (100bb+)</div>
+            <div class="curr-part-sub">6 modules · The part of the tournament most training ignores</div>
+          </div>
+          <div class="curr-part-toggle"></div>
+        </div>
+        <div class="curr-modules">
+          <div class="curr-modules-inner">
+            <div class="curr-module"><div class="curr-module-num">05</div><div><div class="curr-module-title">Range Interactions in Single-Raised Pots</div><div class="curr-module-desc">How ranges interact from common positions (HJ vs. CO, CO vs. BB) and why these dynamics are the foundation for everything that follows.</div></div></div>
+            <div class="curr-module"><div class="curr-module-num">06</div><div><div class="curr-module-title">Bet Sizing Fundamentals</div><div class="curr-module-desc">When to use quarter pot, half pot, geometric sizes, and overbets. How stack-to-pot ratio changes your sizing decisions across three streets.</div></div></div>
+            <div class="curr-module"><div class="curr-module-num">07</div><div><div class="curr-module-title">Deep-Stack Post-Flop, Part 1</div><div class="curr-module-desc">Flop strategies, range vs. range dynamics, and how equity realization changes at different stack depths.</div></div></div>
+            <div class="curr-module"><div class="curr-module-num">08</div><div><div class="curr-module-title">Deep-Stack Post-Flop, Part 2 + "Come Study With Me"</div><div class="curr-module-desc">Turn and river play, value thresholds, and the Demi-Bluff merge bet concept. First live study session on camera.</div></div></div>
+            <div class="curr-module"><div class="curr-module-num">09</div><div><div class="curr-module-title">Deep-Stack Overbets & "The Tomahawk"</div><div class="curr-module-desc">When and why to deploy polar overbets (130–200% pot) and the massive 300% pot jam on dynamic boards.</div></div></div>
+            <div class="curr-module"><div class="curr-module-num">10</div><div><div class="curr-module-title">Deep-Stack Hand Series</div><div class="curr-module-desc">Extended hand examples that illustrate how mechanics and card interactions play out across multiple boards. Theory meets real decisions.</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Part 3 -->
+      <div class="curr-part">
+        <div class="curr-part-head" onclick="togglePart(this)">
+          <div class="curr-part-num">03</div>
+          <div class="curr-part-meta">
+            <div class="curr-part-title">Mid-Stages, The Three Pillars of Preflop</div>
+            <div class="curr-part-sub">4 modules · Tim's core framework: crawl, walk, then run</div>
+          </div>
+          <div class="curr-part-toggle"></div>
+        </div>
+        <div class="curr-modules">
+          <div class="curr-modules-inner">
+            <div class="curr-module"><div class="curr-module-num">11</div><div><div class="curr-module-title">Pillar 1 Chip EV, Equal Stacks (Learning to Crawl)</div><div class="curr-module-desc">The baseline at 50bb. How opening ranges adjust vs. 100bb, why suited connectors lose value, and 3-bet sizing mechanics.</div></div></div>
+            <div class="curr-module"><div class="curr-module-num">12</div><div><div class="curr-module-title">Pillar 1 Continued Big Blind Defense & Counter-Strategies</div><div class="curr-module-desc">Why population over-3-bets from the big blind and how to punish it. Why slow-playing and ripping hands like KJo overperforms against overzealous 3-bettors.</div></div></div>
+            <div class="curr-module"><div class="curr-module-num">13</div><div><div class="curr-module-title">Pillar 2 Chip EV, Mixed Stacks (Learning to Walk)</div><div class="curr-module-desc">How short stacks behind you deny equity and force your ranges to shift. The "canceling out effects" and how to spot them.</div></div></div>
+            <div class="curr-module"><div class="curr-module-num">14</div><div><div class="curr-module-title">Pillar 2 Continued Exploitative Aggression with Mixed Stacks</div><div class="curr-module-desc">Why suited 8x are better 3-bet bluffs than suited 9x. How "scanning the grid" for aggression opportunities makes you harder to play against.</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Part 4 -->
+      <div class="curr-part">
+        <div class="curr-part-head" onclick="togglePart(this)">
+          <div class="curr-part-num">04</div>
+          <div class="curr-part-meta">
+            <div class="curr-part-title">Post-Flop ICM The Section Most Courses Skip</div>
+            <div class="curr-part-sub">3 modules · Daniel Dvoress on what separates good from great</div>
+          </div>
+          <div class="curr-part-toggle"></div>
+        </div>
+        <div class="curr-modules">
+          <div class="curr-modules-inner">
+            <div class="curr-module"><div class="curr-module-num">15–16</div><div><div class="curr-module-title">Pillar 3 ICM Enters the Fray (Learning to Run)</div><div class="curr-module-desc">Daniel takes over. Risk premiums, deltas, why the chip leader at a final table might open tighter than near the bubble.</div></div></div>
+            <div class="curr-module"><div class="curr-module-num">17</div><div><div class="curr-module-title">Post-Flop ICM as the Covering Stack</div><div class="curr-module-desc">When to apply pressure and when to play small ball. Board-specific approaches. Why "I cover, so I crush" is a losing oversimplification.</div></div></div>
+            <div class="curr-module"><div class="curr-module-num">18</div><div><div class="curr-module-title">Post-Flop ICM as the Covered Stack</div><div class="curr-module-desc">How your strategy shifts when a larger stack exerts ICM pressure on you. Defensive adjustments and counter-exploits.</div></div></div>
+            <div class="curr-module"><div class="curr-module-num">19</div><div><div class="curr-module-title">Post-Flop ICM Extreme Spots & Case Studies</div><div class="curr-module-desc">Deliberately extreme scenarios designed to reveal the underlying principles. Range-specific nuances across different board textures.</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Part 5 -->
+      <div class="curr-part">
+        <div class="curr-part-head" onclick="togglePart(this)">
+          <div class="curr-part-num">05</div>
+          <div class="curr-part-meta">
+            <div class="curr-part-title">Endgame Final Table ICM & Triton ME Review</div>
+            <div class="curr-part-sub">4 modules · Multi-hour hand-for-hand Triton London breakdown</div>
+          </div>
+          <div class="curr-part-toggle"></div>
+        </div>
+        <div class="curr-modules">
+          <div class="curr-modules-inner">
+            <div class="curr-module"><div class="curr-module-num">20</div><div><div class="curr-module-title">Advanced ICM Preflop at Final Tables</div><div class="curr-module-desc">How ranges adjust hand by hand as stacks and pay jumps shift. The spots where one mistake costs six figures in equity.</div></div></div>
+            <div class="curr-module"><div class="curr-module-num">21</div><div><div class="curr-module-title">Advanced ICM Post-Flop at Final Tables</div><div class="curr-module-desc">Board-by-board game plans when every chip decision affects everyone's equity.</div></div></div>
+            <div class="curr-module"><div class="curr-module-num">22</div><div><div class="curr-module-title">Chidwick's Triton London ME Review, Part 1</div><div class="curr-module-desc">Multi-hour, hand-by-hand breakdown from bubble burst through the middle stages. Tim and Stephen study together on camera.</div></div></div>
+            <div class="curr-module"><div class="curr-module-num">23</div><div><div class="curr-module-title">Chidwick's Triton London ME Review, Part 2</div><div class="curr-module-desc">The final table hands. Every key decision analyzed through the winner. "You're really going to get a front-row seat into a core part of our study process." Tim Adams</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Part 6 -->
+      <div class="curr-part">
+        <div class="curr-part-head" onclick="togglePart(this)">
+          <div class="curr-part-num">06</div>
+          <div class="curr-part-meta">
+            <div class="curr-part-title">Interactive Drilling</div>
+            <div class="curr-part-sub">2 modules · Hands-on practice sessions woven throughout the course</div>
+          </div>
+          <div class="curr-part-toggle"></div>
+        </div>
+        <div class="curr-modules">
+          <div class="curr-modules-inner">
+            <div class="curr-module"><div class="curr-module-num">24</div><div><div class="curr-module-title">Drilling at Multiple Stack Depths</div><div class="curr-module-desc">Practice from multiple positions at 25bb, 50bb, and 100bb+. Tim makes decisions in real time, explains his thought process, catches his own mistakes.</div></div></div>
+            <div class="curr-module"><div class="curr-module-num">25</div><div><div class="curr-module-title">Building Intuition Through Repetition</div><div class="curr-module-desc">How to use the RNG to build unbiased frequencies. When to trust your intuition and when to override it. Tim's protocol for structuring your own drill sessions.</div></div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TESTIMONIALS ═════════════════════════════════════════ -->
+<section class="proof">
+  <div class="wrap">
+    <header class="section-head reveal">
+      <div class="eyebrow">Student Results</div>
+      <h2 class="section-headline">Don't take our word for it.</h2>
+      <p class="section-sub">See what our early students had to say after going through the course.</p>
+    </header>
+
+    <div class="proof-grid">
+      <article class="testimonial reveal">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-quote">"The ICM section on post-flop covering stack dynamics changed how I play 30bb spots at final tables. I've tried to learn this from other courses for years this is the first one that made it click."</p>
+        <div class="testimonial-attr">
+          <div class="testimonial-avatar">M</div>
+          <div>
+            <div class="testimonial-name">Michael R.</div>
+            <div class="testimonial-stakes">$500–$1K online MTTs</div>
+          </div>
+        </div>
+      </article>
+      <article class="testimonial reveal">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-quote">"The 'Come Study With Me' format is the most underrated thing about this course. Watching Tim actually drill against the bot and explain his mistakes is worth the price alone."</p>
+        <div class="testimonial-attr">
+          <div class="testimonial-avatar">J</div>
+          <div>
+            <div class="testimonial-name">Jason T.</div>
+            <div class="testimonial-stakes">Live $1K–$5K tournaments</div>
+          </div>
+        </div>
+      </article>
+      <article class="testimonial reveal">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-quote">"I've bought three Upswing courses. This is the best one. The Chidwick Triton review alone is a masterclass. Two players with $115M in cashes studying together on camera nothing else comes close."</p>
+        <div class="testimonial-attr">
+          <div class="testimonial-avatar">S</div>
+          <div>
+            <div class="testimonial-name">Sarah K.</div>
+            <div class="testimonial-stakes">$200–$500 online MTTs</div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ OFFER ════════════════════════════════════════════════ -->
+<section class="offer" id="offer">
+  <div class="wrap">
+    <header class="section-head reveal">
+      <div class="eyebrow">The Offer</div>
+      <h2 class="section-headline">Everything you get<br>when you <span class="it">join today.</span></h2>
+    </header>
+
+    <div class="offer-card reveal">
+      <div class="offer-card-head">
+        <div class="launch-badge">Launch Week Ends May 29</div>
+        <h3 class="offer-card-title">Modern Tournament Mastery</h3>
+        <p class="offer-card-sub">Complete course + all bonuses yours for life.</p>
+      </div>
+
+      <div class="offer-card-body">
+        <div class="offer-line">
+          <div>
+            <div class="offer-line-name">Modern Tournament Mastery</div>
+            <div class="offer-line-desc">20+ hours · 25 modules · 6 parts · Lifetime access</div>
+          </div>
+          <div class="offer-line-val">$999</div>
+        </div>
+        <div class="offer-line">
+          <div>
+            <div class="offer-line-name">Preflop Mastersheet 2.0</div>
+            <div class="offer-line-desc">Any hand, 6 stack depths, accessible from any device</div>
+          </div>
+          <div class="offer-line-val free">FREE</div>
+        </div>
+        <div class="offer-line">
+          <div>
+            <div class="offer-line-name">"Super High Roller Mechanics" Course</div>
+            <div class="offer-line-desc">Launch week only goes back to $299 May 29</div>
+          </div>
+          <div class="offer-line-val free">FREE</div>
+        </div>
+
+        <div class="offer-total">
+          <div>
+            <span class="offer-total-label">Your price</span>
+            <span class="offer-total-sub">One-time payment · No subscriptions</span>
+          </div>
+          <div class="offer-total-price">$999</div>
+        </div>
+      </div>
+
+      <div class="offer-cta-wrap">
+        <a href="https://upswingpoker.com/shop/cart/?add-to-cart=784093" class="btn btn-primary">
+          Get Modern Tournament Mastery + All Bonuses <span class="arrow">→</span>
+        </a>
+        <p class="offer-urgency">Launch bonus expires Friday, May 29 at midnight PT</p>
+      </div>
+    </div>
+
+    <div class="bonus-section reveal">
+      <div class="bonus-label">— What's included</div>
+      <div class="bonus">
+        <div class="bonus-icon">⬢</div>
+        <div>
+          <div class="bonus-name">Bonus #1: Preflop Mastersheet 2.0</div>
+          <div class="bonus-desc">Look up how to play almost any common preflop situation in seconds at 6 different stack depths. Accessible from your phone, tablet, or computer pull it up between hands.</div>
+        </div>
+        <div class="bonus-badge">Included FREE</div>
+      </div>
+      <div class="bonus">
+        <div class="bonus-icon">♠</div>
+        <div>
+          <div class="bonus-name">Bonus #2: "Super High Roller Mechanics" Course ($299 value)</div>
+          <div class="bonus-desc">A deep dive into the specific mechanics required for super high roller tournaments: extreme pay jumps, the meta-game shifts when everyone at the table is world-class, and the tactical decisions that change when the buy-in has six figures in front of it.</div>
+        </div>
+        <div class="bonus-badge">Launch Week Only</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ GUARANTEE ═══════════════════════════════════════════ -->
+<section class="guarantee">
+  <div class="wrap">
+    <div class="guarantee-inner reveal">
+      <div class="guarantee-seal">
+        <img src="https://upswingpoker.com/wp-content/uploads/2025/09/upswing-fair-play-poker-guarantee.png.webp" alt="Upswing Poker Fair Play Guarantee">
+      </div>
+      <div class="guarantee-text">
+        <h3>Upswing Poker's Fair Play<br>Satisfaction Guarantee</h3>
+        <p>Study the course. If it's not right for you, reach out to our team within your first 30 days and we'll work with you on a refund or help you exchange it for a course that better fits your game.</p>
+        <p>Your investment is protected. Study with confidence.</p>
+        <p>Refund requests are assessed on a case-by-case basis. <a href="https://upswingpoker.com/refund-policy">Review full refund policy →</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═════════════════════════════════════════════════ -->
+<section class="faq">
+  <div class="wrap">
+    <header class="section-head reveal">
+      <div class="eyebrow">FAQ</div>
+      <h2 class="section-headline">Got questions?</h2>
+    </header>
+
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <div class="faq-q" onclick="toggleFaq(this)">How much does the course cost and how long do I have to finish it?<span class="faq-toggle"></span></div>
+        <div class="faq-a"><p>Modern Tournament Mastery costs $999 for lifetime access. There are no recurring fees, no subscriptions, no future charges. You pay once and own it forever. Study at your own pace there's no deadline.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q" onclick="toggleFaq(this)">Is the course appropriate for newer players?<span class="faq-toggle"></span></div>
+        <div class="faq-a"><p>Tim designed this course primarily for players in $200+ online MTTs and $1,000+ live events. That said, he built it to be valuable for almost anyone with a basic understanding of preflop strategy and post-flop concepts. Tim's clear, structured teaching style makes even complex ICM concepts accessible.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q" onclick="toggleFaq(this)">Do I need any solver tools to follow along?<span class="faq-toggle"></span></div>
+        <div class="faq-a"><p>No. Tim uses PioSOLVER, GTO Lab, and Lucid GTO Trainer on camera and explains every output so you can follow along whether you own the tools or not. If you do have them, you'll learn exactly how to use them. If you don't, you'll still understand the mechanics behind every decision.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q" onclick="toggleFaq(this)">Is this just 20 hours of solver screenshots?<span class="faq-toggle"></span></div>
+        <div class="faq-a"><p>No. Tim uses solver-based study as a foundation, but he looks at every output through an exploitative lens. The course emphasizes understanding <em>why</em> the solver does what it does and how to deviate from it. There are extensive drilling sessions, hand series, and "come study with me" segments.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q" onclick="toggleFaq(this)">I already own Road to Victory. Is this worth getting too?<span class="faq-toggle"></span></div>
+        <div class="faq-a"><p>Yes. They're designed to complement each other. Road to Victory emphasizes exploitative play vs. specific player types. MTM goes much deeper on mechanics, deep-stack post-flop play, post-flop ICM from both the covering and covered stack perspective, and the underlying <em>why</em> behind every range adjustment.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q" onclick="toggleFaq(this)">Is this useful for online MTTs, live tournaments, or both?<span class="faq-toggle"></span></div>
+        <div class="faq-a"><p>Both. The strategic concepts apply universally. Tim's approach focuses on understanding mechanics, not memorizing format-specific spots so you can apply the principles in any tournament setting.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q" onclick="toggleFaq(this)">How do I access the course after purchasing?<span class="faq-toggle"></span></div>
+        <div class="faq-a"><p>You'll have full and instant lifetime access inside the Upswing Members area at <a href="https://members.upswingpoker.com">members.upswingpoker.com</a>. New members: check your email to finish setting up your account.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q" onclick="toggleFaq(this)">How do the launch week bonuses work?<span class="faq-toggle"></span></div>
+        <div class="faq-a"><p>Join before Friday, May 29 at midnight PT and you automatically get access to the "Super High Roller Mechanics" bonus course ($299 value). After the deadline, the bonus course will be sold separately at its full $299 price.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q" onclick="toggleFaq(this)">What if it's not for me?<span class="faq-toggle"></span></div>
+        <div class="faq-a"><p>Your purchase is covered by Upswing Poker's Fair Play Satisfaction Guarantee. Contact our team within your first 30 days and we'll work with you on a refund or exchange.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WARNING ═════════════════════════════════════════════ -->
+<section class="warning">
+  <div class="wrap wrap--narrow">
+    <header class="section-head reveal" style="text-align: left;">
+      <div class="eyebrow">The Cost of Waiting</div>
+      <h2 class="section-headline" style="text-align: left;">Six months from now,<br>the field will be better. <span class="it">Will you?</span></h2>
+      <p class="section-sub" style="margin-left: 0;">Here's what happens if you don't fix this.</p>
+    </header>
+
+    <div class="warning-body reveal">
+      <p>Six months from now, you'll still be opening from the hijack and automatically c-betting boards where the solver wants you checking 76% of the time. Still tightening up near the money because that's what "everybody says" without understanding when to attack and when to preserve. Still busting deep runs on decisions you <em>feel</em> are right but can't explain.</p>
+      <p><strong>The field isn't waiting for you.</strong></p>
+      <p>The players in your $200 MTTs are studying right now. They're watching solver outputs, drilling frequencies, reading flop reports. Some of them will figure out the <em>why</em> on their own it'll take them years, but they'll get there.</p>
+      <p>You can do that. Grind it out alone, make the mistakes, and slowly figure out why your early-level c-betting strategy was costing you 3bb per hour.</p>
+      <p><strong>Or you can watch three players with $100 million+ in combined cashes show you exactly how they think and compress years of trial-and-error into 20 hours.</strong></p>
+    </div>
+
+    <div class="warning-quote reveal">
+      <p>"As soon as I notice myself thinking about how many chips I would have had if I won, I can change that course of action and just count how many chips I have now and how many chips everyone else has now. Just go back to the game plan."</p>
+      <div class="warning-quote-attr">— Stephen Chidwick · #2 All-Time · $76M+ in live cashes</div>
+    </div>
+
+    <p class="warning-lede reveal">That's the difference. That's the mindset. And you either build it or you watch other players cash bigger while you wonder what they're seeing that you're not.</p>
+  </div>
+</section>
+
+<!-- ═══ FINAL CTA ═══════════════════════════════════════════ -->
+<section class="final-cta">
+  <div class="wrap">
+    <div class="final-coaches reveal">
+      <div class="final-chip">
+        <div class="final-chip-av"><img src="https://upswingpoker.com/wp-content/uploads/2026/05/tim-adams-hero-bio-pic.png" alt="Tim Adams"></div>
+        <div class="final-chip-name">Tim Adams</div>
+      </div>
+      <div class="final-chip">
+        <div class="final-chip-av"><img src="https://upswingpoker.com/wp-content/uploads/2026/05/Daniel-Dvoress-min-300x300-gto-lab.png" alt="Daniel Dvoress"></div>
+        <div class="final-chip-name">Daniel Dvoress</div>
+      </div>
+      <div class="final-chip">
+        <div class="final-chip-av"><img src="https://upswingpoker.com/wp-content/uploads/2026/05/chidwick-image-1.png" alt="Stephen Chidwick"></div>
+        <div class="final-chip-name">Stephen Chidwick</div>
+      </div>
+    </div>
+
+    <h2 class="final-headline reveal">Your moment is coming.<br><span class="it">Be ready for it.</span></h2>
+    <p class="final-sub reveal">The great players know their moment will come. They make sure they're ready for it.</p>
+
+    <div class="final-cta-btn reveal">
+      <a href="#offer" class="btn btn-green">Get Modern Tournament Mastery <span class="arrow">→</span></a>
+    </div>
+    <p class="final-note reveal">$999 · Lifetime access · Fair Play Guarantee · Launch bonus expires May 29</p>
+
+    <div class="final-trust reveal">
+      <div class="final-trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5"><path d="M12 2l2.09 6.26L20 9.27l-4.91 4.78 1.18 6.95L12 17.77l-4.27 3.23 1.18-6.95L4 9.27l5.91-.01L12 2z"/></svg>
+        $100M+ combined live cashes
+      </div>
+      <div class="final-trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="#c9a84c"/></svg>
+        20+ hours · Lifetime access
+      </div>
+      <div class="final-trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        30-day Fair Play Guarantee
+      </div>
+      <div class="final-trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 12l2 2 4-4"/></svg>
+        Instant access after purchase
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ══════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-logo"><img src="https://upswingpoker.com/wp-content/uploads/2026/05/upswing-poker-logo-for-dark-bg.png" alt="Upswing Poker"></div>
+    <div class="footer-links">
+      <a href="https://upswingpoker.com/refund-policy">Refund Policy</a>
+      <a href="https://upswingpoker.com/privacy">Privacy Policy</a>
+      <a href="https://upswingpoker.com/terms">Terms of Service</a>
+      <a href="mailto:support@upswingpoker.com">Support</a>
+    </div>
+    <p class="footer-copy">© 2026 Upswing Poker. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+/* ───── TYPOGRAPHY PRESETS (apply BEFORE other scripts) ───── */
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "preset": "Editorial",
+  "displayFont": "Bebas Neue",
+  "editorialFont": "Fraunces",
+  "bodyFont": "DM Sans",
+  "monoFont": "JetBrains Mono"
+}/*EDITMODE-END*/;
+
+const FONT_PRESETS = {
+  "Editorial":     { display: "Bebas Neue",          editorial: "Fraunces",            body: "Inter Tight",       mono: "JetBrains Mono" },
+  "Brutalist":     { display: "Anton",               editorial: "Cormorant Garamond",  body: "Manrope",           mono: "Space Mono" },
+  "Magazine":      { display: "Oswald",              editorial: "Playfair Display",    body: "DM Sans",           mono: "IBM Plex Mono" },
+  "Sport":         { display: "Archivo Black",       editorial: "DM Serif Display",    body: "Plus Jakarta Sans", mono: "Space Mono" },
+  "Refined":       { display: "Unbounded",           editorial: "Lora",                body: "Geist",             mono: "IBM Plex Mono" },
+  "Heritage":      { display: "Big Shoulders Display", editorial: "EB Garamond",       body: "Public Sans",       mono: "Fira Code" },
+  "Geometric":     { display: "Syne",                editorial: "Fraunces",            body: "Geist",             mono: "JetBrains Mono" },
+  "Pulp":          { display: "Bowlby One",          editorial: "Playfair Display",    body: "DM Sans",           mono: "Space Mono" }
+};
+
+const FONT_STACKS = {
+  // display
+  "Bebas Neue":           "'Bebas Neue', Impact, sans-serif",
+  "Anton":                "'Anton', Impact, sans-serif",
+  "Oswald":               "'Oswald', Impact, sans-serif",
+  "Archivo Black":        "'Archivo Black', Impact, sans-serif",
+  "Big Shoulders Display":"'Big Shoulders Display', Impact, sans-serif",
+  "Bowlby One":           "'Bowlby One', Impact, sans-serif",
+  "Unbounded":            "'Unbounded', 'Bebas Neue', sans-serif",
+  "Syne":                 "'Syne', 'Bebas Neue', sans-serif",
+  // editorial
+  "Fraunces":             "'Fraunces', 'Playfair Display', Georgia, serif",
+  "Playfair Display":     "'Playfair Display', Georgia, serif",
+  "DM Serif Display":     "'DM Serif Display', Georgia, serif",
+  "Cormorant Garamond":   "'Cormorant Garamond', Georgia, serif",
+  "EB Garamond":          "'EB Garamond', Georgia, serif",
+  "Lora":                 "'Lora', Georgia, serif",
+  // body
+  "Inter Tight":          "'Inter Tight', system-ui, sans-serif",
+  "Manrope":              "'Manrope', system-ui, sans-serif",
+  "Geist":                "'Geist', system-ui, sans-serif",
+  "DM Sans":              "'DM Sans', system-ui, sans-serif",
+  "Plus Jakarta Sans":    "'Plus Jakarta Sans', system-ui, sans-serif",
+  "Public Sans":          "'Public Sans', system-ui, sans-serif",
+  // mono
+  "JetBrains Mono":       "'JetBrains Mono', ui-monospace, monospace",
+  "IBM Plex Mono":        "'IBM Plex Mono', ui-monospace, monospace",
+  "Space Mono":           "'Space Mono', ui-monospace, monospace",
+  "Fira Code":            "'Fira Code', ui-monospace, monospace"
+};
+
+function applyFonts(t) {
+  const root = document.documentElement.style;
+  root.setProperty('--display',   FONT_STACKS[t.displayFont]   || FONT_STACKS["Bebas Neue"]);
+  root.setProperty('--editorial', FONT_STACKS[t.editorialFont] || FONT_STACKS["Fraunces"]);
+  root.setProperty('--body',      FONT_STACKS[t.bodyFont]      || FONT_STACKS["Inter Tight"]);
+  root.setProperty('--mono',      FONT_STACKS[t.monoFont]      || FONT_STACKS["JetBrains Mono"]);
+}
+// apply defaults immediately so the page paints with the chosen fonts
+applyFonts(TWEAK_DEFAULTS);
+
+/* ───── HERO VIDEO LAZY MOUNT ───── */
+(function() {
+  const v = document.getElementById('heroVideo');
+  if (!v) return;
+  v.addEventListener('click', function() {
+    if (this.classList.contains('playing')) return;
+    const iframe = document.createElement('iframe');
+    iframe.className = 'hero-video-iframe';
+    iframe.src = this.dataset.vimeo;
+    iframe.setAttribute('allow', 'autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media');
+    iframe.setAttribute('title', 'Modern Tournament Mastery Course Trailer');
+    this.appendChild(iframe);
+    this.classList.add('playing');
+  });
+})();
+(function() {
+  const cards = document.querySelectorAll('.lineup-card');
+  if (!cards.length) return;
+  cards.forEach(card => {
+    card.addEventListener('pointermove', (e) => {
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty('--gx', (e.clientX - rect.left).toFixed(2));
+      card.style.setProperty('--gy', (e.clientY - rect.top).toFixed(2));
+    });
+  });
+})();
+
+/* ───── COUNTDOWN ───── */
+(function() {
+  const deadline = new Date('2026-05-29T23:59:59-07:00').getTime();
+  const pad = n => String(n).padStart(2, '0');
+  function tick() {
+    const diff = Math.max(0, deadline - Date.now());
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd-d').textContent = pad(d) + 'd';
+    document.getElementById('cd-h').textContent = pad(h) + 'h';
+    document.getElementById('cd-m').textContent = pad(m) + 'm';
+    document.getElementById('cd-s').textContent = pad(s) + 's';
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+
+/* ───── LINEUP CARDS ─ spotlight glow pointer tracking ───── */
+
+/* ───── CURRICULUM ACCORDION ───── */
+function togglePart(header) {
+  const part = header.parentElement;
+  const open = part.classList.contains('open');
+  document.querySelectorAll('.curr-part').forEach(p => p.classList.remove('open'));
+  if (!open) part.classList.add('open');
+}
+// open Part 1 by default
+document.addEventListener('DOMContentLoaded', () => {
+  const first = document.querySelector('.curr-part');
+  if (first) first.classList.add('open');
+});
+
+/* ───── FAQ ACCORDION ───── */
+function toggleFaq(q) {
+  const item = q.parentElement;
+  const open = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!open) item.classList.add('open');
+}
+
+/* ───── SCROLL REVEAL ───── */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* ───── NAV CTA REVEAL ───── */
+(function() {
+  const cta = document.getElementById('navCta');
+  const hero = document.querySelector('.hero');
+  if (!cta || !hero) return;
+  function onScroll() {
+    const bottom = hero.getBoundingClientRect().bottom;
+    if (bottom < 80) cta.classList.add('visible');
+    else cta.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+
+<!-- ═══ TWEAKS PANEL ═════════════════════════════════════════ -->
+<div id="tweaks-root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel">
+const DISPLAY_FONTS   = ["Bebas Neue","Anton","Oswald","Archivo Black","Big Shoulders Display","Bowlby One","Unbounded","Syne"];
+const EDITORIAL_FONTS = ["Fraunces","Playfair Display","DM Serif Display","Cormorant Garamond","EB Garamond","Lora"];
+const BODY_FONTS      = ["Inter Tight","Manrope","Geist","DM Sans","Plus Jakarta Sans","Public Sans"];
+const MONO_FONTS      = ["JetBrains Mono","IBM Plex Mono","Space Mono","Fira Code"];
+const PRESET_NAMES    = Object.keys(FONT_PRESETS);
+
+function TweaksApp() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+
+  React.useEffect(() => { applyFonts(t); }, [t]);
+
+  const applyPreset = (name) => {
+    const p = FONT_PRESETS[name];
+    if (!p) return;
+    setTweak({
+      preset: name,
+      displayFont: p.display,
+      editorialFont: p.editorial,
+      bodyFont: p.body,
+      monoFont: p.mono
+    });
+  };
+
+  // detect when individual selectors no longer match the preset
+  const matchedPreset = React.useMemo(() => {
+    const found = Object.entries(FONT_PRESETS).find(([_, p]) =>
+      p.display === t.displayFont && p.editorial === t.editorialFont &&
+      p.body === t.bodyFont && p.mono === t.monoFont
+    );
+    return found ? found[0] : "Custom";
+  }, [t]);
+
+  return (
+    <TweaksPanel title="Typography">
+      <TweakSection label="Presets" />
+      <TweakSelect
+        label="Combo"
+        value={matchedPreset === "Custom" ? t.preset : matchedPreset}
+        options={[...PRESET_NAMES, "Custom"]}
+        onChange={(v) => v !== "Custom" && applyPreset(v)}
+      />
+
+      <TweakSection label="Individual fonts" />
+      <TweakSelect label="Display"   value={t.displayFont}   options={DISPLAY_FONTS}   onChange={(v) => setTweak('displayFont', v)} />
+      <TweakSelect label="Editorial" value={t.editorialFont} options={EDITORIAL_FONTS} onChange={(v) => setTweak('editorialFont', v)} />
+      <TweakSelect label="Body"      value={t.bodyFont}      options={BODY_FONTS}      onChange={(v) => setTweak('bodyFont', v)} />
+      <TweakSelect label="Mono"      value={t.monoFont}      options={MONO_FONTS}      onChange={(v) => setTweak('monoFont', v)} />
+    </TweaksPanel>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('tweaks-root')).render(<TweaksApp />);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1321 @@
+<!-- MTM Landing Page — paste into BB HTML Module -->
+<link rel="stylesheet" href="mtm-23.css">
+<style>*, *::before, *::after { box-sizing: border-box; } body { margin: 0; }</style>
+
+<!-- NAV (with inline countdown) -->
+<nav class="mtm-site-nav" id="site-nav">
+  <div class="mtm-container">
+    <a href="https://upswingpoker.com" class="mtm-nav-logo">
+      <img src="https://upswingpoker.com/wp-content/uploads/2026/05/upswing-poker-logo-for-dark-bg.png" alt="Upswing Poker">
+    </a>
+    <span class="mtm-nav-countdown" id="countdown">
+      <span class="mtm-nav-countdown-label"><strong>Bonus ends in</strong></span>
+      <span class="mtm-countdown-unit"><span id="cd-d">00</span><span class="mtm-countdown-label">d</span></span>
+      <span class="mtm-countdown-sep">:</span>
+      <span class="mtm-countdown-unit"><span id="cd-h">00</span><span class="mtm-countdown-label">h</span></span>
+      <span class="mtm-countdown-sep">:</span>
+      <span class="mtm-countdown-unit"><span id="cd-m">00</span><span class="mtm-countdown-label">m</span></span>
+      <span class="mtm-countdown-sep">:</span>
+      <span class="mtm-countdown-unit"><span id="cd-s">00</span><span class="mtm-countdown-label">s</span></span>
+    </span>
+    <div class="mtm-nav-links">
+      <a href="#curriculum" class="mtm-nav-link">Curriculum</a>
+      <a href="#coaches" class="mtm-nav-link">Coaches</a>
+      <a href="#offer" class="mtm-nav-link">Pricing</a>
+      <a href="#offer" class="mtm-btn mtm-btn-primary mtm-nav-cta" id="nav-cta">Get Modern Tournament Mastery</a>
+    </div>
+  </div>
+</nav>
+<!-- ═══ HERO ═══════════════════════════════════════════════ -->
+<!-- ════════════════════════════════════════════════════════════
+   MTM HERO — Paste into Beaver Builder HTML Module
+   Pair with mtm-hero.css in Global/Theme CSS
+   ════════════════════════════════════════════════════════════ -->
+<section class="mtmh-hero">
+  <div class="mtmh-hero-bg"></div>
+  <div class="mtmh-wrap">
+    <div class="mtmh-grid">
+
+      <!-- Row 1 · Header copy (full width) -->
+      <div class="mtmh-header">
+        <p class="mtmh-attention">
+          <span class="mtmh-attention-lead">Attention:</span>
+         Any Tournament player who is serious about the game but wants to make more final tables&hellip;
+        </p>
+        <h1 class="mtmh-headline">
+          Stop Guessing. <em>Start Thinking.</em><br>Like THE Best.
+        </h1>
+        <p class="mtmh-subhead">
+          Tim Adams and Dan Dvoress built a course that teaches you the <strong>why</strong> behind solvers, so you can confidently deviate and crush any tournament.
+        </p>
+      </div>
+
+      <!-- Row 2 · Left: Course preview video
+           Iframe is lazy-mounted on first click — no autoplay on page load.
+           data-src is swapped to src by the inline script below, then
+           .is-playing toggles the thumbnail off and the iframe on. -->
+      <div class="mtmh-video" id="mtmh-video"
+           data-vimeo-src="https://player.vimeo.com/video/1191769044?badge=0&amp;autopause=0&amp;autoplay=1&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0"
+           onclick="(function(el){if(el.classList.contains('is-playing'))return;var f=document.createElement('iframe');f.className='mtmh-video-iframe';f.src=el.getAttribute('data-vimeo-src');f.setAttribute('allow','autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media');f.setAttribute('title','Modern Tournament Mastery — Course Trailer');el.appendChild(f);el.classList.add('is-playing');})(this);">
+        <div class="mtmh-video-label">Course Preview &middot; 2:34</div>
+        <div class="mtmh-video-thumb">
+          <div class="mtmh-video-play">
+            <div class="mtmh-video-play-btn">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="#c9a84c"><polygon points="6,3 20,12 6,21"/></svg>
+            </div>
+            <div class="mtmh-video-play-label">Free Peek Inside</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 2 · Right: Course / Coaches / CTA card -->
+      <div class="mtmh-side">
+        <div class="mtmh-card">
+
+          <div class="mtmh-card-header">The Ultimate Tournament Course</div>
+
+          <div class="mtmh-card-stats">
+            <div class="mtmh-card-stat mtmh-card-stat--logo">
+              <img src="https://upswingpoker.com/wp-content/uploads/2026/04/MTM-Logo-Dark-Version-thumb.png" alt="Modern Tournament Mastery">
+            </div>
+            <div class="mtmh-card-stat">
+              <div class="mtmh-stat-num">20<span>+</span></div>
+              <div class="mtmh-stat-label">Hours of Video</div>
+            </div>
+            <div class="mtmh-card-stat">
+              <div class="mtmh-stat-num">6</div>
+              <div class="mtmh-stat-label">Modules</div>
+            </div>
+            <div class="mtmh-card-stat">
+              <div class="mtmh-stat-num">3</div>
+              <div class="mtmh-stat-label">All-Timers</div>
+            </div>
+          </div>
+
+          <div class="mtmh-coach-list">
+            <div class="mtmh-coach-strip">
+              <div class="mtmh-coach-avatar">
+                <img src="https://upswingpoker.com/wp-content/uploads/2026/05/tim-adams-hero-bio-pic.png" alt="Timothy Adams">
+              </div>
+              <div class="mtmh-coach-mid">
+                <div class="mtmh-coach-name">Timothy Adams</div>
+                <div class="mtmh-coach-role">Lead Coach</div>
+              </div>
+              <div class="mtmh-coach-byline">2&times; Triton ME Champion who teaches you to think, not memorize.</div>
+            </div>
+            <div class="mtmh-coach-strip">
+              <div class="mtmh-coach-avatar">
+                <img src="https://upswingpoker.com/wp-content/uploads/2026/05/Daniel-Dvoress-min-300x300-gto-lab.png" alt="Daniel Dvoress">
+              </div>
+              <div class="mtmh-coach-mid">
+                <div class="mtmh-coach-name">Daniel Dvoress</div>
+                <div class="mtmh-coach-role">Coach</div>
+              </div>
+              <div class="mtmh-coach-byline">13th player to cross $50M in live cashes. The ICM authority.</div>
+            </div>
+            <div class="mtmh-coach-strip">
+              <div class="mtmh-coach-avatar">
+                <img src="https://upswingpoker.com/wp-content/uploads/2026/05/chidwick-image-1.png" alt="Stephen Chidwick">
+              </div>
+              <div class="mtmh-coach-mid">
+                <div class="mtmh-coach-name">Stephen Chidwick</div>
+                <div class="mtmh-coach-role">Guest Coach</div>
+              </div>
+              <div class="mtmh-coach-byline">Widely considered the best tournament player alive.</div>
+            </div>
+          </div>
+
+          <div class="mtmh-card-cta">
+            <a href="https://upswingpoker.com/shop/cart/?add-to-cart=784093" class="mtmh-btn mtmh-btn-primary">Get Modern Tournament Mastery <span aria-hidden="true">&rarr;</span></a>
+            <a href="#curriculum" class="mtmh-btn mtmh-btn-ghost">See What's Inside
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Row 3 · Trust row (under video, left column) -->
+      <div class="mtmh-trust">
+        <div class="mtmh-trust-item">
+          <svg class="mtmh-trust-icon" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5" aria-hidden="true">
+            <path d="M12 2l2.09 6.26L20 9.27l-4.91 4.78 1.18 6.95L12 17.77l-4.27 3.23 1.18-6.95L4 9.27l5.91-.01L12 2z"/>
+          </svg>
+          <span>$100M+ combined live cashes</span>
+        </div>
+        <div class="mtmh-trust-item">
+          <svg class="mtmh-trust-icon" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M8 12h8M12 8v8"/>
+          </svg>
+          <span>Lifetime access</span>
+        </div>
+        <div class="mtmh-trust-item">
+          <svg class="mtmh-trust-icon" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="1"/>
+            <path d="M3 9h18M3 15h18M9 3v18M15 3v18"/>
+          </svg>
+          <span>Adv. ChipEV Ranges</span>
+        </div>
+        <div class="mtmh-trust-item">
+          <svg class="mtmh-trust-icon" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5" aria-hidden="true">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          <span>Fair Play Guarantee</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     MTM CREDENTIAL SECTION — The Lineup
+     ═══════════════════════════════════════════════════════════ -->
+<section class="mtm-credential-bar">
+  <div class="mtm-container">
+
+    <div class="mtm-credential-eyebrow mtm-reveal">The Lineup</div>
+
+    <h2 class="mtm-credential-headline mtm-reveal">
+      <span class="mtm-gold">$100 Million+</span> in Live Tournament Cashes. One Course.
+    </h2>
+
+    <div class="mtm-credential-subhead mtm-reveal">
+      A generational lineup. Three of the most decorated tournament players of the modern era.
+    </div>
+
+    <!-- Coach Cards -->
+    <div class="mtm-coach-credentials mtm-reveal">
+
+      <!-- Tim Adams -->
+      <div class="mtm-credential-card">
+        <div class="mtm-credential-card-photo">
+          <img src="https://upswingpoker.com/wp-content/uploads/2026/05/timothy-adams-upswing-poker-bio.png" alt="Timothy Adams poker pic">
+        </div>
+        <div class="mtm-credential-card-overlay"></div>
+        <div class="mtm-credential-card-badge">Lead Coach</div>
+        <div class="mtm-credential-card-body">
+          <div class="mtm-credential-card-name">Tim Adams</div>
+          <div class="mtm-credential-card-titles">
+            2x Triton Main Event Champion<br>
+            Back-to-Back Super High Roller Bowl Champion<br>
+            WSOP Bracelet Winner &middot; Aussie Millions Champion
+          </div>
+        </div>
+      </div>
+
+      <!-- Daniel Dvoress -->
+      <div class="mtm-credential-card">
+        <div class="mtm-credential-card-photo">
+          <img src="https://upswingpoker.com/wp-content/uploads/2026/05/daniel-dvoress-upswing-course-coach-bio.png" alt="Daniel Dvoress Poker Coach">
+        </div>
+        <div class="mtm-credential-card-overlay"></div>
+        <div class="mtm-credential-card-badge">Coach &middot; GTO Lab Co-Founder</div>
+        <div class="mtm-credential-card-body">
+          <div class="mtm-credential-card-name">Daniel Dvoress</div>
+          <div class="mtm-credential-card-titles">
+            Super High Roller Bowl Champion<br>
+            2x WSOP Bracelet Winner<br>
+            5x EPT Champion &middot; Multi-Triton Title Winner
+          </div>
+        </div>
+      </div>
+
+      <!-- Stephen Chidwick -->
+      <div class="mtm-credential-card">
+        <div class="mtm-credential-card-photo">
+          <img src="https://upswingpoker.com/wp-content/uploads/2026/05/stephen-chidwick-guest-poker-coach-bio-upswing.png" alt="Stephen Chidwick">
+        </div>
+        <div class="mtm-credential-card-overlay"></div>
+        <div class="mtm-credential-card-badge">Guest Coach &middot; Octopi Pro</div>
+        <div class="mtm-credential-card-body">
+          <div class="mtm-credential-card-name">Stephen Chidwick</div>
+          <div class="mtm-credential-card-titles">
+            #2 All-Time Live Earnings<br>
+            2x WSOP Bracelet &middot; 3x Triton Champion<br>
+            11x EPT Champion &middot; Former World #1 GPI
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ PROBLEM / ESSAY SECTION ═════════════════════════════ -->
+<section class="mtm-essay">
+
+  <div class="mtm-container mtm-essay-narrow">
+    <header class="mtm-essay-header mtm-reveal">
+      <div class="mtm-section-label">The Problem</div>
+      <h2 class="mtm-section-headline">
+        You Study Harder Than Ever.<br>
+        You Still Bust in <em>Painful Spots.</em>
+      </h2>
+      <p class="mtm-section-subhead">
+        You know the strategies. You just might not know <em>why.</em>
+      </p>
+    </header>
+
+    <p class="mtm-essay-lead mtm-reveal">
+      Five years ago, a chart and a few well-timed shoves got you a cash. <strong>That world is gone.</strong> Today the $200 field has immersed themselves in solvers. They have ranges memorized. They watch the same free videos you watch. The baseline has moved, and if all you have is the baseline, you're the one being exploited.
+    </p>
+  </div>
+
+  <!-- ─── Interlude 01 — 21:9 cinematic hero, player at the table mid-decision ─── -->
+  <figure class="mtm-essay-interlude mtm-reveal">
+    <div class="mtm-essay-interlude-img">
+      <img src="https://upswingpoker.com/wp-content/uploads/2026/05/mtm-3-problem-pain-section-illustration-solver-confusion.jpg" alt="poker solver confusion">
+    </div>
+    <figcaption class="mtm-essay-interlude-cap">
+      <div class="mtm-essay-interlude-tag">The Habit</div>
+      <div class="mtm-essay-interlude-text">Studied. Tired. Chart in the head. Doubt in the gut.</div>
+    </figcaption>
+  </figure>
+
+  <div class="mtm-container mtm-essay-narrow">
+    <div class="mtm-essay-body mtm-reveal">
+      <p>You <em>know</em> this. You've put in the hours on HRC or GTO Wizard. You've studied the outputs, looked at the frequencies, tried to memorize the spots. And yet, 30 big blinds deep, short stack in the blind, clock ticking, you still feel like you're guessing.</p>
+      <p class="mtm-essay-beat">Because you are.</p>
+    </div>
+  </div>
+
+  <!-- ─── Interlude 02 — overhead close-up, 6-5-2 flop on green felt ─── -->
+  <figure class="mtm-essay-interlude mtm-reveal">
+    <div class="mtm-essay-interlude-img">
+      <img src="https://upswingpoker.com/wp-content/uploads/2026/05/mtt-poker-course-2026-flop-652-for-landing.jpg" alt="Flop on green felt — 6-5-2">
+    </div>
+    <figcaption class="mtm-essay-interlude-cap">
+      <div class="mtm-essay-interlude-tag">The Spot</div>
+      <div class="mtm-essay-interlude-text">A board that hits his range twice as often as yours. You c-bet anyway.</div>
+    </figcaption>
+  </figure>
+
+  <div class="mtm-container mtm-essay-narrow">
+    <div class="mtm-essay-body mtm-reveal">
+      <p>You open from the hijack. Get flatted by the cutoff. Flop comes 6-5-2. You fire a c-bet because, well &mdash; you were the preflop raiser, and that's what you do. Check-raise. <strong>Now what?</strong></p>
+      <p>You didn't think about range asymmetry. The cutoff's flat is loaded with pocket pairs that crush this exact board. Out of position against a condensed range, the solver wants you checking 76% of the time.</p>
+    </div>
+
+    <aside class="mtm-essay-compare mtm-reveal" aria-label="Solver comparison">
+      <div class="mtm-essay-compare-meta">Solver output &middot; BTN flat vs UTG open &middot; 6-5-2 rainbow &middot; OOP turn</div>
+      <div class="mtm-essay-compare-grid">
+        <div class="mtm-essay-compare-cell mtm-essay-compare-cell--you">
+          <div class="mtm-essay-compare-verdict mtm-essay-compare-verdict--wrong" aria-label="Leak — solver disagrees">LEAK</div>
+          <div class="mtm-essay-compare-label">You Did</div>
+          <div class="mtm-essay-compare-action">BET</div>
+          <div class="mtm-essay-compare-size">75% pot</div>
+          <div class="mtm-essay-compare-freq">100%</div>
+        </div>
+        <div class="mtm-essay-compare-cell mtm-essay-compare-cell--solver">
+          <div class="mtm-essay-compare-verdict mtm-essay-compare-verdict--right" aria-label="Solver agrees">&#10003;</div>
+          <div class="mtm-essay-compare-label">Solver Wants</div>
+          <div class="mtm-essay-compare-action">CHECK</div>
+          <div class="mtm-essay-compare-size">&nbsp;</div>
+          <div class="mtm-essay-compare-freq">76%</div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="mtm-essay-body mtm-reveal">
+      <p>So you burned chips in a pot you never should have built. <em>Again.</em></p>
+    </div>
+  </div>
+
+  <!-- ─── Interlude 03 — short chip stack alone on felt, dim ambient ─── -->
+  <figure class="mtm-essay-interlude mtm-reveal">
+    <div class="mtm-essay-interlude-img">
+      <img src="https://pokerati.com/wp-content/uploads/2025/06/Tournament-Poker-Strategy-1024x576.jpg" alt="Reduced chip stack alone on the felt">
+    </div>
+    <figcaption class="mtm-essay-interlude-cap">
+      <div class="mtm-essay-interlude-tag">The Cost</div>
+      <div class="mtm-essay-interlude-text">The bust hand. Not a cooler. A leak.</div>
+    </figcaption>
+  </figure>
+
+  <div class="mtm-container mtm-essay-narrow">
+    <div class="mtm-essay-body mtm-reveal">
+      <p>And it gets worse near the money. You tighten up because that's what everyone says to do. But you tighten too much, or not enough, or in the wrong spots &mdash; because nobody ever explained <em>how</em> ICM actually changes post-flop strategy.</p>
+    </div>
+
+    <div class="mtm-essay-kicker mtm-reveal">
+      <div class="mtm-essay-kicker-rule"></div>
+      <p class="mtm-essay-kicker-text">
+        The gap between <em>knowing the charts</em> and <em>understanding what the best players see</em> &mdash; that's where your money is hiding.
+      </p>
+      <p class="mtm-essay-kicker-foot">Cashing vs. final-tabling. <strong>$2,000 vs. $20,000.</strong></p>
+    </div>
+  </div>
+
+</section>
+<section class="mtm-solution-section">
+  <div class="mtm-container">
+    <div class="mtm-solution-inner">
+
+      <!-- LEFT column: header, body copy, pull quote -->
+      <div>
+        <div class="mtm-section-header mtm-reveal">
+          <div class="mtm-section-label">The Solution</div>
+          <h2 class="mtm-section-headline">What If You Could See the Game the Way They See It?</h2>
+          <p class="mtm-section-subhead">This course doesn't teach you what to memorize. It teaches you how to think.</p>
+        </div>
+
+        <div class="mtm-solution-body mtm-reveal">
+          <p>Here's what separates the players who cash $100&nbsp;million+ from the rest of the field.</p>
+          <p>They understand the <em>why</em> behind every decision.</p>
+          <p>They know why the same hand plays differently at 100bb than at 30bb. They know why ICM pressure doesn't just change preflop ranges, it <strong>reshapes entire post-flop strategies</strong> in ways most players never think about. They know why a dry Jack-high flop means one thing against a wide range and something completely different against a tight defender under bubble pressure.</p>
+          <p>When you understand the mechanics behind the decisions, you don't need to memorize 10,000 spots. You need the principles. And you'll know what to do when you get there.</p>
+        </div>
+
+        <div class="mtm-pull-quote mtm-reveal">
+          <p class="mtm-pull-quote-text"><strong>We want to help you become that player who makes their opponents shrug their shoulders a lot, creating a lot of indifference in their decisions. That's the hardest player to play against. Someone very, very well balanced.</strong></p>
+          <div class="mtm-pull-quote-attr">
+            <div>
+              <div class="mtm-pull-quote-name">The Upswing Poker Team</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT column: mechanics reading list with SVG graphics -->
+      <div class="mtm-mechanics-list mtm-reveal">
+        <div class="mtm-mechanics-list__head">
+          <div class="mtm-mechanics-list__eyebrow">Examples From the Curriculum</div>
+          <h3 class="mtm-mechanics-list__title">Mechanics, in <em>Practice</em></h3>
+        </div>
+
+        <ol class="mtm-mechanics-list__items">
+
+          <!-- 01 · Range Asymmetry -->
+          <li>
+            <div class="mtm-mechanics-list__gfx" aria-hidden="true">
+              <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                <g stroke="#c9a84c" stroke-width="0.5" fill="none" opacity="0.35">
+                  <line x1="10" y1="10" x2="70" y2="10"/><line x1="10" y1="20" x2="70" y2="20"/><line x1="10" y1="30" x2="70" y2="30"/><line x1="10" y1="40" x2="70" y2="40"/><line x1="10" y1="50" x2="70" y2="50"/><line x1="10" y1="60" x2="70" y2="60"/><line x1="10" y1="70" x2="70" y2="70"/>
+                  <line x1="10" y1="10" x2="10" y2="70"/><line x1="20" y1="10" x2="20" y2="70"/><line x1="30" y1="10" x2="30" y2="70"/><line x1="40" y1="10" x2="40" y2="70"/><line x1="50" y1="10" x2="50" y2="70"/><line x1="60" y1="10" x2="60" y2="70"/><line x1="70" y1="10" x2="70" y2="70"/>
+                </g>
+                <g fill="#c9a84c">
+                  <rect x="10" y="10" width="10" height="10" opacity="0.95"/>
+                  <rect x="20" y="20" width="10" height="10" opacity="0.85"/>
+                  <rect x="30" y="30" width="10" height="10" opacity="0.7"/>
+                  <rect x="40" y="40" width="10" height="10" opacity="0.55"/>
+                  <rect x="50" y="50" width="10" height="10" opacity="0.4"/>
+                  <rect x="60" y="60" width="10" height="10" opacity="0.3"/>
+                </g>
+                <g fill="#c9a84c">
+                  <rect x="20" y="10" width="10" height="10" opacity="0.75"/>
+                  <rect x="30" y="10" width="10" height="10" opacity="0.6"/>
+                  <rect x="40" y="10" width="10" height="10" opacity="0.45"/>
+                  <rect x="30" y="20" width="10" height="10" opacity="0.55"/>
+                  <rect x="40" y="20" width="10" height="10" opacity="0.4"/>
+                </g>
+                <g fill="#9490a8">
+                  <rect x="10" y="20" width="10" height="10" opacity="0.4"/>
+                  <rect x="10" y="30" width="10" height="10" opacity="0.3"/>
+                  <rect x="10" y="40" width="10" height="10" opacity="0.22"/>
+                  <rect x="20" y="30" width="10" height="10" opacity="0.3"/>
+                  <rect x="20" y="40" width="10" height="10" opacity="0.22"/>
+                  <rect x="30" y="40" width="10" height="10" opacity="0.18"/>
+                </g>
+              </svg>
+            </div>
+            <div>
+              <strong>Range Asymmetry</strong>
+              <span>Why boards hit your range vs. your opponent's differently, and how to act on it without guessing.</span>
+            </div>
+          </li>
+
+          <!-- 02 · Stack-Depth Adjustments -->
+          <li>
+            <div class="mtm-mechanics-list__gfx" aria-hidden="true">
+              <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                <line x1="10" y1="68" x2="70" y2="68" stroke="#c9a84c" stroke-width="0.5" opacity="0.4"/>
+                <g>
+                  <rect x="14" y="20" width="14" height="3" rx="1" fill="#c9a84c" opacity="0.9"/>
+                  <rect x="14" y="25" width="14" height="3" rx="1" fill="#c9a84c" opacity="0.85"/>
+                  <rect x="14" y="30" width="14" height="3" rx="1" fill="#c9a84c" opacity="0.8"/>
+                  <rect x="14" y="35" width="14" height="3" rx="1" fill="#c9a84c" opacity="0.75"/>
+                  <rect x="14" y="40" width="14" height="3" rx="1" fill="#c9a84c" opacity="0.7"/>
+                  <rect x="14" y="45" width="14" height="3" rx="1" fill="#c9a84c" opacity="0.65"/>
+                  <rect x="14" y="50" width="14" height="3" rx="1" fill="#c9a84c" opacity="0.6"/>
+                  <rect x="14" y="55" width="14" height="3" rx="1" fill="#c9a84c" opacity="0.55"/>
+                  <rect x="14" y="60" width="14" height="3" rx="1" fill="#c9a84c" opacity="0.5"/>
+                  <rect x="14" y="65" width="14" height="3" rx="1" fill="#c9a84c" opacity="0.45"/>
+                </g>
+                <g>
+                  <rect x="33" y="45" width="14" height="3" rx="1" fill="#c9a84c" opacity="0.85"/>
+                  <rect x="33" y="50" width="14" height="3" rx="1" fill="#c9a84c" opacity="0.75"/>
+                  <rect x="33" y="55" width="14" height="3" rx="1" fill="#c9a84c" opacity="0.65"/>
+                  <rect x="33" y="60" width="14" height="3" rx="1" fill="#c9a84c" opacity="0.55"/>
+                  <rect x="33" y="65" width="14" height="3" rx="1" fill="#c9a84c" opacity="0.45"/>
+                </g>
+                <g>
+                  <rect x="52" y="60" width="14" height="3" rx="1" fill="#c9a84c" opacity="0.7"/>
+                  <rect x="52" y="65" width="14" height="3" rx="1" fill="#c9a84c" opacity="0.5"/>
+                </g>
+              </svg>
+            </div>
+            <div>
+              <strong>Stack-Depth Adjustments</strong>
+              <span>Why the same hand plays differently at 100bb, 30bb, and 15bb, with the mechanical reason behind every change.</span>
+            </div>
+          </li>
+
+          <!-- 03 · Post-Flop ICM -->
+          <li>
+            <div class="mtm-mechanics-list__gfx" aria-hidden="true">
+              <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                <line x1="10" y1="68" x2="70" y2="68" stroke="#c9a84c" stroke-width="0.5" opacity="0.4"/>
+                <rect x="13" y="15" width="9" height="53" fill="#c9a84c" opacity="0.9"/>
+                <rect x="24" y="32" width="9" height="36" fill="#c9a84c" opacity="0.65"/>
+                <rect x="35" y="45" width="9" height="23" fill="#c9a84c" opacity="0.5"/>
+                <rect x="46" y="54" width="9" height="14" fill="#c9a84c" opacity="0.38"/>
+                <rect x="57" y="60" width="9" height="8"  fill="#c9a84c" opacity="0.28"/>
+                <path d="M 17.5 15 Q 30 28 39.5 45 T 61.5 60" fill="none" stroke="#e0c87a" stroke-width="0.8" opacity="0.7"/>
+              </svg>
+            </div>
+            <div>
+              <strong>Post-Flop ICM</strong>
+              <span>The section most courses skip entirely. How ICM reshapes flop, turn, and river strategy, covering and covered.</span>
+            </div>
+          </li>
+
+          <!-- 04 · Risk Premium Deltas -->
+          <li>
+            <div class="mtm-mechanics-list__gfx" aria-hidden="true">
+              <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                <rect x="14" y="40" width="14" height="28" fill="#9490a8" opacity="0.5"/>
+                <rect x="52" y="22" width="14" height="46" fill="#c9a84c" opacity="0.85"/>
+                <path d="M 40 22 L 32 52 L 48 52 Z" fill="none" stroke="#e0c87a" stroke-width="1.2" opacity="0.85"/>
+                <line x1="10" y1="68" x2="70" y2="68" stroke="#c9a84c" stroke-width="0.5" opacity="0.4"/>
+              </svg>
+            </div>
+            <div>
+              <strong>Risk Premium Deltas</strong>
+              <span>Dvoress's framework for finding attack spots, and for defending when a bigger stack is targeting you.</span>
+            </div>
+          </li>
+
+          <!-- 05 · The Study Method -->
+          <li>
+            <div class="mtm-mechanics-list__gfx" aria-hidden="true">
+              <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                <line x1="20" y1="40" x2="40" y2="40" stroke="#c9a84c" stroke-width="0.8" opacity="0.55"/>
+                <line x1="40" y1="40" x2="60" y2="40" stroke="#c9a84c" stroke-width="0.8" opacity="0.55"/>
+                <circle cx="18" cy="40" r="9" fill="none" stroke="#c9a84c" stroke-width="1" opacity="0.9"/>
+                <text x="18" y="44" text-anchor="middle" fill="#c9a84c" font-family="Georgia, serif" font-style="italic" font-size="10">1</text>
+                <circle cx="40" cy="40" r="9" fill="none" stroke="#c9a84c" stroke-width="1" opacity="0.9"/>
+                <text x="40" y="44" text-anchor="middle" fill="#c9a84c" font-family="Georgia, serif" font-style="italic" font-size="10">2</text>
+                <circle cx="62" cy="40" r="9" fill="#c9a84c" stroke="#c9a84c" stroke-width="1" opacity="0.9"/>
+                <text x="62" y="44" text-anchor="middle" fill="#141318" font-family="Georgia, serif" font-style="italic" font-weight="700" font-size="10">3</text>
+              </svg>
+            </div>
+            <div>
+              <strong>The Study Method</strong>
+              <span>The exact three-step routine Tim uses to prepare for $100K buy-ins. You can copy it starting today.</span>
+            </div>
+          </li>
+
+        </ol>
+
+        <div class="mtm-mechanics-list__tail">
+          A few examples from <strong>25+ modules</strong> across preflop, post-flop, ICM, and study workflow.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ORIGIN STORY ════════════════════════════════════════ -->
+<section class="mtm-origin-section">
+  <div class="mtm-container">
+    <div class="mtm-origin-inner">
+      <div class="mtm-section-header mtm-reveal">
+        <div class="mtm-section-label">How This Course Got Made</div>
+        <h2 class="mtm-section-headline">This Course Almost<br>Didn't Get Made.</h2>
+        <p class="mtm-section-subhead">Why three of the best current tournament players alive spent months building this for you.</p>
+      </div>
+      <div class="mtm-origin-body mtm-reveal">
+        <p>Tim Adams spent the last year and a half mostly at home, preparing to have his first child. Not grinding the circuit. Studying. So when the chance to build a course came up, he took it. Building it at that stage of life wasn't easy — <strong>he rented an office space just to get it over the finish line.</strong></p>
+        <p>He didn't build it alone. He brought in Daniel Dvoress and, for the Triton final-table review, Stephen Chidwick — the player ranked #2 all-time on the Hendon Mob money list.</p>
+        <div class="mtm-origin-pull">
+          <p>"The best of the best when it comes to preflop, the mechanics behind the plays, and the way ICM influences responses."</p>
+          <div class="mtm-origin-pull-src">&mdash; Tim, on Daniel</div>
+        </div>
+        <p>The three of them are friends who've studied and grown their game together — comparing notes, arguing spots, sharpening each other. In the Triton London Main Event review, you get to sit in on one of those Super High Roller study sessions. On camera. For hours.</p>
+        <p class="mtm-origin-closer">That's what over $100 million in combined cashes looks like when it's teaching instead of playing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ EASE OF USE / COURSE PROGRESSION ═══════════════════ -->
+<section class="mtm-progression-section">
+  <div class="mtm-container">
+    <div class="mtm-section-header mtm-reveal">
+      <div class="mtm-section-label">Course Structure</div>
+      <h2 class="mtm-section-headline">You'll See Spots<br>Differently After the First Week.</h2>
+      <p class="mtm-section-subhead">You don't need to be an ICM expert to start. You just need to be willing to study.</p>
+    </div>
+    <div class="mtm-progression-track mtm-reveal">
+      <div class="mtm-prog-node">
+        <div class="mtm-prog-dot">🔧</div>
+        <div class="mtm-prog-label">Study Tools<br>& Methods</div>
+        <div class="mtm-prog-sublabel">Part 1</div>
+      </div>
+      <div class="mtm-prog-node">
+        <div class="mtm-prog-dot">♠</div>
+        <div class="mtm-prog-label">Deep Stack<br>Play (100bb+)</div>
+        <div class="mtm-prog-sublabel">Part 2</div>
+      </div>
+      <div class="mtm-prog-node">
+        <div class="mtm-prog-dot">⚡</div>
+        <div class="mtm-prog-label">Mid-Stage<br>Preflop</div>
+        <div class="mtm-prog-sublabel">Part 3</div>
+      </div>
+      <div class="mtm-prog-node">
+        <div class="mtm-prog-dot">⚖</div>
+        <div class="mtm-prog-label">ICM Pre &<br>Post-Flop</div>
+        <div class="mtm-prog-sublabel">Part 4</div>
+      </div>
+      <div class="mtm-prog-node">
+        <div class="mtm-prog-dot">👑</div>
+        <div class="mtm-prog-label">Endgame &<br>Final Tables</div>
+        <div class="mtm-prog-sublabel">Part 5</div>
+      </div>
+      <div class="mtm-prog-node">
+        <div class="mtm-prog-dot">🏆</div>
+        <div class="mtm-prog-label">Triton ME<br>Review</div>
+        <div class="mtm-prog-sublabel">Part 5–6</div>
+      </div>
+    </div>
+    <div class="mtm-container--narrow">
+      <div class="mtm-reveal mtm-lead-paragraph">
+        Tim designed this course so each concept builds on the last. You don't start with final table ICM and drown. You start with the tools and the study method — the same study method Tim uses to prepare for $100,000 buy-in events.
+      </div>
+      <div class="mtm-study-steps mtm-reveal">
+        <div class="mtm-study-step">
+          <div class="mtm-study-step-num">1</div>
+          <div class="mtm-study-step-content">
+            <strong>Preflop Range Breakdown</strong>
+            <span>Tim breaks down the range interaction. Not just "we have the advantage" — but <em>why</em>, showing the exact weight of offsuit hands versus pocket pairs.</span>
+          </div>
+        </div>
+        <div class="mtm-step-connector"></div>
+        <div class="mtm-study-step">
+          <div class="mtm-study-step-num">2</div>
+          <div class="mtm-study-step-content">
+            <strong>Aggregate Flop Reports</strong>
+            <span>He opens GTO Lab and looks at flop reports across thousands of boards, teaching you the push and pull factors that drive strategy.</span>
+          </div>
+        </div>
+        <div class="mtm-step-connector"></div>
+        <div class="mtm-study-step">
+          <div class="mtm-study-step-num">3</div>
+          <div class="mtm-study-step-content">
+            <strong>Live Bot Drilling</strong>
+            <span>He boots up Lucid GTO Trainer and plays hands live, explaining his thinking, managing frequencies with the RNG, catching his own mistakes in real time.</span>
+          </div>
+        </div>
+      </div>
+      <blockquote class="mtm-pull-quote mtm-reveal">
+        <p class="mtm-pull-quote-text">"The best way to get better at poker is to drill, drill versus the bot. It'll open up your mind. You'll get good at frequencies."</p>
+        <div class="mtm-pull-quote-attr">
+          <div class="mtm-pull-quote-avatar">TA</div>
+          <div>
+            <div class="mtm-pull-quote-name">Tim Adams</div>
+            <div class="mtm-pull-quote-role">Course Lead</div>
+          </div>
+        </div>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FUTURE CAST ══════════════════════════════════════════ -->
+<section class="mtm-futurecast-section">
+  <div class="mtm-container">
+    <div class="mtm-section-header mtm-reveal">
+      <div class="mtm-section-label">The Result</div>
+      <h2 class="mtm-section-headline">The Table Is<br>Afraid of You Now.</h2>
+      <p class="mtm-section-subhead">Imagine sitting down at a final table and feeling <em>ready</em>.</p>
+    </div>
+    <div class="mtm-futurecast-inner">
+      <div class="mtm-futurecast-scenario mtm-reveal">
+        <p>You're 9-handed. The money bubble just burst. The chip leader has been bullying the table for the last 20 minutes.</p>
+        <p>Old you would tighten up. Wait for a big hand. Hope to ladder.</p>
+        <p><strong>The new you sees something different.</strong></p>
+        <p>You see that the chip leader is opening wider than the solver wants because he thinks "I have the big stack, I should pressure everyone." You see that his risk premium is lower than yours, but his <em>delta</em> against the players behind you is where the real action is. You see a spot to 3-bet jam with a hand you used to fold. Not because you're gambling, but because you understand the exact ICM math that makes it profitable.</p>
+        <p>You act. He tank-folds. The table notices.</p>
+        <p>Two orbits later, a wet board comes down and you fire what Tim calls a <strong>"Demi-Bluff"</strong> — a merge bet at 150% pot with a vulnerable hand that forces his middle-pair combos into pure indifference. He doesn't know whether you're value-betting or bluffing. That's the point. You've put him in a blender. You're picking on the chip leader.</p>
+        <p>He folds again. And now you're the one the table is afraid of.</p>
+      </div>
+      <div class="mtm-futurecast-body mtm-reveal">
+        <p>That's what "understanding the why" feels like in practice. You stop reacting. You start dictating. The guy across from you shrugs, sighs, and gives you his chips because you've become the hardest player at the table to play against.</p>
+      </div>
+      <blockquote class="mtm-pull-quote mtm-reveal">
+        <p class="mtm-pull-quote-text">"Do you want to be a transactional player, where all you care about is the wins and losses? Or do you want to be a <strong>transformational player</strong>, where you're thinking bigger picture on improving every day? For me, that mindset made poker a much healthier and more enjoyable experience, just treating it like a strategy game."</p>
+        <div class="mtm-pull-quote-attr">
+          <div class="mtm-pull-quote-avatar">TA</div>
+          <div>
+            <div class="mtm-pull-quote-name">Tim Adams</div>
+            <div class="mtm-pull-quote-role">2x Triton Main Event Champion</div>
+          </div>
+        </div>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ COACHES ══════════════════════════════════════════════ -->
+<section class="mtm-coaches-section" id="coaches">
+  <div class="mtm-container">
+    <div class="mtm-section-header mtm-reveal">
+      <div class="mtm-section-label">Your Coaches</div>
+      <h2 class="mtm-section-headline">Three Coaches.<br>Five Bracelets. $100 Million+.</h2>
+    </div>
+    <!-- Tim -->
+    <div class="mtm-coach-profile mtm-reveal">
+      <div class="mtm-coach-photo-wrap">
+        <div class="mtm-coach-photo">
+          <img src="https://upswingpoker.com/wp-content/uploads/2026/05/Timothy-Adams-poker-coach-card-fifa-style.png" alt="Tim Adams">
+        </div>
+        <div class="mtm-coach-photo-label">
+          <div class="mtm-coach-photo-name">Tim Adams</div>
+          
+        </div>
+      </div>
+      <div class="mtm-coach-bio">
+        <div class="mtm-coach-bio-role">Course Lead</div>
+        <div class="mtm-coach-bio-name">Tim Adams</div>
+        
+        <div class="mtm-coach-bio-body">
+          <p>Tim started playing freerolls in his dorm room during the poker boom. He's now a 2x Triton Main Event Champion, 2x Super High Roller Bowl Champion, and bracelet winner.</p>
+          <p>But what makes Tim different as a teacher is his philosophy. He's a solver-based player who looks at every output through an exploitative lens.</p>
+        </div>
+        <blockquote class="mtm-pull-quote">
+          <p class="mtm-pull-quote-text">"At the end of the day, we are playing humans. I do look through the solves with that exploitative lens. I'm always searching for exploitative opportunities."</p>
+          <div class="mtm-pull-quote-attr">
+            <div class="mtm-pull-quote-avatar">TA</div>
+            <div>
+              <div class="mtm-pull-quote-name">Tim Adams</div>
+              <div class="mtm-pull-quote-role">Course Lead</div>
+            </div>
+          </div>
+        </blockquote>
+        <p class="mtm-fine-print">Tim drives the bus on this course. He shows you his exact study process, his tools, his mistakes. When he drills against the bot on camera, he catches his own errors and explains what went wrong. That kind of honesty is rare from someone at his level.</p>
+      </div>
+    </div>
+    <!-- Daniel -->
+    <div class="mtm-coach-profile mtm-reverse mtm-reveal">
+      <div class="mtm-coach-photo-wrap">
+        <div class="mtm-coach-photo">
+          <img src="https://upswingpoker.com/wp-content/uploads/2026/05/Daniel-Dvoress-poker-coach-card-fifa-style.png" alt="Daniel Dvoress">
+        </div>
+        <div class="mtm-coach-photo-label">
+          <div class="mtm-coach-photo-name">Daniel Dvoress</div>
+          <div class="mtm-coach-photo-cash">$50.5M+</div>
+        </div>
+      </div>
+      <div class="mtm-coach-bio">
+        <div class="mtm-coach-bio-role">ICM Specialist</div>
+        <div class="mtm-coach-bio-name">Daniel Dvoress</div>
+        <div class="mtm-coach-bio-cash-lg">$50.5M+</div>
+        <div class="mtm-coach-bio-body">
+          <p>Here's how Tim introduces Daniel in the course: <em>"The best of the best when it comes to understanding preflop, the mechanics behind the plays, and the way ICM influences responses."</em></p>
+          <p>Daniel just crossed $50 million in live cashes. Only the 13th player in history to do it. He's won a Super High Roller Bowl ($4.08M), three Triton titles, two bracelets, and four EPT titles.</p>
+          <p>Daniel takes over when the course shifts from chip EV to tournament EV. He handles the ICM sections — both preflop and post-flop — and breaks down concepts like risk premium deltas that most players have never even heard of, let alone understood.</p>
+        </div>
+      </div>
+    </div>
+    <!-- Stephen -->
+    <div class="mtm-coach-profile mtm-reveal">
+      <div class="mtm-coach-photo-wrap">
+        <div class="mtm-coach-photo">
+          <img src="https://upswingpoker.com/wp-content/uploads/2026/05/stephen-chidwick-poker-coach-card-fifa-style.png" alt="Stephen Chidwick">
+        </div>
+        <div class="mtm-coach-photo-label">
+          <div class="mtm-coach-photo-name">Stephen Chidwick</div>
+          <div class="mtm-coach-photo-cash">$76M+</div>
+        </div>
+      </div>
+      <div class="mtm-coach-bio">
+        <div class="mtm-coach-bio-role">Final Table Analyst</div>
+        <div class="mtm-coach-bio-name">Stephen Chidwick</div>
+        <div class="mtm-coach-bio-cash-lg">$76M+</div>
+        <div class="mtm-coach-bio-body">
+          <p>The poker community has been saying it for years. PokerNews, PokerGO, his peers. They all agree. Chidwick is widely considered one of the best tournament players on the planet. #2 all-time on the Hendon Mob money list. Two-time CardPlayer Player of the Year. Former world #1 GPI ranking.</p>
+          <p>Stephen's contribution is a multi-hour review of the Triton London Main Event — the same event Tim Adams won. Every key hand analyzed, from bubble burst to the final winner, with Tim and Stephen studying it together on camera.</p>
+        </div>
+        <blockquote class="mtm-pull-quote">
+          <p class="mtm-pull-quote-text">"How you play when you are running poorly or things aren't going your way, that's a much bigger variable between players... that gives you a really big opportunity to separate yourself from other players if you can handle that situation better than they can."</p>
+          <div class="mtm-pull-quote-attr">
+            <div class="mtm-pull-quote-avatar">SC</div>
+            <div>
+              <div class="mtm-pull-quote-name">Stephen Chidwick</div>
+              <div class="mtm-pull-quote-role">Final Table Analyst · $76M+ in live cashes</div>
+            </div>
+          </div>
+        </blockquote>
+      </div>
+    </div>
+    <!-- Credentials Banner -->
+    <div class="mtm-credentials-banner mtm-reveal">
+      <div class="mtm-cred-item">
+        <div class="mtm-cred-number">$100M+</div>
+        <div class="mtm-cred-label">Combined live cashes</div>
+      </div>
+      <div class="mtm-cred-item">
+        <div class="mtm-cred-number">5</div>
+        <div class="mtm-cred-label">Bracelets</div>
+      </div>
+      <div class="mtm-cred-item">
+        <div class="mtm-cred-number">3</div>
+        <div class="mtm-cred-label">Triton ME titles</div>
+      </div>
+      <div class="mtm-cred-item">
+        <div class="mtm-cred-number">3</div>
+        <div class="mtm-cred-label">Super High Roller Bowl titles</div>
+      </div>
+      <div class="mtm-cred-item">
+        <div class="mtm-cred-number">#1</div>
+        <div class="mtm-cred-label">Most credentialed Upswing lineup ever</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WEAPONS / MECHANISM ══════════════════════════════════ -->
+<section class="mtm-weapons-section" id="inside">
+  <div class="mtm-container">
+    <div class="mtm-section-header mtm-reveal">
+      <div class="mtm-section-label">The Mechanics</div>
+      <h2 class="mtm-section-headline">The Weapons They Don't<br>Teach in Other Tournament Courses</h2>
+      <p class="mtm-section-subhead">Four concepts that will forever change how you play tournaments.</p>
+    </div>
+    <div class="mtm-weapons-grid">
+      <div class="mtm-weapon-card mtm-reveal">
+        <div class="mtm-weapon-number">01</div>
+        <div class="mtm-weapon-label">The Framework</div>
+        <div class="mtm-weapon-title">The Three Pillars of Mid-Stage Preflop</div>
+        <div class="mtm-weapon-body">
+          <p>Most players treat the middle of a tournament like a guessing game, blindly applying early-game deep-stack strategy to tables where stack depths are wildly uneven.</p>
+          <p><strong>Pillar 1 — Equal Stacks (Crawling):</strong> How ranges actually function when everyone has 50bb. Why hands you loved at 100bb lose massive value at shallower depths.</p>
+          <p><strong>Pillar 2 — Mixed Stacks (Walking):</strong> What happens when you have 50bb but there are 11bb and 15bb stacks behind you? Those short stacks deny your equity in ways that aren't obvious.</p>
+          <p><strong>Pillar 3 — ICM (Running):</strong> Daniel Dvoress takes over. How to use risk premium deltas to find attack spots — and defend when you're targeted.</p>
+        </div>
+      </div>
+      <div class="mtm-weapon-card mtm-reveal">
+        <div class="mtm-weapon-number">02</div>
+        <div class="mtm-weapon-label">The Study Method</div>
+        <div class="mtm-weapon-title">The "Come Study With Me" Format</div>
+        <div class="mtm-weapon-body">
+          <p>You're exhausted by courses that dump hours of static solver charts on your screen without showing you how to use them in a real game.</p>
+          <p>Tim fixes this with an over-the-shoulder teaching method. A repeatable three-step process:</p>
+          <p><strong>Step 1:</strong> Preflop range interaction breakdown — not just "we have the advantage" but why.</p>
+          <p><strong>Step 2:</strong> GTO Lab aggregate flop reports across thousands of boards — the push and pull factors driving strategy.</p>
+          <p><strong>Step 3:</strong> Lucid GTO Trainer live drilling — thinking out loud, managing frequencies, catching his own mistakes in real time.</p>
+        </div>
+      </div>
+      <div class="mtm-weapon-card mtm-reveal">
+        <div class="mtm-weapon-number">03</div>
+        <div class="mtm-weapon-label">The Concept</div>
+        <div class="mtm-weapon-title">The Demi-Bluff</div>
+        <div class="mtm-weapon-body">
+          <p>A merge bet at 150% pot with a vulnerable hand — one that simultaneously generates fold equity, builds a pot when called with the best hand, and forces your opponent into pure indifference.</p>
+          <p>It's the exact spot that separates players who "sort of understand ICM" from players who can dictate outcomes at a final table. When your opponent doesn't know if you're value-betting or bluffing, they're in a blender. That's the point.</p>
+          <p><strong>When better hands fold. When equal hands give up equity. When worse hands pay you off.</strong> All three outcomes are profitable.</p>
+        </div>
+      </div>
+      <div class="mtm-weapon-card mtm-reveal">
+        <div class="mtm-weapon-number">04</div>
+        <div class="mtm-weapon-label">The Concept</div>
+        <div class="mtm-weapon-title">The Tomahawk — 300% Pot Jams</div>
+        <div class="mtm-weapon-body">
+          <p>On certain dynamic boards with a specific stack-to-pot ratio, the solver wants you jamming the entire pot at 300% — a massive, polar move that most players would never consider.</p>
+          <p>The Tomahawk isn't gambling. It's precisely calibrated aggression that puts your opponents in impossible spots. At deep stacks with the right board texture, it's not just an option — it's the highest-EV play available.</p>
+          <p><strong>Tim shows you the exact conditions, the right hands, and how to balance this play</strong> so it can't be exploited.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CURRICULUM ════════════════════════════════════════════ -->
+<section class="mtm-curriculum-section">
+  <div class="mtm-container">
+    <div class="mtm-section-header mtm-reveal">
+      <div class="mtm-section-label">Full Curriculum</div>
+      <h2 class="mtm-section-headline">25 Modules. 6 Parts.<br>Every Stage of Tournaments.</h2>
+    </div>
+    <div class="mtm-curriculum-parts mtm-reveal">
+      <!-- Part 1 -->
+      <div class="mtm-curriculum-part">
+        <div class="mtm-curriculum-part-header" onclick="togglePart(this)">
+          <div>
+            <div class="mtm-curriculum-part-title">Part 1 — How Elite Players Study</div>
+            <div class="mtm-curriculum-part-sub">4 modules · Tim's exact study process for $100K+ buy-in events</div>
+          </div>
+          <div class="mtm-curriculum-part-toggle">+</div>
+        </div>
+        <div class="mtm-curriculum-modules">
+          <div class="mtm-curriculum-module"><div class="mtm-module-num">01</div><div><div class="mtm-module-title">Welcome & Course Philosophy</div><div class="mtm-module-desc">Tim introduces the "transactional vs. transformational" mindset and how to approach the material for maximum results.</div></div></div>
+          <div class="mtm-curriculum-module"><div class="mtm-module-num">02</div><div><div class="mtm-module-title">PioSOLVER & GTO Lab Walkthrough</div><div class="mtm-module-desc">How to use Range Explorer and Equity Distribution graphs. How to read flop reports and quickly spot which boards favor which player.</div></div></div>
+          <div class="mtm-curriculum-module"><div class="mtm-module-num">03</div><div><div class="mtm-module-title">Runout Analysis</div><div class="mtm-module-desc">How strategy shifts across different turn and river cards. Tim shows you how to use runout tools so you stop guessing on later streets.</div></div></div>
+          <div class="mtm-curriculum-module"><div class="mtm-module-num">04</div><div><div class="mtm-module-title">Lucid GTO Trainer & Bot Drilling</div><div class="mtm-module-desc">How the RNG works, why it matters for building unbiased frequencies, and how to structure effective drill sessions. Tim drills live on camera.</div></div></div>
+        </div>
+      </div>
+      <!-- Part 2 -->
+      <div class="mtm-curriculum-part">
+        <div class="mtm-curriculum-part-header" onclick="togglePart(this)">
+          <div>
+            <div class="mtm-curriculum-part-title">Part 2 — Early Stages, Deep-Stack Mechanics (100bb+)</div>
+            <div class="mtm-curriculum-part-sub">6 modules · The part of the tournament most training ignores</div>
+          </div>
+          <div class="mtm-curriculum-part-toggle">+</div>
+        </div>
+        <div class="mtm-curriculum-modules">
+          <div class="mtm-curriculum-module"><div class="mtm-module-num">05</div><div><div class="mtm-module-title">Range Interactions in Single-Raised Pots</div><div class="mtm-module-desc">How ranges interact from common positions (HJ vs. CO, CO vs. BB) and why these dynamics are the foundation for everything that follows.</div></div></div>
+          <div class="mtm-curriculum-module"><div class="mtm-module-num">06</div><div><div class="mtm-module-title">Bet Sizing Fundamentals</div><div class="mtm-module-desc">When to use quarter pot, half pot, geometric sizes, and overbets. How stack-to-pot ratio changes your sizing decisions across three streets.</div></div></div>
+          <div class="mtm-curriculum-module"><div class="mtm-module-num">07</div><div><div class="mtm-module-title">Deep-Stack Post-Flop, Part 1</div><div class="mtm-module-desc">Flop strategies, range vs. range dynamics, and how equity realization changes at different stack depths.</div></div></div>
+          <div class="mtm-curriculum-module"><div class="mtm-module-num">08</div><div><div class="mtm-module-title">Deep-Stack Post-Flop, Part 2 + "Come Study With Me"</div><div class="mtm-module-desc">Turn and river play, value thresholds, and the Demi-Bluff merge bet concept. First live study session on camera.</div></div></div>
+          <div class="mtm-curriculum-module"><div class="mtm-module-num">09</div><div><div class="mtm-module-title">Deep-Stack Overbets & "The Tomahawk"</div><div class="mtm-module-desc">When and why to deploy polar overbets (130–200% pot) and the massive 300% pot jam on dynamic boards.</div></div></div>
+          <div class="mtm-curriculum-module"><div class="mtm-module-num">10</div><div><div class="mtm-module-title">Deep-Stack Hand Series</div><div class="mtm-module-desc">Extended hand examples that illustrate how mechanics and card interactions play out across multiple boards. Theory meets real decisions.</div></div></div>
+        </div>
+      </div>
+      <!-- Part 3 -->
+      <div class="mtm-curriculum-part">
+        <div class="mtm-curriculum-part-header" onclick="togglePart(this)">
+          <div>
+            <div class="mtm-curriculum-part-title">Part 3 — Mid-Stages, The Three Pillars of Preflop</div>
+            <div class="mtm-curriculum-part-sub">4 modules · Tim's core framework: crawl, walk, then run</div>
+          </div>
+          <div class="mtm-curriculum-part-toggle">+</div>
+        </div>
+        <div class="mtm-curriculum-modules">
+          <div class="mtm-curriculum-module"><div class="mtm-module-num">11</div><div><div class="mtm-module-title">Pillar 1 — Chip EV, Equal Stacks (Learning to Crawl)</div><div class="mtm-module-desc">The baseline at 50bb. How opening ranges adjust vs. 100bb, why suited connectors lose value, and 3-bet sizing mechanics.</div></div></div>
+          <div class="mtm-curriculum-module"><div class="mtm-module-num">12</div><div><div class="mtm-module-title">Pillar 1 Continued — Big Blind Defense & Counter-Strategies</div><div class="mtm-module-desc">Why population over-3-bets from the big blind and how to punish it. Why slow-playing and ripping hands like KJo overperforms against overzealous 3-bettors.</div></div></div>
+          <div class="mtm-curriculum-module"><div class="mtm-module-num">13</div><div><div class="mtm-module-title">Pillar 2 — Chip EV, Mixed Stacks (Learning to Walk)</div><div class="mtm-module-desc">How short stacks behind you deny equity and force your ranges to shift. The "canceling out effects" and how to spot them.</div></div></div>
+          <div class="mtm-curriculum-module"><div class="mtm-module-num">14</div><div><div class="mtm-module-title">Pillar 2 Continued — Exploitative Aggression with Mixed Stacks</div><div class="mtm-module-desc">Why suited 8x are better 3-bet bluffs than suited 9x. How "scanning the grid" for aggression opportunities makes you harder to play against.</div></div></div>
+        </div>
+      </div>
+      <!-- Part 4 -->
+      <div class="mtm-curriculum-part">
+        <div class="mtm-curriculum-part-header" onclick="togglePart(this)">
+          <div>
+            <div class="mtm-curriculum-part-title">Part 4 — Post-Flop ICM: The Section Most Courses Skip</div>
+            <div class="mtm-curriculum-part-sub">3 modules · Daniel Dvoress on what separates good from great</div>
+          </div>
+          <div class="mtm-curriculum-part-toggle">+</div>
+        </div>
+        <div class="mtm-curriculum-modules">
+          <div class="mtm-curriculum-module"><div class="mtm-module-num">15–16</div><div><div class="mtm-module-title">Pillar 3 — ICM Enters the Fray (Learning to Run)</div><div class="mtm-module-desc">Daniel takes over. Risk premiums, deltas, why the chip leader at a final table might open tighter than near the bubble.</div></div></div>
+          <div class="mtm-curriculum-module"><div class="mtm-module-num">17</div><div><div class="mtm-module-title">Post-Flop ICM as the Covering Stack</div><div class="mtm-module-desc">When to apply pressure and when to play small ball. Board-specific approaches. Why "I cover, so I crush" is a losing oversimplification.</div></div></div>
+          <div class="mtm-curriculum-module"><div class="mtm-module-num">18</div><div><div class="mtm-module-title">Post-Flop ICM as the Covered Stack</div><div class="mtm-module-desc">How your strategy shifts when a larger stack exerts ICM pressure on you. Defensive adjustments and counter-exploits.</div></div></div>
+          <div class="mtm-curriculum-module"><div class="mtm-module-num">19</div><div><div class="mtm-module-title">Post-Flop ICM: Extreme Spots & Case Studies</div><div class="mtm-module-desc">Deliberately extreme scenarios designed to reveal the underlying principles. Range-specific nuances across different board textures.</div></div></div>
+        </div>
+      </div>
+      <!-- Part 5 -->
+      <div class="mtm-curriculum-part">
+        <div class="mtm-curriculum-part-header" onclick="togglePart(this)">
+          <div>
+            <div class="mtm-curriculum-part-title">Part 5 — Endgame, Final Table ICM & Triton Main Event Review</div>
+            <div class="mtm-curriculum-part-sub">4 modules including multi-hour hand-for-hand Triton London breakdown</div>
+          </div>
+          <div class="mtm-curriculum-part-toggle">+</div>
+        </div>
+        <div class="mtm-curriculum-modules">
+          <div class="mtm-curriculum-module"><div class="mtm-module-num">20</div><div><div class="mtm-module-title">Advanced ICM Preflop at Final Tables</div><div class="mtm-module-desc">How ranges adjust hand by hand as stacks and pay jumps shift. The spots where one mistake costs six figures in equity.</div></div></div>
+          <div class="mtm-curriculum-module"><div class="mtm-module-num">21</div><div><div class="mtm-module-title">Advanced ICM Post-Flop at Final Tables</div><div class="mtm-module-desc">Board-by-board game plans when every chip decision affects everyone's equity.</div></div></div>
+          <div class="mtm-curriculum-module"><div class="mtm-module-num">22</div><div><div class="mtm-module-title">Chidwick's Triton London ME Review, Part 1</div><div class="mtm-module-desc">Multi-hour, hand-by-hand breakdown from bubble burst through the middle stages. Tim and Stephen study together on camera.</div></div></div>
+          <div class="mtm-curriculum-module"><div class="mtm-module-num">23</div><div><div class="mtm-module-title">Chidwick's Triton London ME Review, Part 2</div><div class="mtm-module-desc">The final table hands. Every key decision analyzed through the winner. "You're really going to get a front-row seat into a core part of our study process." — Tim Adams</div></div></div>
+        </div>
+      </div>
+      <!-- Part 6 -->
+      <div class="mtm-curriculum-part">
+        <div class="mtm-curriculum-part-header" onclick="togglePart(this)">
+          <div>
+            <div class="mtm-curriculum-part-title">Part 6 — Interactive Drilling</div>
+            <div class="mtm-curriculum-part-sub">2 modules · Hands-on practice sessions woven throughout the course</div>
+          </div>
+          <div class="mtm-curriculum-part-toggle">+</div>
+        </div>
+        <div class="mtm-curriculum-modules">
+          <div class="mtm-curriculum-module"><div class="mtm-module-num">24</div><div><div class="mtm-module-title">Drilling at Multiple Stack Depths</div><div class="mtm-module-desc">Practice from multiple positions at 25bb, 50bb, and 100bb+. Tim makes decisions in real time, explains his thought process, catches his own mistakes.</div></div></div>
+          <div class="mtm-curriculum-module"><div class="mtm-module-num">25</div><div><div class="mtm-module-title">Building Intuition Through Repetition</div><div class="mtm-module-desc">How to use the RNG to build unbiased frequencies. When to trust your intuition and when to override it. Tim's protocol for structuring your own drill sessions.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER: dark → light cream -->
+<div class="mtm-divider-dark-to-light">
+  <svg viewBox="0 0 1440 72" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="0,0 1440,0 1440,72 0,16" fill="#e4dfd3"/>
+  </svg>
+</div>
+
+<!-- ═══ SOCIAL PROOF ══════════════════════════════════════════ -->
+<section class="mtm-proof-section">
+  <div class="mtm-container">
+    <div class="mtm-section-header mtm-reveal">
+      <div class="mtm-section-label">Student Results</div>
+      <h2 class="mtm-section-headline">Don't Take<br>Our Word for It.</h2>
+      <p class="mtm-section-subhead">See what our early students had to say after going through the course.</p>
+    </div>
+    <div class="mtm-testimonial-grid mtm-reveal">
+      <div class="mtm-testimonial-card">
+        <div class="mtm-testimonial-stars">★★★★★</div>
+        <p class="mtm-testimonial-quote">"The ICM section on post-flop covering stack dynamics changed how I play 30bb spots at final tables. I've tried to learn this from other courses for years — this is the first one that made it click."</p>
+        <div class="mtm-testimonial-attr">
+          <div class="mtm-testimonial-avatar">M</div>
+          <div>
+            <div class="mtm-testimonial-name">Michael R.</div>
+            <div class="mtm-testimonial-stakes">$500–$1K online MTTs</div>
+          </div>
+        </div>
+      </div>
+      <div class="mtm-testimonial-card">
+        <div class="mtm-testimonial-stars">★★★★★</div>
+        <p class="mtm-testimonial-quote">"The 'Come Study With Me' format is the most underrated thing about this course. Watching Tim actually drill against the bot and explain his mistakes is worth the price alone."</p>
+        <div class="mtm-testimonial-attr">
+          <div class="mtm-testimonial-avatar">J</div>
+          <div>
+            <div class="mtm-testimonial-name">Jason T.</div>
+            <div class="mtm-testimonial-stakes">Live $1K–$5K tournaments</div>
+          </div>
+        </div>
+      </div>
+      <div class="mtm-testimonial-card">
+        <div class="mtm-testimonial-stars">★★★★★</div>
+        <p class="mtm-testimonial-quote">"I've bought three Upswing courses. This is the best one. The Chidwick Triton review alone is a masterclass. Two players with $115M in cashes studying together on camera — nothing else comes close."</p>
+        <div class="mtm-testimonial-attr">
+          <div class="mtm-testimonial-avatar">S</div>
+          <div>
+            <div class="mtm-testimonial-name">Sarah K.</div>
+            <div class="mtm-testimonial-stakes">$200–$500 online MTTs</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ OFFER / PRICING ═══════════════════════════════════════ -->
+<section class="mtm-offer-section" id="offer">
+  <div class="mtm-container">
+    <div class="mtm-section-header mtm-reveal">
+      <div class="mtm-section-label">The Offer</div>
+      <h2 class="mtm-section-headline">Everything You Get<br>When You Join Today</h2>
+    </div>
+    <div class="mtm-offer-inner">
+      <div class="mtm-offer-card mtm-reveal">
+        <div class="mtm-offer-card-header">
+          <div class="mtm-launch-badge">Launch Week — Ends May 29</div>
+          <div class="mtm-offer-card-title">Modern Tournament Mastery</div>
+          <div class="mtm-offer-card-sub">Complete course + all bonuses — yours for life</div>
+        </div>
+        <div class="mtm-offer-card-body">
+          <div class="mtm-offer-line-item">
+            <div class="mtm-offer-item-name">
+              Modern Tournament Mastery
+              <span>20+ hours · 25 modules · 6 parts · Lifetime access</span>
+            </div>
+            <div class="mtm-offer-item-value">$999</div>
+          </div>
+          <div class="mtm-offer-line-item">
+            <div class="mtm-offer-item-name">
+              Preflop Mastersheet 2.0
+              <span>Any hand, 6 stack depths, accessible from any device</span>
+            </div>
+            <div class="mtm-offer-item-value mtm-free">FREE</div>
+          </div>
+          <div class="mtm-offer-line-item">
+            <div class="mtm-offer-item-name">
+              "Super High Roller Mechanics" Course
+              <span>Launch week only — goes back to $299 May 29</span>
+            </div>
+            <div class="mtm-offer-item-value mtm-free">FREE</div>
+          </div>
+          <div class="mtm-offer-total">
+            <div class="mtm-offer-total-label">
+              Your Price
+              <span>One-time payment · No subscriptions</span>
+            </div>
+            <div class="mtm-offer-total-price">$999</div>
+          </div>
+        </div>
+        <div class="mtm-offer-cta-wrap">
+          <a href="https://upswingpoker.com/shop/cart/?add-to-cart=784093" class="mtm-btn mtm-btn-primary mtm-btn-arrow">Get Modern Tournament Mastery + All Bonuses</a>
+          <p class="mtm-offer-urgency">Launch bonus expires Friday, May 29 at midnight PT. After that, "Super High Roller Mechanics" goes back to $299 separately.</p>
+        </div>
+      </div>
+      <!-- Bonuses detail -->
+      <div class="mtm-bonus-section mtm-reveal">
+        <div class="mtm-bonus-label">What's Included</div>
+        <div class="mtm-bonus-item">
+          <div class="mtm-bonus-icon">📊</div>
+          <div>
+            <div class="mtm-bonus-name">Bonus #1: Preflop Mastersheet 2.0</div>
+            <div class="mtm-bonus-desc">Look up how to play almost any common preflop situation in seconds at 6 different stack depths. Accessible from your phone, tablet, or computer — pull it up between hands.</div>
+          </div>
+          <div class="mtm-bonus-badge">Included FREE</div>
+        </div>
+        <div class="mtm-bonus-item">
+          <div class="mtm-bonus-icon">🃏</div>
+          <div>
+            <div class="mtm-bonus-name">Bonus #2: "Super High Roller Mechanics" Course ($299 value)</div>
+            <div class="mtm-bonus-desc">A deep dive into the specific mechanics required for super high roller tournaments: extreme pay jumps, the meta-game shifts when everyone at the table is world-class, and the tactical decisions that change when the buy-in has six figures in front of it.</div>
+          </div>
+          <div class="mtm-bonus-badge">Launch Week Only</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ GUARANTEE ══════════════════════════════════════════════ -->
+<section class="mtm-guarantee-section">
+  <div class="mtm-container">
+    <div class="mtm-guarantee-inner mtm-reveal">
+      <div class="mtm-guarantee-seal">
+        <img src="https://upswingpoker.com/wp-content/uploads/2025/09/upswing-fair-play-poker-guarantee.png.webp" alt="Upswing Poker Fair Play Guarantee" class="mtm-seal-img">
+      </div>
+      <div class="mtm-guarantee-text">
+        <h3>Upswing Poker's Fair Play<br>Satisfaction Guarantee</h3>
+        <p>Study the course. If it's not right for you, reach out to our team within your first 30 days and we'll work with you on a refund or help you exchange it for a course that better fits your game.</p>
+        <p>Your investment is protected. Study with confidence.</p>
+        <p class="mtm-fine-print-cream">Refund requests are assessed on a case-by-case basis. <a href="https://upswingpoker.com/refund-policy" class="mtm-link-gold-on-cream">Review full refund policy →</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ════════════════════════════════════════════════════ -->
+<section class="mtm-faq-section">
+  <div class="mtm-container">
+    <div class="mtm-section-header mtm-reveal">
+      <div class="mtm-section-label">FAQ</div>
+      <h2 class="mtm-section-headline">Got Questions?</h2>
+    </div>
+    <div class="mtm-faq-list">
+      <div class="mtm-faq-item mtm-reveal">
+        <div class="mtm-faq-question" onclick="toggleFaq(this)">How much does the course cost and how long do I have to finish it? <span class="mtm-faq-toggle">+</span></div>
+        <div class="mtm-faq-answer"><p>Modern Tournament Mastery costs $999 for lifetime access. There are no recurring fees, no subscriptions, no future charges. You pay once and own it forever. Study at your own pace — there's no deadline.</p></div>
+      </div>
+      <div class="mtm-faq-item mtm-reveal">
+        <div class="mtm-faq-question" onclick="toggleFaq(this)">Is the course appropriate for newer players? <span class="mtm-faq-toggle">+</span></div>
+        <div class="mtm-faq-answer"><p>Tim designed this course primarily for players in $200+ online MTTs and $1,000+ live events. That said, he built it to be valuable for almost anyone with a basic understanding of preflop strategy and post-flop concepts. Tim's clear, structured teaching style makes even complex ICM concepts accessible to players who haven't studied them deeply before.</p></div>
+      </div>
+      <div class="mtm-faq-item mtm-reveal">
+        <div class="mtm-faq-question" onclick="toggleFaq(this)">Do I need any solver tools to follow along? <span class="mtm-faq-toggle">+</span></div>
+        <div class="mtm-faq-answer"><p>No. Tim uses PioSOLVER, GTO Lab, and Lucid GTO Trainer on camera and explains every output so you can follow along whether you own the tools or not. If you do have them, you'll learn exactly how to use them. If you don't, you'll still understand the mechanics behind every decision.</p></div>
+      </div>
+      <div class="mtm-faq-item mtm-reveal">
+        <div class="mtm-faq-question" onclick="toggleFaq(this)">Is this just 20 hours of solver screenshots? <span class="mtm-faq-toggle">+</span></div>
+        <div class="mtm-faq-answer"><p>No. Tim uses solver-based study as a foundation, but he looks at every output through an exploitative lens. The course emphasizes understanding <em>why</em> the solver does what it does — and how to deviate from it. There are extensive drilling sessions, hand series, and "come study with me" segments, not just static screenshots.</p></div>
+      </div>
+      <div class="mtm-faq-item mtm-reveal">
+        <div class="mtm-faq-question" onclick="toggleFaq(this)">I already own Road to Victory. Is this worth getting too? <span class="mtm-faq-toggle">+</span></div>
+        <div class="mtm-faq-answer"><p>Yes. They're designed to complement each other. Road to Victory (with Darren Elias and Nick Petrangelo) emphasizes exploitative play vs. specific player types. MTM goes much deeper on mechanics, deep-stack post-flop play, post-flop ICM from both the covering and covered stack perspective, and the underlying <em>why</em> behind every range adjustment. Different coaches, different approach, different depth.</p></div>
+      </div>
+      <div class="mtm-faq-item mtm-reveal">
+        <div class="mtm-faq-question" onclick="toggleFaq(this)">Is this useful for online MTTs, live tournaments, or both? <span class="mtm-faq-toggle">+</span></div>
+        <div class="mtm-faq-answer"><p>Both. The strategic concepts apply universally. Tim's approach focuses on understanding mechanics, not memorizing format-specific spots — so you can apply the principles in any tournament setting, whether it's a $200 online MTT or a $10K live event.</p></div>
+      </div>
+      <div class="mtm-faq-item mtm-reveal">
+        <div class="mtm-faq-question" onclick="toggleFaq(this)">How do I access the course after purchasing? <span class="mtm-faq-toggle">+</span></div>
+        <div class="mtm-faq-answer"><p>You'll have full and instant lifetime access inside the Upswing Members area at <a href="https://members.upswingpoker.com">members.upswingpoker.com</a>. New members: check your email to finish setting up your account. Need help? Email <a href="mailto:support@upswingpoker.com">support@upswingpoker.com</a>.</p></div>
+      </div>
+      <div class="mtm-faq-item mtm-reveal">
+        <div class="mtm-faq-question" onclick="toggleFaq(this)">How do the launch week bonuses work? <span class="mtm-faq-toggle">+</span></div>
+        <div class="mtm-faq-answer"><p>Join before Friday, May 29 at midnight PT and you automatically get access to the "Super High Roller Mechanics" bonus course ($299 value). After the deadline, the bonus course will be sold separately at its full $299 price.</p></div>
+      </div>
+      <div class="mtm-faq-item mtm-reveal">
+        <div class="mtm-faq-question" onclick="toggleFaq(this)">What if it's not for me? <span class="mtm-faq-toggle">+</span></div>
+        <div class="mtm-faq-answer"><p>Your purchase is covered by Upswing Poker's Fair Play Satisfaction Guarantee. Contact our team within your first 30 days and we'll work with you on a refund or exchange. <a href="https://upswingpoker.com/refund-policy">Full details in our refund policy →</a></p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER: light → dark -->
+<div class="mtm-divider-light-to-dark">
+  <svg viewBox="0 0 1440 72" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="0,72 1440,56 1440,72 0,72" fill="#0e0d10"/>
+    <polygon points="0,0 1440,0 1440,56 0,72" fill="#f4f1eb"/>
+  </svg>
+</div>
+
+<!-- ═══ WARNING / COST OF INACTION ═══════════════════════════ -->
+<section class="mtm-warning-section">
+  <div class="mtm-container">
+    <div class="mtm-warning-inner">
+      <div class="mtm-section-header mtm-reveal">
+        <div class="mtm-section-label">The Cost of Waiting</div>
+        <h2 class="mtm-section-headline">Six Months From Now,<br>the Field Will Be Better. Will You?</h2>
+        <p class="mtm-section-subhead">Here's what happens if you don't fix this.</p>
+      </div>
+      <div class="mtm-warning-body mtm-reveal">
+        <p>Six months from now, you'll still be opening from the hijack and automatically c-betting boards where the solver wants you checking 76% of the time. Still tightening up near the money because that's what "everybody says" — without understanding when to attack and when to preserve. Still busting deep runs on decisions you <em>feel</em> are right but can't explain.</p>
+        <p><strong>The field isn't waiting for you.</strong></p>
+        <p>The players in your $200 MTTs are studying right now. They're watching solver outputs, drilling frequencies, reading flop reports. Some of them will figure out the <em>why</em> on their own — it'll take them years, but they'll get there.</p>
+        <p>You can do that. Grind it out alone, make the mistakes, and slowly figure out why your early-level c-betting strategy was costing you 3bb per hour.</p>
+        <p><strong>Or you can watch three players with $100 million+ in combined cashes show you exactly how they think, and compress years of trial-and-error into 20 hours.</strong></p>
+      </div>
+      <blockquote class="mtm-pull-quote mtm-reveal">
+        <p class="mtm-pull-quote-text">"As soon as I notice myself thinking about how many chips I would have had if I won, I can change that course of action and just count how many chips do I have now and count how many chips does everyone else have now. Just go back to the game plan, go back to thinking strategically and treating every hand in a vacuum."</p>
+        <div class="mtm-pull-quote-attr">
+          <div class="mtm-pull-quote-avatar">SC</div>
+          <div>
+            <div class="mtm-pull-quote-name">Stephen Chidwick</div>
+            <div class="mtm-pull-quote-role">#2 All-Time Hendon Mob · $76M+ in live cashes</div>
+          </div>
+        </div>
+      </blockquote>
+      <p class="mtm-reveal mtm-guarantee-lede">That's the difference. That's the mindset. And you either build it or you watch other players cash bigger while you wonder what they're seeing that you're not.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FINAL CTA ══════════════════════════════════════════════ -->
+<section class="mtm-final-cta-section">
+  <div class="mtm-container">
+    <div class="mtm-final-coaches-row mtm-reveal">
+      <div class="mtm-final-coach-chip">
+        <div class="mtm-final-coach-chip-avatar">TA</div>
+        <div class="mtm-final-coach-chip-name">Tim Adams</div>
+      </div>
+      <div class="mtm-final-coach-chip">
+        <div class="mtm-final-coach-chip-avatar">DD</div>
+        <div class="mtm-final-coach-chip-name">Daniel Dvoress</div>
+      </div>
+      <div class="mtm-final-coach-chip">
+        <div class="mtm-final-coach-chip-avatar">SC</div>
+        <div class="mtm-final-coach-chip-name">Stephen Chidwick</div>
+      </div>
+    </div>
+    <h2 class="mtm-final-headline mtm-reveal">Your Moment Is Coming.<br><span class="mtm-gold">Be Ready for It.</span></h2>
+    <p class="mtm-final-subhead mtm-reveal">The great players know their moment will come. They make sure they're ready for it.</p>
+    <div class="mtm-final-cta-btn-wrap mtm-reveal">
+      <a href="#offer" class="mtm-btn mtm-btn-primary mtm-btn-large mtm-btn-arrow">Get Modern Tournament Mastery</a>
+      <p class="mtm-final-note">$999 · Lifetime access · Fair Play Guarantee · Launch bonus expires May 29</p>
+    </div>
+    <div class="mtm-final-trust-row mtm-reveal">
+      <div class="mtm-trust-item">
+        <svg class="mtm-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" color="#c9a84c"><path d="M12 2l2.09 6.26L20 9.27l-4.91 4.78 1.18 6.95L12 17.77l-4.27 3.23 1.18-6.95L4 9.27l5.91-.01L12 2z"/></svg>
+        $100M+ combined live cashes
+      </div>
+      <div class="mtm-trust-item">
+        <svg class="mtm-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" color="#c9a84c"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor"/></svg>
+        20+ hours · Lifetime access
+      </div>
+      <div class="mtm-trust-item">
+        <svg class="mtm-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" color="#c9a84c"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        30-day Fair Play Guarantee
+      </div>
+      <div class="mtm-trust-item">
+        <svg class="mtm-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" color="#c9a84c"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 12l2 2 4-4"/></svg>
+        Instant access after purchase
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═════════════════════════════════════════════════ -->
+<footer class="mtm-footer">
+  <div class="mtm-container">
+    <div class="mtm-footer-logo">UPSWING POKER</div>
+    <div class="mtm-footer-links">
+      <a href="https://upswingpoker.com/refund-policy">Refund Policy</a>
+      <a href="https://upswingpoker.com/privacy">Privacy Policy</a>
+      <a href="https://upswingpoker.com/terms">Terms of Service</a>
+      <a href="mailto:support@upswingpoker.com">Support</a>
+    </div>
+    <p class="mtm-footer-copy">© 2026 Upswing Poker. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+/* ── COUNTDOWN TIMER ─────────────────────────────────── */
+(function() {
+  const deadline = new Date('2026-05-29T23:59:59-07:00').getTime();
+  function pad(n) { return String(n).padStart(2, '0'); }
+  function tick() {
+    const now = Date.now();
+    const diff = Math.max(0, deadline - now);
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd-d').textContent = pad(d);
+    document.getElementById('cd-h').textContent = pad(h);
+    document.getElementById('cd-m').textContent = pad(m);
+    document.getElementById('cd-s').textContent = pad(s);
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+
+/* ── ACCORDION — CURRICULUM ──────────────────────────── */
+function togglePart(header) {
+  const modules = header.nextElementSibling;
+  const isOpen = header.classList.contains('mtm-open');
+  // close all
+  document.querySelectorAll('.mtm-curriculum-part-header').forEach(h => {
+    h.classList.remove('mtm-open');
+    h.nextElementSibling.classList.remove('mtm-open');
+  });
+  if (!isOpen) {
+    header.classList.add('mtm-open');
+    modules.classList.add('mtm-open');
+  }
+}
+
+/* ── ACCORDION — FAQ ──────────────────────────────────── */
+function toggleFaq(question) {
+  const answer = question.nextElementSibling;
+  const isOpen = question.classList.contains('mtm-open');
+  document.querySelectorAll('.mtm-faq-question').forEach(q => {
+    q.classList.remove('mtm-open');
+    q.nextElementSibling.classList.remove('mtm-open');
+  });
+  if (!isOpen) {
+    question.classList.add('mtm-open');
+    answer.classList.add('mtm-open');
+  }
+}
+
+/* ── SCROLL REVEAL ────────────────────────────────────── */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('mtm-visible'), 60);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.mtm-reveal').forEach(el => observer.observe(el));
+</script>
+<script>
+(function() {
+  var navCta = document.getElementById('nav-cta');
+  var hero = document.querySelector('.mtm-hero');
+  if (!navCta || !hero) return;
+  function onScroll() {
+    var heroBottom = hero.getBoundingClientRect().bottom;
+    if (heroBottom < 0) {
+      navCta.classList.add('mtm-visible');
+    } else {
+      navCta.classList.remove('mtm-visible');
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
+</script>
