@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:contra.com)",
+      "Bash(git add *)"
+    ]
+  }
+}
